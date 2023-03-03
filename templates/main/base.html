@@ -1,6 +1,10 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    {% block head %}
+    
+    {% endblock %}
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,7 +12,7 @@
         {% block title %}
         {% endblock %}
     </title>
-    <link rel="stylesheet" href="../../static/main/css/base.css">
+    <link rel="stylesheet" href="{% static 'main/css/base.css' %}">
     <script
 		src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
 		integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
@@ -40,7 +44,6 @@
 	</script>
 </head>
 <body>
-    //Navbar
     <nav class="navbar navbar-expand-lg navbar-light bg-white" id="menu">
         <div class="container-fluid">
             <!-- Toggle button -->
@@ -84,6 +87,8 @@
     </nav>
 
     {% block content %}
+
+
         {% endblock %}
 </body>
 </html>

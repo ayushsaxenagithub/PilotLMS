@@ -3,33 +3,7 @@ from django.contrib.auth.models import User
 from ckeditor.fields import RichTextField
 import uuid
 from django.utils import timezone
-
-class Profile(models.Model):
-    user=models.OneToOneField(User, on_delete=models.CASCADE,null=True,blank=True)
-    status=models.CharField(max_length=2000,blank=True,null=True, default="Student")
-    image_profile=models.ImageField(null=True, blank=True, default='blank.png',upload_to='user_profile/')
-    shortBio=models.CharField(max_length=2000, blank=True, null=True)
-    detail=RichTextField(null=True, blank=True)
-    github=models.URLField(null=True, blank=True)
-    youtube=models.URLField(null=True, blank=True)
-    twitter=models.URLField(null=True, blank=True)
-    facebook=models.URLField(null=True, blank=True)
-    instagram=models.URLField(null=True, blank=True)
-    linkedin=models.URLField(null=True, blank=True)
-    id = models.UUIDField(default= uuid.uuid4, unique=True , primary_key=True, editable=False)
-
-    def __str__(self):
-        return str(self.name)
-
-class Organization(models.Model):
-    profile=models.ForeignKey(Profile, on_delete=models.CASCADE, null=True, blank=True)
-
-class Teacher(models.Model):
-    profile=models.ForeignKey(Profile, on_delete=models.CASCADE, null=True, blank=True)
-
-class Student(models.Model):
-    profile=models.ForeignKey(Profile, on_delete=models.CASCADE, null=True, blank=True)
-    
+from user.models import Profil,Organization,Teacher,Student
 
 class Tags(models.Model):
     name=models.CharField(max_length=2000,blank=True, null=True)

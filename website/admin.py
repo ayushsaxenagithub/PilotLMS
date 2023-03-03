@@ -1,12 +1,8 @@
 from django.contrib import admin
-from .models import Profile, Organization, Teacher, Student, Tags, Course, Module, Video, Comment, SubComment, Notes, Monitor
+from .models import Tags, Course, Module, Video, Comment, SubComment, Notes, Monitor
 
 # Register your models here.
 
-admin.site.register(Profile)
-admin.site.register(Organization)
-admin.site.register(Teacher)
-admin.site.register(Student)
 admin.site.register(Tags)
 admin.site.register(Course)
 admin.site.register(Module)
