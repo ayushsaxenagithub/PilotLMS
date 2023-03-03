@@ -1,0 +1,56 @@
+.nav-item {
+	padding-left: 10px;
+	padding-right: 10px;
+}
+
+a {
+	color: #FFFFFF;
+}
+
+a:link {
+	text-decoration: none;
+}
+
+a:hover {
+	text-decoration: underline;
+	color: #FFFFFF;
+}
+
+#signup {
+	background: #A91938;
+	border-color: #A91938;
+	font-weight: bold;
+}
+
+#login {
+	color: #A91938;
+	background-color: #FFFFFF;
+	border-color: #FFFFFF;
+	font-weight: bold;
+}
+
+#brand {
+	font-weight: bold;
+	font-size: 25px;
+	padding-left: 20px;
+	letter-spacing: 0.12em;
+}
+
+#menu {
+	background-color: #FFFFFF;
+	font-weight: 500;
+	font-size: 19px;
+	line-height: 28px;
+}
+
+.section1 {
+	display: flex;
+	flex-flow: row wrap;
+}
+
+#cycling-img {
+	max-width: 757px;
+	max-height: 673px;
+	width: 100%;
+	flex: 1;
+}

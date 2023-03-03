@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>
+        {% block title %}
+        {% endblock %}
+    </title>
+    <link rel="stylesheet" href="../../static/main/css/base.css">
+</head>
+<body>
+    //Navbar
+    <nav class="navbar navbar-expand-lg navbar-light bg-white" id="menu">
+        <div class="container-fluid">
+            <!-- Toggle button -->
+            <button
+            class="navbar-toggler"
+            type="button"
+            data-toggle="collapse"
+            data-target="#navbarCentered"
+            aria-controls="navbarCentered"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+            >
+            <i class="fas fa-bars"></i>
+            </button>
+            <div class="navbar-brand" id="brand">PILOT</div>
+            <div
+            class="collapse navbar-collapse justify-content-center"
+            id="navbarCentered"
+            >
+            <ul class="navbar-nav mb-2 mb-lg-0">
+                <li class="nav-item active">
+                    <a class="nav-link active" aria-current="page" href="#">Home</a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link active" href="#">About</a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link active" href="#">Contact</a>
+                </li>
+            </ul>
+            </div>
+            <div class="d-flex align-items-right">
+                <button type="button" class="btn btn-primary me-3" id="login">
+                  Login
+                </button>
+                <button type="button" class="btn btn-primary me-3" id="signup">
+                  Sign up
+                </button>
+              </div>
+        </div>
+    </nav>
+
+    {% block content %}
+        {% endblock %}
+</body>
+</html>
