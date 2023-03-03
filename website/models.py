@@ -3,7 +3,7 @@ from django.contrib.auth.models import User
 from ckeditor.fields import RichTextField
 import uuid
 from django.utils import timezone
-from user.models import Profil,Organization,Teacher,Student
+from user.models import Profile,Organization,Teacher,Student
 
 class Tags(models.Model):
     name=models.CharField(max_length=2000,blank=True, null=True)

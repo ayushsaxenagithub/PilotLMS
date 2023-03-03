@@ -12,10 +12,6 @@ from django.contrib import messages
 
 # messages.error(request,'User not found')
 # @login_required(login_url='login')
-def profile(request):
-    user = Profile.objects.all()
-    context ={'user': user}
-    return render(request,'user/profiles.html',context)
 
 def loginUser(request):
     page = 'login'
