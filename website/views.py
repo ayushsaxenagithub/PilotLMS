@@ -8,7 +8,7 @@ from user.models import Profile, Student, Organization, Teacher
 # Create your views here.
 
 def index(request):
-    return render(request, 'main/base.html')
+    return render(request, 'website/home.html')
 
 
 
