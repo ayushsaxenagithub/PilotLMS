@@ -32,8 +32,7 @@ class Profile(models.Model):
 
 class Organization(models.Model):
     profile = models.ForeignKey(Profile, on_delete=models.CASCADE, null=True, blank=True)
-    name = models.CharField(max_length=2000, blank=True, null=True)
-    description = models.TextField(blank=True, null=True)
+    description = RichTextField(blank=True, null=True)
     location = models.CharField(max_length=2000, blank=True, null=True)
     website = models.URLField(blank=True, null=True)
     founded_year = models.IntegerField(blank=True, null=True)
@@ -45,17 +44,12 @@ class Teacher(models.Model):
     organization = models.ForeignKey(Organization, on_delete=models.CASCADE, null=True, blank=True)
     department = models.CharField(max_length=2000, blank=True, null=True)
     qualification = models.CharField(max_length=2000, blank=True, null=True)
-    experience_years = models.IntegerField(blank=True, null=True)
-    bio = models.TextField(blank=True, null=True)
-    research_interests = models.TextField(blank=True, null=True)
+    bio = RichTextField(blank=True, null=True)    
+    date_of_birth = models.DateField(blank=True, null=True)
+    research_interests = RichTextField(blank=True, null=True)
 
 
 class Student(models.Model):
     profile = models.ForeignKey(Profile, on_delete=models.CASCADE, null=True, blank=True)
-    enrollment_number = models.CharField(max_length=2000, blank=True, null=True)
-    program = models.CharField(max_length=2000, blank=True, null=True)
     department = models.CharField(max_length=2000, blank=True, null=True)
-    semester = models.IntegerField(blank=True, null=True)
-    academic_year = models.CharField(max_length=2000, blank=True, null=True)
     date_of_birth = models.DateField(blank=True, null=True)
-    interests = models.TextField(blank=True, null=True)

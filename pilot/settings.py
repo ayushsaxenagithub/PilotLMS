@@ -122,14 +122,21 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 MEDIA_URL = '/images/'
-STATIC_DIRS = [
+
+STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static'),
 ]
+# STATIC_DIRS = [
+#     os.path.join(BASE_DIR, 'staticfiles'),
+# ]
 
 
 MEDIA_ROOT = os.path.join(BASE_DIR,'static/images')
-# STATIC_ROOT = os.path.join(BASE_DIR,'staticfiles')
-STATIC_ROOT = os.path.join(BASE_DIR,'static')
+# STATICFILES_ROOT = os.path.join(BASE_DIR,'static')
+STATIC_ROOT = os.path.join(BASE_DIR,'staticfiles')
+
+# CKEDITOR_UPLOAD_PATH = 'uploads/'
+
 
 
 # Default primary key field type

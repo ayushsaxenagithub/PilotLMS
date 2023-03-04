@@ -7,8 +7,7 @@ from django.conf.urls.static import static
 urlpatterns = [
     path('login/',views.loginUser,name='login'),
     path('logout/',views.logoutUser,name='logout'),
-    path('register/', views.registerUser, name='register'),    
+    path('register/', views.registerUser, name='register'),  
+    path('create_profile/', views.create_profile, name='create_profile'),  
 ]
 
-urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
-urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

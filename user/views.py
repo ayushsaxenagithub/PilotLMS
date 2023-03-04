@@ -5,6 +5,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from .models import Profile
 from django.contrib import messages
+from .models import Teacher, Student, Organization
 
 
 
@@ -72,6 +73,48 @@ def registerUser(request):
         return render(request, 'user/register.html')        
 
 
+def create_profile(request):
+    if request.user.is_authenticated:
+        profile = Profile.objects.get(user=request.user)
+        status = profile.status
+        if request.method == 'POST':
+            name = request.POST.get('name')
+            image_profile = request.FILES.get('image_profile')
+            shortBio = request.POST.get('shortBio')
+            detail = request.POST.get('detail')
+            github = request.POST.get('github')
+            youtube = request.POST.get('youtube')
+            twitter = request.POST.get('twitter')
+            facebook = request.POST.get('facebook')
+            instagram = request.POST.get('instagram')
+            linkedin = request.POST.get('linkedin')
+            department = request.POST.get('department')
+            date_of_birth = request.POST.get('date_of_birth')
 
+            student = Student()
+            student.profile = profile
+            profile=Profile.objects.create(
+            user=request.user,    
+            name=name,    
+            image_profile=image_profile,
+            shortBio=shortBio,
+            detail=detail,
+            github=github,
+            youtube=youtube,
+            twitter=twitter,
+            facebook=facebook,
+            instagram=instagram,
+            linkedin=linkedin,
+            )
+            student=Student.objects.create(
+                profile=profile,
+                department=department,
+                date_of_birth=date_of_birth,
+            )
+            return redirect('index')
+
+        return render(request, 'user/create_profile.html')
+    else:
+        return redirect('index')
 
 
