@@ -1,0 +1,45 @@
+{% extends 'main/base.html' %}
+
+    {% block head %}
+    
+    {% endblock %}
+
+
+    {% block title %}
+    
+    {% endblock %}
+
+    {% block content %}
+    <div class="container">
+        <div class="row">
+          <div class="col-md-8">
+            <h1>{{ course.name }}</h1>
+            <img src="{{ course.image_course.url }}" class="img-fluid rounded mb-3" alt="{{ course.name }}">
+            <p>{{ course.description }}</p>
+            <h3>What you will learn</h3>
+            <p>{{ course.learned }}</p>
+          </div>
+          <div class="col-md-4">
+            <div class="card">
+              <div class="card-body">
+                <h5 class="card-title">Course Information</h5>
+                <ul class="list-unstyled">
+                  <li><strong>Price:</strong> {{ course.price }}</li>
+                  <li><strong>Organisation:</strong> {{ course.organisation.name }}</li>
+                  <li><strong>Instructors:</strong>
+                    {% for teacher in course.teacher.all %}
+                      {{ teacher.name }}{% if not forloop.last %}, {% endif %}
+                    {% endfor %}
+                  </li>
+                  <li><strong>Tags:</strong>
+                    {% for tag in course.tags.all %}
+                      {{ tag.name }}{% if not forloop.last %}, {% endif %}
+                    {% endfor %}
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    {% endblock %}
