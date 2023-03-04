@@ -14,7 +14,7 @@ class Profile(models.Model):
         ('Teacher', 'Teacher'),
         ('Organization', 'Organization')
     )
-    status = models.CharField(max_length=2000, choices=status_choices, blank=True, null=True)
+    status = models.CharField(max_length=2000, choices=status_choices, blank=True, null=True, default='Student')
     image_profile = models.ImageField(null=True, blank=True, default='blank.png', upload_to='user_profile/')
     shortBio = models.CharField(max_length=2000, blank=True, null=True)
     detail = RichTextField(null=True, blank=True)
@@ -42,6 +42,7 @@ class Organization(models.Model):
 
 class Teacher(models.Model):
     profile = models.ForeignKey(Profile, on_delete=models.CASCADE, null=True, blank=True)
+    organization = models.ForeignKey(Organization, on_delete=models.CASCADE, null=True, blank=True)
     department = models.CharField(max_length=2000, blank=True, null=True)
     qualification = models.CharField(max_length=2000, blank=True, null=True)
     experience_years = models.IntegerField(blank=True, null=True)

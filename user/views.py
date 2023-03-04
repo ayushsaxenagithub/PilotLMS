@@ -16,7 +16,6 @@ from django.contrib import messages
 def loginUser(request):
     page = 'login'
     if request.user.is_authenticated:
-        # return redirect('profile')
         return redirect('index')
 
     if request.method == 'POST':
@@ -31,10 +30,10 @@ def loginUser(request):
 
         if user is not None:
             login(request, user)
-            return redirect('home')
+            return redirect('index')
         else:
             messages.error(request,'Username or password is incorrect')
-    return render(request,'index.html',)
+    return render(request,'user/login.html',)
 
 def logoutUser(request):
     logout(request)
@@ -42,8 +41,8 @@ def logoutUser(request):
 
 def registerUser(request):
     page='signup'
-    if (user.is_authenticated):
-        pass
+    if (request.user.is_authenticated):
+        return redirect('index')
     else:
         if request.method == 'POST':
             username = request.POST.get('name')
@@ -62,14 +61,15 @@ def registerUser(request):
                         profile=Profile.objects.create(user=user,name=username,email=email,phone=phone)
                         user.save()
                         profile.save()
-                        return render(request, 'index.html')
+                        return redirect('index')
                     else:
-                        return render(request, 'index.html',{"msg": "User already exists"})
+                        return render(request, 'user/register.html',{"msg": "User already exists"})
                 else:
-                    return render(request, 'index.html',{ "msg":"Confirm Password is not equal to Password" }) 
+                    return render(request, 'user/register.html',{ "msg":"Confirm Password is not equal to Password" }) 
                    
             except Exception as e:
-                return HttpResponse(e)    
+                return HttpResponse(e)
+        return render(request, 'user/register.html')        
 
 
 
