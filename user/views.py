@@ -75,8 +75,7 @@ def registerUser(request):
 
 def create_profile(request):
     if request.user.is_authenticated:
-        profile = Profile.objects.get(user=request.user)
-        status = profile.status
+        
         if request.method == 'POST':
             name = request.POST.get('name')
             image_profile = request.FILES.get('image_profile')
@@ -91,10 +90,11 @@ def create_profile(request):
             department = request.POST.get('department')
             date_of_birth = request.POST.get('date_of_birth')
 
-            student = Student()
-            student.profile = profile
-            profile=Profile.objects.create(
-            user=request.user,    
+            r_profile=Profile()
+            
+            
+            r_profile=Profile.objects.create(
+            # user=request.user,    
             name=name,    
             image_profile=image_profile,
             shortBio=shortBio,
@@ -106,11 +106,16 @@ def create_profile(request):
             instagram=instagram,
             linkedin=linkedin,
             )
+
+            r_profile.save()
+            student = Student()
+
             student=Student.objects.create(
-                profile=profile,
+                profile=r_profile,
                 department=department,
                 date_of_birth=date_of_birth,
             )
+            student.save()
             return redirect('index')
 
         return render(request, 'user/create_profile.html')
