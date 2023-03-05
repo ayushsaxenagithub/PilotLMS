@@ -6,8 +6,8 @@ from django.dispatch import receiver
 from ckeditor.fields import RichTextField
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, null=True, blank=True)
-    name = models.CharField(max_length=2000, blank=True, null=True)
     email = models.CharField(max_length=2000, blank=True, null=True)
+    name = models.CharField(max_length=2000, blank=True, null=True)
     phone = models.CharField(max_length=2000, blank=True, null=True)
     status_choices = (
         ('Student', 'Student'),
