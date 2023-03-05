@@ -88,8 +88,20 @@ def update_profile(request):
             facebook = request.POST.get('facebook')
             instagram = request.POST.get('instagram')
             linkedin = request.POST.get('linkedin')
-            department = request.POST.get('department')
             date_of_birth = request.POST.get('date_of_birth')
+            location=request.POST.get('location')
+            website = request.POST.get('website')
+            founded_year = request.POST.get('founded_year')
+            employees = request.POST.get('employees')
+            department = request.POST.get('department')
+            profile = request.POST.get('profile')
+            organization = request.POST.get('organization')
+            qualification = request.POST.get('qualification')
+            bio = request.POST.get('bio')
+            date_of_birth = request.POST.get('date_of_birth')
+            date_of_birth = request.POST.get('date_of_birth')
+            research_interests = request.POST.get('research_interests')
+
             try:
                 r_profile = Profile.objects.get(user=request.user)
             except Profile.DoesNotExist:
@@ -111,6 +123,7 @@ def update_profile(request):
                     student=Student.objects.get(profile=r_profile)
                 else:
                     student=Student()  
+                
                 student.profile = r_profile
                 student.department = department
                 if(date_of_birth is not None ):
@@ -123,8 +136,14 @@ def update_profile(request):
                     teacher=Teacher.objects.get(profile=r_profile)
                 else:
                     teacher=Teacher()  
+                 
                 teacher.profile = r_profile
                 teacher.department = department
+                teacher.organization = organization
+                teacher.qualification = qualification
+                teacher.bio = bio
+                teacher.research_interests = research_interests
+
                 if(date_of_birth is not None ):
                     teacher.date_of_birth = date_of_birth
                 teacher.save()
@@ -137,8 +156,13 @@ def update_profile(request):
                     organization=Organization()  
                 organization.profile = r_profile
                 organization.department = department
-                if(date_of_birth is not None ):
-                    organization.date_of_birth = date_of_birth
+                organization.location = location
+                organization.website = website
+                organization.founded_year = founded_year
+                organization.employees = employees
+
+                if(founded_year is not None ):
+                    organization.founded_year = founded_year
                 organization.save()
                 return redirect('index') 
             else:
