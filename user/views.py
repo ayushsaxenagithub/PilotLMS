@@ -1,5 +1,5 @@
 from django.http import HttpResponse
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth import login, authenticate, logout
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
@@ -73,7 +73,8 @@ def registerUser(request):
         return render(request, 'user/register.html')        
 
 
-def create_profile(request):
+def update_profile(request):
+    print(request.user)
     if request.user.is_authenticated:
         
         if request.method == 'POST':
@@ -87,39 +88,118 @@ def create_profile(request):
             facebook = request.POST.get('facebook')
             instagram = request.POST.get('instagram')
             linkedin = request.POST.get('linkedin')
-            department = request.POST.get('department')
             date_of_birth = request.POST.get('date_of_birth')
+            location=request.POST.get('location')
+            website = request.POST.get('website')
+            founded_year = request.POST.get('founded_year')
+            employees = request.POST.get('employees')
+            department = request.POST.get('department')
+            profile = request.POST.get('profile')
+            organization = request.POST.get('organization')
+            qualification = request.POST.get('qualification')
+            bio = request.POST.get('bio')
+            date_of_birth = request.POST.get('date_of_birth')
+            date_of_birth = request.POST.get('date_of_birth')
+            research_interests = request.POST.get('research_interests')
 
-            r_profile=Profile()
-            
-            
-            r_profile=Profile.objects.create(
-            # user=request.user,    
-            name=name,    
-            image_profile=image_profile,
-            shortBio=shortBio,
-            detail=detail,
-            github=github,
-            youtube=youtube,
-            twitter=twitter,
-            facebook=facebook,
-            instagram=instagram,
-            linkedin=linkedin,
-            )
+            try:
+                r_profile = Profile.objects.get(user=request.user)
+            except Profile.DoesNotExist:
+                raise ValueError("Profile does not exist for user")
+            r_profile.name=name    
+            r_profile.image_profile=image_profile
+            r_profile.shortBio=shortBio
+            r_profile.github=github
+            r_profile.youtube=youtube
+            r_profile.twitter=twitter
+            r_profile.facebook=facebook
+            r_profile.instagram=instagram
+            r_profile.linkedin=linkedin
 
             r_profile.save()
-            student = Student()
+            if(r_profile.status=="Student"):
+                student = Student.objects.filter(profile=r_profile)
+                if student.exists():
+                    student=Student.objects.get(profile=r_profile)
+                else:
+                    student=Student()  
+                
+                student.profile = r_profile
+                student.department = department
+                if(date_of_birth is not None ):
+                    student.date_of_birth = date_of_birth
+                student.save()
+                return redirect('index')    
+            elif(r_profile.status=="Teacher"):
+                teacher = Teacher.objects.filter(profile=r_profile)
+                if teacher.exists():
+                    teacher=Teacher.objects.get(profile=r_profile)
+                else:
+                    teacher=Teacher()  
+                 
+                teacher.profile = r_profile
+                teacher.department = department
+                teacher.organization = organization
+                teacher.qualification = qualification
+                teacher.bio = bio
+                teacher.research_interests = research_interests
 
-            student=Student.objects.create(
-                profile=r_profile,
-                department=department,
-                date_of_birth=date_of_birth,
-            )
-            student.save()
-            return redirect('index')
+                if(date_of_birth is not None ):
+                    teacher.date_of_birth = date_of_birth
+                teacher.save()
+                return redirect('index') 
+            elif(r_profile.status=="Organization"):
+                organization = Organization.objects.filter(profile=r_profile)
+                if organization.exists():
+                    organization=Organization.objects.get(profile=r_profile)
+                else:
+                    organization=Organization()  
+                organization.profile = r_profile
+                organization.department = department
+                organization.location = location
+                organization.website = website
+                organization.founded_year = founded_year
+                organization.employees = employees
 
-        return render(request, 'user/create_profile.html')
+                if(founded_year is not None ):
+                    organization.founded_year = founded_year
+                organization.save()
+                return redirect('index') 
+            else:
+                return HttpResponse("Something went wrong")
+            student=Student.objects.filter(profile=r_profile)
+            
+            
+
+        return render(request, 'user/update_profile.html')
     else:
         return redirect('index')
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+def profile_detail(request, profile_id):
+    profile = get_object_or_404(Profile, id=profile_id)
+    
+    if profile.status == 'Organization':
+        organization = get_object_or_404(Organization, profile=profile)
+        context = {'organization': organization}
+    
+    elif profile.status == 'Teacher':
+        teacher = get_object_or_404(Teacher, profile=profile)
+        context = {'teacher': teacher}
+    
+    else:
+        student = get_object_or_404(Student, profile=profile)
+        context = {'student': student}
+    return render(request, 'user/user_detail.html', context)    
