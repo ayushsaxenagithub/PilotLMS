@@ -1,5 +1,5 @@
 from django.http import HttpResponse
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth import login, authenticate, logout
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
@@ -176,3 +176,30 @@ def update_profile(request):
         return redirect('index')
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+def profile_detail(request, profile_id):
+    profile = get_object_or_404(Profile, id=profile_id)
+    
+    if profile.status == 'Organization':
+        organization = get_object_or_404(Organization, profile=profile)
+        context = {'organization': organization}
+    
+    elif profile.status == 'Teacher':
+        teacher = get_object_or_404(Teacher, profile=profile)
+        context = {'teacher': teacher}
+    
+    else:
+        student = get_object_or_404(Student, profile=profile)
+        context = {'student': student}
+    return render(request, 'user/user_detail.html', context)    
