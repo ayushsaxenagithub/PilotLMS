@@ -105,17 +105,46 @@ def update_profile(request):
             r_profile.linkedin=linkedin
 
             r_profile.save()
-            student=Student.objects.filter(profile=r_profile)
-            if student.exists():
-                student=Student.objects.get(profile=r_profile)
+            if(r_profile.status=="Student"):
+                student = Student.objects.filter(profile=r_profile)
+                if student.exists():
+                    student=Student.objects.get(profile=r_profile)
+                else:
+                    student=Student()  
+                student.profile = r_profile
+                student.department = department
+                if(date_of_birth is not None ):
+                    student.date_of_birth = date_of_birth
+                student.save()
+                return redirect('index')    
+            elif(r_profile.status=="Teacher"):
+                teacher = Teacher.objects.filter(profile=r_profile)
+                if teacher.exists():
+                    teacher=Teacher.objects.get(profile=r_profile)
+                else:
+                    teacher=Teacher()  
+                teacher.profile = r_profile
+                teacher.department = department
+                if(date_of_birth is not None ):
+                    teacher.date_of_birth = date_of_birth
+                teacher.save()
+                return redirect('index') 
+            elif(r_profile.status=="Organization"):
+                organization = Organization.objects.filter(profile=r_profile)
+                if organization.exists():
+                    organization=Organization.objects.get(profile=r_profile)
+                else:
+                    organization=Organization()  
+                organization.profile = r_profile
+                organization.department = department
+                if(date_of_birth is not None ):
+                    organization.date_of_birth = date_of_birth
+                organization.save()
+                return redirect('index') 
             else:
-                student=Student()    
-            student.profile = r_profile
-            student.department = department
-            if(date_of_birth is not None ):
-                student.date_of_birth = date_of_birth
-            student.save()
-            return redirect('index')    
+                return HttpResponse("Something went wrong")
+            student=Student.objects.filter(profile=r_profile)
+            
             
 
         return render(request, 'user/update_profile.html')
