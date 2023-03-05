@@ -73,7 +73,8 @@ def registerUser(request):
         return render(request, 'user/register.html')        
 
 
-def create_profile(request):
+def update_profile(request):
+    print(request.user)
     if request.user.is_authenticated:
         
         if request.method == 'POST':
@@ -89,36 +90,64 @@ def create_profile(request):
             linkedin = request.POST.get('linkedin')
             department = request.POST.get('department')
             date_of_birth = request.POST.get('date_of_birth')
-
-            r_profile=Profile()
-            
-            
-            r_profile=Profile.objects.create(
-            # user=request.user,    
-            name=name,    
-            image_profile=image_profile,
-            shortBio=shortBio,
-            detail=detail,
-            github=github,
-            youtube=youtube,
-            twitter=twitter,
-            facebook=facebook,
-            instagram=instagram,
-            linkedin=linkedin,
-            )
+            try:
+                r_profile = Profile.objects.get(user=request.user)
+            except Profile.DoesNotExist:
+                raise ValueError("Profile does not exist for user")
+            r_profile.name=name    
+            r_profile.image_profile=image_profile
+            r_profile.shortBio=shortBio
+            r_profile.github=github
+            r_profile.youtube=youtube
+            r_profile.twitter=twitter
+            r_profile.facebook=facebook
+            r_profile.instagram=instagram
+            r_profile.linkedin=linkedin
 
             r_profile.save()
-            student = Student()
+            if(r_profile.status=="Student"):
+                student = Student.objects.filter(profile=r_profile)
+                if student.exists():
+                    student=Student.objects.get(profile=r_profile)
+                else:
+                    student=Student()  
+                student.profile = r_profile
+                student.department = department
+                if(date_of_birth is not None ):
+                    student.date_of_birth = date_of_birth
+                student.save()
+                return redirect('index')    
+            elif(r_profile.status=="Teacher"):
+                teacher = Teacher.objects.filter(profile=r_profile)
+                if teacher.exists():
+                    teacher=Teacher.objects.get(profile=r_profile)
+                else:
+                    teacher=Teacher()  
+                teacher.profile = r_profile
+                teacher.department = department
+                if(date_of_birth is not None ):
+                    teacher.date_of_birth = date_of_birth
+                teacher.save()
+                return redirect('index') 
+            elif(r_profile.status=="Organization"):
+                organization = Organization.objects.filter(profile=r_profile)
+                if organization.exists():
+                    organization=Organization.objects.get(profile=r_profile)
+                else:
+                    organization=Organization()  
+                organization.profile = r_profile
+                organization.department = department
+                if(date_of_birth is not None ):
+                    organization.date_of_birth = date_of_birth
+                organization.save()
+                return redirect('index') 
+            else:
+                return HttpResponse("Something went wrong")
+            student=Student.objects.filter(profile=r_profile)
+            
+            
 
-            student=Student.objects.create(
-                profile=r_profile,
-                department=department,
-                date_of_birth=date_of_birth,
-            )
-            student.save()
-            return redirect('index')
-
-        return render(request, 'user/create_profile.html')
+        return render(request, 'user/update_profile.html')
     else:
         return redirect('index')
 
