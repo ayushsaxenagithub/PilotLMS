@@ -94,7 +94,6 @@ def update_profile(request):
             founded_year = request.POST.get('founded_year')
             employees = request.POST.get('employees')
             department = request.POST.get('department')
-            profile = request.POST.get('profile')
             organization = request.POST.get('organization')
             qualification = request.POST.get('qualification')
             bio = request.POST.get('bio')
@@ -129,7 +128,10 @@ def update_profile(request):
                 if(date_of_birth is not None ):
                     student.date_of_birth = date_of_birth
                 student.save()
-                return redirect('index')    
+                return redirect('profile_detail',profile_id=r_profile.id)   
+
+
+
             elif(r_profile.status=="Teacher"):
                 teacher = Teacher.objects.filter(profile=r_profile)
                 if teacher.exists():
@@ -147,7 +149,9 @@ def update_profile(request):
                 if(date_of_birth is not None ):
                     teacher.date_of_birth = date_of_birth
                 teacher.save()
-                return redirect('index') 
+                return redirect('profile_detail',profile_id=r_profile.id)  
+            
+
             elif(r_profile.status=="Organization"):
                 organization = Organization.objects.filter(profile=r_profile)
                 if organization.exists():
@@ -155,7 +159,6 @@ def update_profile(request):
                 else:
                     organization=Organization()  
                 organization.profile = r_profile
-                organization.department = department
                 organization.location = location
                 organization.website = website
                 organization.founded_year = founded_year
@@ -164,13 +167,9 @@ def update_profile(request):
                 if(founded_year is not None ):
                     organization.founded_year = founded_year
                 organization.save()
-                return redirect('index') 
+                return redirect('profile_detail',profile_id=r_profile.id)   
             else:
                 return HttpResponse("Something went wrong")
-            student=Student.objects.filter(profile=r_profile)
-            
-            
-
         return render(request, 'user/update_profile.html')
     else:
         return redirect('index')
@@ -193,13 +192,13 @@ def profile_detail(request, profile_id):
     
     if profile.status == 'Organization':
         organization = get_object_or_404(Organization, profile=profile)
-        context = {'organization': organization}
+        context = {'organization': organization,'profile': profile}
     
     elif profile.status == 'Teacher':
         teacher = get_object_or_404(Teacher, profile=profile)
-        context = {'teacher': teacher}
+        context = {'teacher': teacher,'profile': profile}
     
     else:
         student = get_object_or_404(Student, profile=profile)
-        context = {'student': student}
-    return render(request, 'user/user_detail.html', context)    
+        context = {'student': student,'profile': profile}
+    return render(request, 'user/user_details.html', context)    
