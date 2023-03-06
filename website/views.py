@@ -177,4 +177,4 @@ def course_modules(request, course_id):
         'course': course,
         'modules': modules,
     }
-    return render(request, 'website/course_modules.html', context=context)
+    return render(request, 'website/course_module_details.html', context=context)
