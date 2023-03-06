@@ -97,11 +97,17 @@
                 <i class="fa-solid fa-magnifying-glass"></i>
               </button>
             </div>
-
+            {% if user.is_authenticated %}
             <div class="d-flex align-items-center gap-2">
-              <button class="btn btn-danger">Login</button>
-              <button class="btn btn-danger">Register</button>
+              <button class="btn btn-danger" ><a href="{% url 'logout' %}">Logout</a></button>
+              <button class="btn btn-danger"><a href="#">Dashboard</a></button>
             </div>
+            {% else %}
+            <div class="d-flex align-items-center gap-2">
+              <button class="btn btn-danger" ><a href="{% url 'login' %}">Login</a></button>
+              <button class="btn btn-danger" ><a href="{% url 'register' %}">Register</a></button>
+            </div>
+            {% endif %}
           </div>
         </div>
       </div>

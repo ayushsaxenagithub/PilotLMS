@@ -46,20 +46,5 @@
   </div>
 </div>
 
-<script>
-  function checkPassword(input) {
-    var password = input.value;
-    var regex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/;
-    var isValid = regex.test(password);
-
-    if (isValid) {
-      input.setCustomValidity("");
-    } else {
-      input.setCustomValidity(
-        "Password must contain at least 8 characters, including at least one uppercase letter, one lowercase letter, and one number."
-      );
-    }
-  }
-</script>
 
 {% endblock %}

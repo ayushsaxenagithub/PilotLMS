@@ -38,7 +38,7 @@ def loginUser(request):
 
 def logoutUser(request):
     logout(request)
-    return redirect('login')
+    return redirect('index')
 
 def registerUser(request):
     page='signup'
@@ -62,6 +62,7 @@ def registerUser(request):
                         profile=Profile.objects.create(user=user,name=username,email=email,phone=phone)
                         user.save()
                         profile.save()
+                        login(request, user)
                         return redirect('index')
                     else:
                         return render(request, 'user/register.html',{"msg": "User already exists"})
@@ -76,6 +77,14 @@ def registerUser(request):
 def update_profile(request):
     print(request.user)
     if request.user.is_authenticated:
+
+        try:
+            r_profile = Profile.objects.get(user=request.user)
+        except Profile.DoesNotExist:
+            raise ValueError("Profile does not exist for user")
+        context = {
+            'profile': r_profile
+        }
         
         if request.method == 'POST':
             name = request.POST.get('name')
@@ -88,18 +97,8 @@ def update_profile(request):
             facebook = request.POST.get('facebook')
             instagram = request.POST.get('instagram')
             linkedin = request.POST.get('linkedin')
-            date_of_birth = request.POST.get('date_of_birth')
-            location=request.POST.get('location')
-            website = request.POST.get('website')
-            founded_year = request.POST.get('founded_year')
-            employees = request.POST.get('employees')
-            department = request.POST.get('department')
-            organization = request.POST.get('organization')
-            qualification = request.POST.get('qualification')
-            bio = request.POST.get('bio')
-            date_of_birth = request.POST.get('date_of_birth')
-            date_of_birth = request.POST.get('date_of_birth')
-            research_interests = request.POST.get('research_interests')
+           
+            
 
             try:
                 r_profile = Profile.objects.get(user=request.user)
@@ -117,7 +116,10 @@ def update_profile(request):
 
             r_profile.save()
             if(r_profile.status=="Student"):
+                date_of_birth = request.POST.get('date_of_birth')
+                department = request.POST.get('department')
                 student = Student.objects.filter(profile=r_profile)
+
                 if student.exists():
                     student=Student.objects.get(profile=r_profile)
                 else:
@@ -133,7 +135,13 @@ def update_profile(request):
 
 
             elif(r_profile.status=="Teacher"):
+                date_of_birth = request.POST.get('date_of_birth')
+                department = request.POST.get('department')
+                qualification = request.POST.get('qualification')
+                bio = request.POST.get('bio')
+                research_interests = request.POST.get('research_interests')
                 teacher = Teacher.objects.filter(profile=r_profile)
+
                 if teacher.exists():
                     teacher=Teacher.objects.get(profile=r_profile)
                 else:
@@ -141,7 +149,6 @@ def update_profile(request):
                  
                 teacher.profile = r_profile
                 teacher.department = department
-                teacher.organization = organization
                 teacher.qualification = qualification
                 teacher.bio = bio
                 teacher.research_interests = research_interests
@@ -153,6 +160,11 @@ def update_profile(request):
             
 
             elif(r_profile.status=="Organization"):
+                location=request.POST.get('location')
+                website = request.POST.get('website')
+                founded_year = request.POST.get('founded_year')
+                employees = request.POST.get('employees')
+
                 organization = Organization.objects.filter(profile=r_profile)
                 if organization.exists():
                     organization=Organization.objects.get(profile=r_profile)
@@ -170,22 +182,10 @@ def update_profile(request):
                 return redirect('profile_detail',profile_id=r_profile.id)   
             else:
                 return HttpResponse("Something went wrong")
-        return render(request, 'user/update_profile.html')
+        return render(request, 'user/update_profile.html', context)
     else:
         return redirect('index')
-
-
-
-
-
-
-
-
-
-
-
-
-
+    
 
 def profile_detail(request, profile_id):
     profile = get_object_or_404(Profile, id=profile_id)

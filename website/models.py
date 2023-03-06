@@ -20,6 +20,9 @@ class Course(models.Model):
     small_description = models.TextField(null=True, blank=True)
     description=RichTextField(null=True, blank=True)
     learned = RichTextField(null = True, blank = True)
+    created_at=models.DateTimeField(null=True, blank = True)
+    updated_at=models.DateTimeField(null=True, blank =True)
+    modules=models.IntegerField(null=True, blank = True)
 
 
 class Module(models.Model):
