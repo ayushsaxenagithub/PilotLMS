@@ -174,7 +174,6 @@ def update_profile(request):
                 organization.profile = r_profile
                 organization.location = location
                 organization.website = website
-                organization.founded_year = founded_year
                 organization.employees = employees
 
                 if(founded_year is not None ):

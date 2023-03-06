@@ -44,7 +44,7 @@ def create_course(request):
                 tags.append(tag)
             teacher=Teacher.objects.get(profile=request.user.profile)
                 
-
+            
             course = Course.objects.create(
                 name=name,
                 description=description,

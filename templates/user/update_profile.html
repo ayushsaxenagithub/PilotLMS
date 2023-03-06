@@ -52,8 +52,46 @@
     <label for="date_of_birth">Date of Birth:</label>
     <input type="date" name="date_of_birth" class="form-control" />
   </div>
-  {% elif profile.status == 'Teacher' %} {% elif profile.status ==
-  'Organization' %} {% endif %}
+  {% elif profile.status == 'Teacher' %}
+  <div class="form-group">
+    <label for="date_of_birth">Date of Birth:</label>
+    <input type="date" name="date_of_birth" class="form-control" />
+  </div>
+  <div class="form-group">
+    <label for="department">Department:</label>
+    <input type="text" name="department" class="form-control" />
+  </div>
+  <div class="form-group">
+    <label for="qualification">Qualification:</label>
+    <input type="text" name="qualification" class="form-control" />
+  </div>
+  <div class="form-group">
+    <label for="bio">Bio:</label>
+    <input type="text" name="bio" class="form-control" />
+  </div>
+  <div class="form-group">
+    <label for="research_interests">Research Interest:</label>
+    <input type="text" name="research_interests" class="form-control" />
+  </div>
+
+  {% elif profile.status == 'Organization' %}
+  <div class="form-group">
+    <label for="location">Location:</label>
+    <input type="text" name="location" class="form-control" />
+  </div>
+  <div class="form-group">
+    <label for="website">Website:</label>
+    <input type="text" name="website" class="form-control" />
+  </div>
+  <div class="form-group">
+    <label for="employees">Employees:</label>
+    <input type="text" name="employees" class="form-control" />
+  </div>
+  <div class="form-group">
+    <label for="founded_year">Founded Year:</label>
+    <input type="date" name="founded_year" class="form-control" />
+  </div>
+  {% endif %}
   <button type="submit" class="btn btn-primary">Submit</button>
 </form>
 
