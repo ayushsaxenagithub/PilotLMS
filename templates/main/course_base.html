@@ -1,0 +1,155 @@
+{% extends 'main/base.html' %} {% block head %} {% endblock %} {% block title %}
+{% endblock %} {% block content %}
+<!-- main content of side bar         -->
+<div class="d-flex px-3 mt-2" style="height: 100vh">
+  <div class="w-75 bg-danger" style="height: 100hv">Right bar</div>
+
+  <div
+    class="w-25 border border-1 border-dark rounded-2 position-relative"
+    style="height: 100hv"
+  >
+    <div class="p-2 position-absolute top-0">
+      <h3 class="text-danger">Course Content</h3>
+    </div>
+    <div class="mt-5 border-top border-dark">
+      <div class="accordion" id="accordionExample">
+        <div class="accordion-item">
+          <h2 class="accordion-header" id="headingOne">
+            <button
+              class="accordion-button fw-bold"
+              type="button"
+              data-bs-toggle="collapse"
+              data-bs-target="#collapseOne"
+              aria-expanded="true"
+              aria-controls="collapseOne"
+            >
+              Module 1: Data structure & Algorithm
+            </button>
+          </h2>
+          <div
+            id="collapseOne"
+            class="accordion-collapse collapse show"
+            aria-labelledby="headingOne"
+            data-bs-parent="#accordionExample"
+          >
+            <div class="accordion-body p-0">
+              <ul class="list-unstyled m-0">
+                <li class="w-100 border border-1 border-secondary">
+                  <a
+                    href="#"
+                    class="text-decoration-none p-3 d-flex text-dark fw-bold w-100 flex-column"
+                    style="background-color: rgb(238, 250, 255)"
+                  >
+                    Arrays Introduction
+                    <p class="m-0 fw-normal text-danger">23 min</p>
+                  </a>
+                </li>
+                <li class="w-100 border border-1 border-secondary">
+                  <a
+                    href="#"
+                    class="text-decoration-none p-3 d-flex text-dark fw-bold w-100 flex-column"
+                    style="background-color: rgb(238, 250, 255)"
+                  >
+                    Arrays Introduction
+                    <p class="m-0 fw-normal text-danger">23 min</p>
+                  </a>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <div class="accordion-item">
+          <h2 class="accordion-header" id="headingTwo">
+            <button
+              class="accordion-button collapsed fw-bold"
+              type="button"
+              data-bs-toggle="collapse"
+              data-bs-target="#collapseTwo"
+              aria-expanded="false"
+              aria-controls="collapseTwo"
+            >
+              Module 2: Data structure & Algorithm
+            </button>
+          </h2>
+          <div
+            id="collapseTwo"
+            class="accordion-collapse collapse"
+            aria-labelledby="headingTwo"
+            data-bs-parent="#accordionExample"
+          >
+            <div class="accordion-body p-0">
+              <ul class="list-unstyled m-0">
+                <li class="w-100 border border-1 border-secondary">
+                  <a
+                    href="#"
+                    class="text-decoration-none p-3 d-flex text-dark fw-bold w-100 flex-column"
+                    style="background-color: rgb(238, 250, 255)"
+                  >
+                    Arrays Introduction
+                    <p class="m-0 fw-normal text-danger">23 min</p>
+                  </a>
+                </li>
+                <li class="w-100 border border-1 border-secondary">
+                  <a
+                    href="#"
+                    class="text-decoration-none p-3 d-flex text-dark fw-bold w-100 flex-column"
+                    style="background-color: rgb(238, 250, 255)"
+                  >
+                    Arrays Introduction
+                    <p class="m-0 fw-normal text-danger">23 min</p>
+                  </a>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <div class="accordion-item">
+          <h2 class="accordion-header" id="headingThree">
+            <button
+              class="accordion-button collapsed fw-bold"
+              type="button"
+              data-bs-toggle="collapse"
+              data-bs-target="#collapseThree"
+              aria-expanded="false"
+              aria-controls="collapseThree"
+            >
+              Module 3: Data structure & Algorithm
+            </button>
+          </h2>
+          <div
+            id="collapseThree"
+            class="accordion-collapse collapse"
+            aria-labelledby="headingThree"
+            data-bs-parent="#accordionExample"
+          >
+            <div class="accordion-body p-0">
+              <ul class="list-unstyled m-0">
+                <li class="w-100 border border-1 border-secondary">
+                  <a
+                    href="#"
+                    class="text-decoration-none p-3 d-flex text-dark fw-bold w-100 flex-column"
+                    style="background-color: rgb(238, 250, 255)"
+                  >
+                    Arrays Introduction
+                    <p class="m-0 fw-normal text-danger">23 min</p>
+                  </a>
+                </li>
+                <li class="w-100 border border-1 border-secondary">
+                  <a
+                    href="#"
+                    class="text-decoration-none p-3 d-flex text-dark fw-bold w-100 flex-column"
+                    style="background-color: rgb(238, 250, 255)"
+                  >
+                    Arrays Introduction
+                    <p class="m-0 fw-normal text-danger">23 min</p>
+                  </a>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
