@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Tags, Course, Module, Video, Comment, SubComment, Notes, Monitor
+from .models import Tags, Course, Module, Video, Comment, SubComment, Notes, Monitor, UserProgress
 
 # Register your models here.
 
@@ -11,5 +11,6 @@ admin.site.register(Comment)
 admin.site.register(SubComment)
 admin.site.register(Notes)
 admin.site.register(Monitor)
+admin.site.register(UserProgress)
 
 

@@ -119,7 +119,7 @@ def create_module(request, course_id):
 
         for video in request.FILES.getlist('video'):
             video_name = video.name.split('.')[0]
-            Video.objects.create(module=module, video=video, name=video_name)
+            Video.objects.create(module=module, video=video, name=video_name, course=course)
 
         for note in request.POST.getlist('note'):
             Notes.objects.create(user=request.user, module=module, description=note)
@@ -144,7 +144,7 @@ def update_module(request, course_id, module_id):
 
         for video in request.FILES.getlist('video'):
             video_name = video.name.split('.')[0]
-            Video.objects.create(module=module, video=video, name=video_name)
+            Video.objects.create(module=module, video=video, name=video_name, course=course)
 
         notes_to_delete = request.POST.getlist('delete_note')
         for note_id in notes_to_delete:
@@ -178,3 +178,6 @@ def course_modules(request, course_id):
         'modules': modules,
     }
     return render(request, 'website/course_module_details.html', context=context)
+
+
+
