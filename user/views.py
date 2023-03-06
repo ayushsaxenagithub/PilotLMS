@@ -8,7 +8,8 @@ from django.contrib import messages
 from .models import Teacher, Student, Organization
 
 
-
+def coursebase(request):
+    return render(request, 'main/course_base.html')
 
 
 # messages.error(request,'User not found')
@@ -188,6 +189,7 @@ def update_profile(request):
     
 
 def profile_detail(request, profile_id):
+    
     profile = get_object_or_404(Profile, id=profile_id)
     
     if profile.status == 'Organization':
@@ -202,3 +204,5 @@ def profile_detail(request, profile_id):
         student = get_object_or_404(Student, profile=profile)
         context = {'student': student,'profile': profile}
     return render(request, 'user/user_details.html', context)    
+
+

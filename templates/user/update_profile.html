@@ -1,80 +1,68 @@
-{% extends 'main/base.html' %}
+{% extends 'main/base.html' %} {% block head %} {% endblock %} {% block title %}
+{% endblock %} {% block content %}
+<h1>Profile</h1>
+<form method="POST" enctype="multipart/form-data">
+  {% csrf_token %}
+  <div class="form-group">
+    <label for="name">Name:</label>
+    <textarea name="name" class="form-control"></textarea>
+  </div>
+  <div class="form-group">
+    <label for="image_profile">Profile Image:</label>
+    <input type="file" name="image_profile" class="form-control-file" />
+  </div>
+  <div class="form-group">
+    <label for="shortBio">Short Bio:</label>
+    <textarea name="shortBio" class="form-control"></textarea>
+  </div>
+  <div class="form-group">
+    <label for="detail">Detail:</label>
+    <textarea name="detail" class="form-control" id="detail"></textarea>
+  </div>
+  <div class="form-group">
+    <label for="github">Github:</label>
+    <input type="text" name="github" class="form-control" />
+  </div>
+  <div class="form-group">
+    <label for="youtube">Youtube:</label>
+    <input type="text" name="youtube" class="form-control" />
+  </div>
+  <div class="form-group">
+    <label for="twitter">Twitter:</label>
+    <input type="text" name="twitter" class="form-control" />
+  </div>
+  <div class="form-group">
+    <label for="facebook">Facebook:</label>
+    <input type="text" name="facebook" class="form-control" />
+  </div>
+  <div class="form-group">
+    <label for="instagram">Instagram:</label>
+    <input type="text" name="instagram" class="form-control" />
+  </div>
+  <div class="form-group">
+    <label for="linkedin">LinkedIn:</label>
+    <input type="text" name="linkedin" class="form-control" />
+  </div>
+  {% if profile.status == 'Student' %}
+  <div class="form-group">
+    <label for="department">Department:</label>
+    <input type="text" name="department" class="form-control" />
+  </div>
+  <div class="form-group">
+    <label for="date_of_birth">Date of Birth:</label>
+    <input type="date" name="date_of_birth" class="form-control" />
+  </div>
+  {% elif profile.status == 'Teacher' %} {% elif profile.status ==
+  'Organization' %} {% endif %}
+  <button type="submit" class="btn btn-primary">Submit</button>
+</form>
 
-    {% block head %}
-    
-    {% endblock %}
+<script>
+  try {
+    CKEDITOR.replace("detail");
+  } catch (error) {
+    console.log(error);
+  }
+</script>
 
-
-    {% block title %}
-    
-    {% endblock %}
-
-    {% block content %}
-    <h1>Profile</h1>
-    <form method="POST" enctype="multipart/form-data">
-      {% csrf_token %}
-      <div class="form-group">
-        <label for="name">Name:</label>
-        <textarea name="name" class="form-control"></textarea>
-      </div>
-      <div class="form-group">
-        <label for="image_profile">Profile Image:</label>
-        <input type="file" name="image_profile" class="form-control-file">
-      </div>
-      <div class="form-group">
-        <label for="shortBio">Short Bio:</label>
-        <textarea name="shortBio" class="form-control"></textarea>
-      </div>
-      <div class="form-group">
-        <label for="detail">Detail:</label>
-        <textarea name="detail" class="form-control" id="detail"></textarea>
-      </div>
-      <div class="form-group">
-        <label for="github">Github:</label>
-        <input type="text" name="github" class="form-control">
-      </div>
-      <div class="form-group">
-        <label for="youtube">Youtube:</label>
-        <input type="text" name="youtube" class="form-control">
-      </div>
-      <div class="form-group">
-        <label for="twitter">Twitter:</label>
-        <input type="text" name="twitter" class="form-control">
-      </div>
-      <div class="form-group">
-        <label for="facebook">Facebook:</label>
-        <input type="text" name="facebook" class="form-control">
-      </div>
-      <div class="form-group">
-        <label for="instagram">Instagram:</label>
-        <input type="text" name="instagram" class="form-control">
-      </div>
-      <div class="form-group">
-        <label for="linkedin">LinkedIn:</label>
-        <input type="text" name="linkedin" class="form-control">
-      </div>
-      {% if profile.status == 'Student' %}
-      <div class="form-group">
-        <label for="department">Department:</label>
-        <input type="text" name="department" class="form-control">
-      </div>
-      <div class="form-group">
-        <label for="date_of_birth">Date of Birth:</label>
-        <input type="date" name="date_of_birth" class="form-control">
-      </div>
-      {% elif profile.status == 'Teacher' %}
-      {% elif profile.status == 'Organization' %}
-      {% endif %}
-      <button type="submit" class="btn btn-primary">Submit</button>
-    </form>
-
-    <script>
-      try {
-          CKEDITOR.replace('detail')
-      } catch(error) {
-          console.log(error);
-      }
-  </script>
-
-
-    {% endblock %}
+{% endblock %}
