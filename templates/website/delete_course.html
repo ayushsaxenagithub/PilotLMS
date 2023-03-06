@@ -1,0 +1,22 @@
+{% extends 'main/base.html' %}
+
+    {% block head %}
+    
+    {% endblock %}
+
+
+    {% block title %}
+    
+    {% endblock %}
+
+    {% block content %}
+    <div class="container">
+        <h1>Delete Course</h1>
+        <form method="POST" action="{% url 'course_delete' course.id %}">
+          {% csrf_token %}
+          <p>Are you sure you want to delete "{{ course.name }}"?</p>
+          <button type="submit" class="btn btn-danger">Delete</button>
+          <a href="{% url 'course_detail' course.id %}" class="btn btn-secondary">Cancel</a>
+        </form>
+      </div>
+    {% endblock %}

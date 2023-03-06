@@ -11,8 +11,8 @@ class Tags(models.Model):
 class Course(models.Model):
     name = models.CharField(max_length=2000,blank=True,null=True)
     organisation = models.ForeignKey(Organization, on_delete=models.CASCADE, null = True, blank = True)
-    teacher=models.ManyToManyField(Teacher, blank=True, null=True)
-    students=models.ManyToManyField(Student,blank=True, null=True)
+    teacher=models.ForeignKey(Teacher,on_delete=models.CASCADE, blank=True, null=True)
+    enroller_user=models.ManyToManyField(User,blank=True, null=True, through="Enrollment")
     tags=models.ManyToManyField(Tags, blank=True, null=True)
     description=RichTextField(null=True, blank=True)
     image_course=models.ImageField(null=True, blank=True, default='blank.png',upload_to='course/')
@@ -23,6 +23,13 @@ class Course(models.Model):
     created_at=models.DateTimeField(null=True, blank = True)
     updated_at=models.DateTimeField(null=True, blank =True)
     modules=models.IntegerField(null=True, blank = True)
+
+
+class Enrollment(models.Model):
+    course = models.ForeignKey(Course, related_name="enrollments",on_delete=models.CASCADE)
+    student = models.ForeignKey(User, related_name="user_courses", on_delete=models.CASCADE)
+    class Meta:
+        unique_together = ('course', 'student')
 
 
 class Module(models.Model):

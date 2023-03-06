@@ -1,0 +1,50 @@
+{% extends 'main/base.html' %}
+
+    {% block head %}
+    
+    {% endblock %}
+
+
+    {% block title %}
+    
+    {% endblock %}
+
+    {% block content %}
+    <div class="container">
+        <h1>Update Course</h1>
+        <form method="POST" enctype="multipart/form-data" action="{% url 'course_update' course.id %}">
+          {% csrf_token %}
+          <div class="form-group">
+            <label for="name">Name:</label>
+            <input type="text" class="form-control" id="name" name="name" value="{{ course.name }}">
+          </div>
+          <div class="form-group">
+            <label for="description">Description:</label>
+            <textarea class="form-control" id="description" name="description" rows="10">{{ course.description }}</textarea>
+          </div>
+          <div class="form-group">
+            <label for="image_course">Image:</label>
+            <input type="file" class="form-control-file" id="image_course" name="image_course">
+          </div>
+          <div class="form-group">
+            <label for="price">Price:</label>
+            <input type="text" class="form-control" id="price" name="price" value="{{ course.price }}">
+          </div>
+          <div class="form-group">
+            <label for="small_description">Small Description:</label>
+            <input type="text" class="form-control" id="small_description" name="small_description" value="{{ course.small_description }}">
+          </div>
+          <div class="form-group">
+            <label for="learned">What you will learn:</label>
+            <textarea class="form-control" id="learned" name="learned" rows="10">{{ course.learned }}</textarea>
+          </div>
+         
+          <div class="form-group">
+            <label for="tags">Tags:</label>
+            <input type="text" class="form-control" id="tags" name="tags" value="{% for tag in course.tags.all %}{{ tag.name }}, {% endfor %}">
+          </div>
+          <button type="submit" class="btn btn-primary">Update</button>
+          <a href="{% url 'course_detail' course.id %}" class="btn btn-secondary">Cancel</a>
+        </form>
+      </div>
+    {% endblock %}

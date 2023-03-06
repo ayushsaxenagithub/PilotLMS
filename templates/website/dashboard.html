@@ -1,0 +1,51 @@
+{% extends 'main/base.html' %}
+
+    {% block head %}
+    
+    {% endblock %}
+
+
+    {% block title %}
+    
+    {% endblock %}
+
+    {% block content %}
+
+
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <a class="navbar-brand" href="#">Dashboard</a>
+      </nav>
+    
+      <div class="container-fluid">
+        <div class="row mt-4">
+          <div class="col-md-3">
+            <div class="card">
+              <div class="card-header">
+                <h5>Profile</h5>
+              </div>
+              <div class="card-body">
+                <ul>
+                  <li><a href="{% url 'profile_detail' profile_id=request.user.profile.id %}">Profile</a></li>
+                  <li><a href="{% url 'update_profile' %}">Update Profile</a></li>
+                  <li><a href="#">Change Password</a></li>
+                </ul>
+              </div>
+            </div>
+    
+            <div class="card">
+              <div class="card-header">
+                <h5>Courses</h5>
+              </div>
+              <div class="card-body">
+                <ul>
+                  <li><a href="{% url 'create_course' %}">Create Course</a></li>
+                  <li><a href="#">View Courses</a></li>
+                  <li><a href="#">Assign Students</a></li>
+                  <li><a href="#">Select Teachers</a></li>
+                  <li><a href="#">Course Progress</a></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+    
+    {% endblock %}

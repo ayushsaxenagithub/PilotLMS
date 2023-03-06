@@ -1,0 +1,33 @@
+{% extends 'main/base.html' %}
+
+    {% block head %}
+    
+    {% endblock %}
+
+
+    {% block title %}
+    
+    {% endblock %}
+
+    {% block content %}
+    <div class="container">
+        <h1>Update Module</h1>
+        <hr>
+        <form method="POST">
+            {% csrf_token %}
+            <div class="form-group">
+                <label for="module_name">Module Name:</label>
+                <input type="text" class="form-control" id="module_name" name="module_name" value="{{ module.name }}" required>
+            </div>
+            <div class="form-group">
+                <label for="video">Videos:</label>
+                <input type="file" class="form-control-file" id="video" name="video" accept="video/*" multiple>
+            </div>
+            <div class="form-group">
+                <label for="note">Notes:</label>
+                <textarea class="form-control" id="note" name="note" rows="3">{{ module.note.description }}</textarea>
+            </div>
+            <button type="submit" class="btn btn-primary">Update Module</button>
+            <a href="{% url 'course_detail' course_id=module.course.id %}" class="btn btn-secondary">Cancel</a>
+        </form>
+    {% endblock %}

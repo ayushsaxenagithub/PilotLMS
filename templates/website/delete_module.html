@@ -1,0 +1,23 @@
+{% extends 'main/base.html' %}
+
+    {% block head %}
+    
+    {% endblock %}
+
+
+    {% block title %}
+    
+    {% endblock %}
+
+    {% block content %}
+    <div class="container">
+        <h1>Delete Module</h1>
+        <hr>
+        <p>Are you sure you want to delete this module?</p>
+        <form method="POST">
+            {% csrf_token %}
+            <button type="submit" class="btn btn-danger">Delete</button>
+            <a href="{% url 'course_detail' course_id=module.course.id %}" class="btn btn-primary">Cancel</a>
+        </form>
+    </div>
+    {% endblock %}
