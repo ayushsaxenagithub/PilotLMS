@@ -1,9 +1,11 @@
+from datetime import datetime
 from django.db import models
 from django.contrib.auth.models import User
 from ckeditor.fields import RichTextField
 import uuid
 from django.utils import timezone
 from user.models import Profile,Organization,Teacher,Student
+from moviepy.editor import *
 
 class Tags(models.Model):
     name=models.CharField(max_length=2000,blank=True, null=True)
@@ -23,6 +25,16 @@ class Course(models.Model):
     created_at=models.DateTimeField(null=True, blank = True)
     updated_at=models.DateTimeField(null=True, blank =True)
     modules=models.IntegerField(null=True, blank = True)
+    rating=models.FloatField(null=True, blank = True, default=0)
+    videos=models.IntegerField(null=True, blank = True)
+    vidoes_time=models.CharField(max_length=2000,null=True, blank = True)
+    def save(self, *args, **kwargs):
+        self.videos = Video.objects.filter(module=self).count()
+        time = sum([video.duration for video in Video.objects.filter(module=self)])
+        self.videos_time = str(datetime.timedelta(seconds=time))
+        super().save(*args, **kwargs)
+
+
 
 
 class Enrollment(models.Model):
@@ -33,15 +45,35 @@ class Enrollment(models.Model):
 
 
 class Module(models.Model):
-    course=models.ForeignKey(Course, on_delete=models.CASCADE, blank=True, null=True)
-    number=models.IntegerField(null=True, blank=True)
-    name = models.CharField(max_length=2000,blank=True,null=True)
-    description=RichTextField(null=True, blank=True)
+    course = models.ForeignKey(Course, on_delete=models.CASCADE, blank=True, null=True)
+    number = models.IntegerField(null=True, blank=True)
+    name = models.CharField(max_length=2000, blank=True, null=True)
+    description = RichTextField(null=True, blank=True)
+    videos = models.IntegerField(null=True, blank=True)
+    duration = models.CharField(max_length=2000, blank=True, null=True)
+
+    def save(self, *args, **kwargs):
+        self.videos = Video.objects.filter(module=self).count()
+        time = sum([video.duration for video in Video.objects.filter(module=self)])
+        self.duration = str(datetime.timedelta(seconds=time))
+        super().save(*args, **kwargs)
 
 class Video(models.Model):
-    module=models.ForeignKey(Module, on_delete=models.CASCADE, blank=True, null=True)
-    video=models.FileField(null=True, blank=True)
-    name=models.CharField(max_length=2000,null=True, blank=True)
+    course=models.ForeignKey(Course,on_delete=models.SET_NULL,blank=True,null=True)
+    module = models.ForeignKey(Module, on_delete=models.CASCADE, blank=True, null=True)
+    video = models.FileField(null=True, blank=True)
+    name = models.CharField(max_length=2000, null=True, blank=True)
+    duration = models.IntegerField(default=0)
+
+    def save(self, *args, **kwargs):
+        super().save(*args, **kwargs)
+        try:
+            import moviepy.editor as mp
+            clip = mp.VideoFileClip(self.video.path)
+            self.duration = int(clip.duration)
+            clip.close()
+        except Exception as e:
+            print(f"Error getting video duration: {e}")
 
 class Comment(models.Model):
     user=models.ForeignKey(User, on_delete=models.CASCADE,null=True,blank=True)
@@ -71,7 +103,32 @@ class Notes(models.Model):
         foreign_key_count = sum([bool(getattr(self, f)) for f in ['video', 'module', 'course']])
         if foreign_key_count > 1:
             raise ValueError("Comment can only be linked to one of video, module, or Course.")
-        super().save(*args, **kwargs)  
+        super().save(*args, **kwargs) 
+
+class UserProgress(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE, blank=True, null=True)
+    course = models.ForeignKey(Course, on_delete=models.CASCADE, blank=True, null=True)
+    number_of_videos_watched = models.IntegerField(default=0)
+    total_number_of_videos = models.IntegerField(default=0)
+    last_video_watched = models.ForeignKey(
+        Video,
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+        verbose_name="last video watched",
+    )
+    progress_percent = models.FloatField(default=0)
+
+    def save(self, *args, **kwargs):
+        if self.total_number_of_videos == 0:
+            self.progress_percent = 0
+        else:
+            self.progress_percent = (
+                self.number_of_videos_watched / self.total_number_of_videos
+            ) * 100
+        super().save(*args, **kwargs)   
+            
+               
 
 class Monitor(models.Model):
     user=models.OneToOneField(User, on_delete=models.CASCADE,null=True,blank=True)
