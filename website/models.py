@@ -127,7 +127,27 @@ class UserProgress(models.Model):
                 self.number_of_videos_watched / self.total_number_of_videos
             ) * 100
         super().save(*args, **kwargs)   
-            
+
+
+class CourseProgress(models.Model):
+    course = models.ForeignKey(Course, on_delete=models.CASCADE, blank=True, null=True)
+    total_number_of_videos = models.IntegerField(default=0)
+    number_of_videos_watched = models.IntegerField(default=0)
+    total_number_of_users = models.IntegerField(default=0)
+    total_progress_percent = models.FloatField(default=0)
+
+    def calculate_progress_percent(self):
+        if self.total_number_of_users == 0:
+            self.total_progress_percent = 0
+        else:
+            self.total_progress_percent = (self.number_of_videos_watched / (self.total_number_of_videos * self.total_number_of_users)) * 100
+
+    def save(self, *args, **kwargs):
+        self.total_number_of_users = self.course.enroller_user.count()
+        self.total_number_of_videos = self.course.video_set.count()
+        self.number_of_videos_watched = sum([userprogress.number_of_videos_watched for userprogress in UserProgress.objects.filter(course=self.course)])
+        self.calculate_progress_percent()
+        super().save(*args, **kwargs)
                
 
 class Monitor(models.Model):
