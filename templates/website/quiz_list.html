@@ -1,0 +1,42 @@
+{% extends 'main/base.html' %}
+
+{% block title %}
+  Quiz List
+{% endblock %}
+
+{% block content %}
+  <div class="container">
+    <div class="row justify-content-center mt-5">
+      <div class="col-md-8">
+        <h2>Quiz List</h2>
+        <hr>
+        <table class="table table-bordered">
+          <thead>
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col">Video</th>
+              <th scope="col">Start Time</th>
+              <th scope="col">Pass Mark</th>
+              <th scope="col"></th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for quiz in quizzes %}
+            <tr>
+              <th scope="row">{{ quiz.id }}</th>
+              <td>{{ quiz.video.name }}</td>
+              <td>{{ quiz.start_time }}</td>
+              <td>{{ quiz.pass_mark }}</td>
+              <td>
+                <a href="{% url 'quiz:view_quiz' quiz.id %}" class="btn btn-sm btn-primary">View</a>
+                <a href="{% url 'quiz:update_quiz' quiz.id %}" class="btn btn-sm btn-warning">Edit</a>
+                <a href="{% url 'quiz:delete_quiz' quiz.id %}" class="btn btn-sm btn-danger">Delete</a>
+              </td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+{% endblock %}

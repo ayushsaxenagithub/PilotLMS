@@ -1,4 +1,4 @@
-from datetime import datetime
+from datetime import datetime, timedelta
 from django.db import models
 from django.contrib.auth.models import User
 from ckeditor.fields import RichTextField
@@ -148,7 +148,23 @@ class CourseProgress(models.Model):
         self.number_of_videos_watched = sum([userprogress.number_of_videos_watched for userprogress in UserProgress.objects.filter(course=self.course)])
         self.calculate_progress_percent()
         super().save(*args, **kwargs)
-               
+
+
+
+
+class Quiz(models.Model):
+    video = models.ForeignKey(Video, on_delete=models.CASCADE)
+    start_time = models.DurationField(default=timedelta(seconds=0))
+    pass_mark = models.FloatField(default=0)
+
+class Question(models.Model):
+    quiz = models.ForeignKey(Quiz, on_delete=models.CASCADE)
+    text = models.CharField(max_length=1000)
+
+class Answer(models.Model):
+    question = models.ForeignKey(Question, on_delete=models.CASCADE)
+    text = models.CharField(max_length=1000)
+    is_correct = models.BooleanField(default=False)
 
 class Monitor(models.Model):
     user=models.OneToOneField(User, on_delete=models.CASCADE,null=True,blank=True)

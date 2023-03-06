@@ -1,0 +1,32 @@
+{% extends 'main/base.html' %}
+
+{% block title %}
+  {{ quiz.video.name }}
+{% endblock %}
+
+{% block content %}
+  <div class="container">
+    <div class="row justify-content-center mt-5">
+      <div class="col-md-8">
+        <h2>{{ quiz.video.name }}</h2>
+        <hr>
+        <p><strong>Start Time:</strong> {{ quiz.start_time }}</p>
+        <p><strong>Pass Mark:</strong> {{ quiz.pass_mark }}</p>
+        <hr>
+        {% if quiz.questions.all %}
+        <h4>Questions:</h4>
+        <ul>
+          {% for question in quiz.questions.all %}
+          <li>{{ question.text }}</li>
+          {% endfor %}
+        </ul>
+        {% else %}
+        <p>No questions added for this quiz yet.</p>
+        {% endif %}
+        <hr>
+        <a href="{% url 'quiz:update_quiz' quiz.id %}" class="btn btn-warning">Edit Quiz</a>
+        <a href="{% url 'quiz:delete_quiz' quiz.id %}" class="btn btn-danger">Delete Quiz</a>
+      </div>
+    </div>
+  </div>
+{% endblock %}

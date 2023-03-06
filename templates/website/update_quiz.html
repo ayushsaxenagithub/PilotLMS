@@ -1,0 +1,63 @@
+{% extends 'main/base.html' %}
+
+    {% block head %}
+    
+    {% endblock %}
+
+
+    {% block title %}
+    
+    {% endblock %}
+
+    {% block content %}
+    <div class="container mt-5">
+        <div class="row justify-content-center">
+          <div class="col-md-8">
+            <h2>Update Quiz</h2>
+            <hr>
+            <form method="post" enctype="multipart/form-data">
+              {% csrf_token %}
+              <div class="form-group">
+                <label for="video">Video</label>
+                <input type="text" class="form-control" id="video" name="video" value="{{ quiz.video.name }}" readonly>
+              </div>
+              <div class="form-group">
+                <label for="timestamp">Quiz Timestamp</label>
+                <input type="text" class="form-control" id="timestamp" name="timestamp" value="{{ quiz.start_time.total_seconds }}" required>
+                <small class="form-text text-muted">Enter timestamp in seconds (e.g. 42.5)</small>
+              </div>
+              {% for question in quiz.questions.all %}
+              <div class="form-group">
+                <label for="question{{ forloop.counter }}">Question {{ forloop.counter }}</label>
+                <textarea class="form-control" id="question{{ forloop.counter }}" name="question{{ forloop.counter }}" rows="3" required>{{ question.text }}</textarea>
+              </div>
+              <div class="form-group">
+                <label for="option1{{ forloop.counter }}">Option 1</label>
+                <input type="text" class="form-control" id="option1{{ forloop.counter }}" name="option1{{ forloop.counter }}" value="{{ question.answer_set.get(is_correct=True).text }}" required>
+              </div>
+              {% for i in "234" %}
+              <div class="form-group">
+                <label for="option{{ i }}{{ forloop.counter }}">Option {{ i }}</label>
+                <input type="text" class="form-control" id="option{{ i }}{{ forloop.counter }}" name="option{{ i }}{{ forloop.counter }}" value="{% if forloop.counter <= question.answer_set.count %}{{ question.answer_set.all|slice:":3"|make_list|index:forloop.counter0|text }}{% endif %}">
+              </div>
+              {% endfor %}
+              <div class="form-group">
+                <label for="correct_option{{ forloop.counter }}">Correct Option</label>
+                <select class="form-control" id="correct_option{{ forloop.counter }}" name="correct_option{{ forloop.counter }}" required>
+                  {% for i in "1234" %}
+                  {% if forloop.counter == question.answer_set.get(is_correct=True).id %}
+                  <option value="{{ i }}" selected>Option {{ i }}</option>
+                  {% else %}
+                  <option value="{{ i }}">Option {{ i }}</option>
+                  {% endif %}
+                  {% endfor %}
+                </select>
+              </div>
+              {% endfor %}
+              <button type="submit" class="btn btn-primary">Update Quiz</button>
+              <a href="{% url 'delete_quiz' quiz.id %}" class="btn btn-danger">Delete Quiz</a>
+            </form>
+          </div>
+        </div>
+      </div>
+    {% endblock %}
