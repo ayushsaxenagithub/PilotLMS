@@ -1,8 +1,123 @@
 {% extends 'main/base.html' %} {% block head %} {% endblock %} {% block title %}
 {% endblock %} {% block content %}
 <!-- main content of side bar         -->
-<div class="d-flex px-3 mt-2" style="height: 100vh">
-  <div class="w-75 bg-danger" style="height: 100hv">Right bar</div>
+<div class="d-flex px-1 mt-2" style="height: 100vh">
+  <div class="w-75 overflow-y-scroll" style="height: 100hv">
+    <div class="video w-100 h-75 bg-danger">Video</div>
+    <!-- Tab Nav -->
+    <div class="nav-wrapper position-relative mb-2">
+      <ul
+        class="nav nav-pills nav-fill flex-column flex-md-row"
+        id="tabs-text"
+        role="tablist"
+      >
+        <li class="nav-item">
+          <a
+            class="nav-link mb-sm-3 mb-md-0 active border border-2"
+            id="tabs-text-1-tab"
+            data-bs-toggle="tab"
+            href="#tabs-text-1"
+            role="tab"
+            aria-controls="tabs-text-1"
+            aria-selected="true"
+            >Course Content</a
+          >
+        </li>
+        <li class="nav-item">
+          <a
+            class="nav-link mb-sm-3 mb-md-0 border border-2"
+            id="tabs-text-2-tab"
+            data-bs-toggle="tab"
+            href="#tabs-text-2"
+            role="tab"
+            aria-controls="tabs-text-2"
+            aria-selected="false"
+            >Notes</a
+          >
+        </li>
+        <li class="nav-item">
+          <a
+            class="nav-link mb-sm-3 mb-md-0 border border-2"
+            id="tabs-text-3-tab"
+            data-bs-toggle="tab"
+            href="#tabs-text-3"
+            role="tab"
+            aria-controls="tabs-text-3"
+            aria-selected="false"
+            >Instructor</a
+          >
+        </li>
+      </ul>
+    </div>
+    <!-- End of Tab Nav -->
+    <!-- Tab Content -->
+    <div class="card border-0">
+      <div class="card-body p-0">
+        <div class="tab-content" id="tabcontent1">
+          <div
+            class="tab-pane fade show active"
+            id="tabs-text-1"
+            role="tabpanel"
+            aria-labelledby="tabs-text-1-tab"
+          >
+            <div class="px-2">
+              <div>
+                <h2>About this Course</h2>
+                <p>
+                  Lorem ipsum dolor, sit amet consectetur adipisicing elit.
+                  Inventore, magni nisi porro voluptatem perspiciatis molestias
+                  repellendus vitae qui ex eius recusandae minima voluptas culpa
+                  dolor ducimus nobis laborum aliquam in!
+                </p>
+                <h5>More</h5>
+                <ul>
+                  <li></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          <div
+            class="tab-pane fade"
+            id="tabs-text-2"
+            role="tabpanel"
+            aria-labelledby="tabs-text-2-tab"
+          >
+            <p>
+              Photo booth stumptown tote bag Banksy, elit small batch freegan
+              sed. Craft beer elit seitan exercitation, photo booth et 8-bit
+              kale chips proident chillwave deep v laborum. Aliquip veniam
+              delectus, Marfa eiusmod Pinterest in do umami readymade swag.
+            </p>
+            <p>
+              Day handsome addition horrible sensible goodness two contempt.
+              Evening for married his account removal. Estimable me disposing of
+              be moonlight cordially curiosity.
+            </p>
+          </div>
+          <div
+            class="tab-pane fade"
+            id="tabs-text-3"
+            role="tabpanel"
+            aria-labelledby="tabs-text-3-tab"
+          >
+            <p>
+              Exercitation photo booth stumptown tote bag Banksy, elit small
+              batch freegan sed. Craft beer elit seitan exercitation, photo
+              booth et 8-bit kale chips proident chillwave deep v laborum.
+              Aliquip veniam delectus, Marfa eiusmod Pinterest in do umami
+              readymade swag.
+            </p>
+            <p>
+              Day handsome addition horrible sensible goodness two contempt.
+              Evening for married his account removal. Estimable me disposing of
+              be moonlight cordially curiosity.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- End of Tab Content -->
+  </div>
 
   <div
     class="w-25 border border-1 border-dark rounded-2 position-relative"
