@@ -1,7 +1,14 @@
-{% extends 'main/base.html' %} {% block head %} {% endblock %} {% block title %}
-{% endblock %} {% block content %}
+{% extends 'main/base.html' %} 
+{% block head %} 
+    <link rel="stylesheet" href="../../static/user/css/login.css">
+{% endblock %} 
 
-<div class="container my-5" style="height: 60vh">
+{% block title %}
+{% endblock %} 
+
+{% block content %}
+
+<!-- <div class="container my-5" style="height: 60vh">
   <div class="row justify-content-center">
     <div class="col-md-6 bg-danger"></div>
     <div class="col-md-6">
@@ -44,7 +51,16 @@
       </div>
     </div>
   </div>
-</div>
+</div> -->
 
+<div class="form">
+  <p>Login</p>
+  <form>
+      <input type="text" name="username" placeholder="username">
+      <input type="password" name="password" placeholder="password">
+      <button>login</button>
+      <p class="message">Not registered? <a href="#">Create an account</a></p>
+  </form>
+  </div>
 
 {% endblock %}
