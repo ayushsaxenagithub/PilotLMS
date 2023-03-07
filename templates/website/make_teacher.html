@@ -1,0 +1,66 @@
+{% extends 'main/base.html' %}
+
+    {% block head %}
+    
+    {% endblock %}
+
+
+    {% block title %}
+    
+    {% endblock %}
+
+    {% block content %}
+    <div class="container-fluid mt-3">
+        <h3 class="mb-3">User Details</h3>
+        <div class="row mb-3">
+            <div class="col-md-6">
+                <form action="" method="get">
+                    <div class="input-group">
+                        <input type="text" name="search" class="form-control" placeholder="Search by name or email">
+                        <div class="input-group-append">
+                            <button class="btn btn-outline-secondary" type="submit">
+                                <i class="fa fa-search"></i>
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+        
+        <div class="table-responsive">
+            <table class="table table-hover table-bordered">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Email</th>
+                        <th>Phone</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for profile in profiles %}
+                    {% if profile.status == 'Student' %}
+                        {% if profile.user.is_staff == False %}
+                            <tr>
+                                <td>{{ profile.name }}</td>
+                                <td>{{ profile.email }}</td>
+                                <td>{{ profile.phone }}</td>
+                                <td>
+                                    <a href="{% url 'profile_detail' profile.id %}" class="btn btn-primary btn-sm">View Full Profile</a>
+                                    
+                                        <form action="{% url 'make_teacher' %}" method="post" class="d-inline">
+                                            {% csrf_token %}
+                                            <button type="submit" class="btn btn-success btn-sm">Make Teacher</button>
+                                        </form>
+                                    
+                                </td>
+                            </tr>
+                        {% endif %}
+                        {% endif %}
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        
+    </div>
+    {% endblock %}

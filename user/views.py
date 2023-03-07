@@ -176,7 +176,7 @@ def update_profile(request):
                 organization.website = website
                 organization.employees = employees
 
-                if(founded_year is not None ):
+                if(founded_year is not "" ):
                     organization.founded_year = founded_year
                 organization.save()
                 return redirect('profile_detail',profile_id=r_profile.id)   

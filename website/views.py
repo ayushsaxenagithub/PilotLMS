@@ -17,8 +17,13 @@ def dashboard(request):
         return redirect('index')
     else:
         profile=Profile.objects.filter(user=request.user)
+       
         if profile.exists():
-            return render(request, 'website/dashboard.html')
+            profile=Profile.objects.get(user=request.user)
+            context={
+            "profile": profile
+            }
+            return render(request, 'website/dashboard.html', context)
         else:
             return HttpResponse('Something went wrong')
 
@@ -265,3 +270,13 @@ def delete_quiz(request, quiz_id):
         return redirect('quiz_list')
     return render(request, 'website/delete_quiz.html', {'quiz': quiz})
 
+
+
+def make_teacher(request):
+    profiles = Profile.objects.all()
+    context = {
+        'profiles': profiles
+    }
+    if request.method == 'POST':
+        pass
+    return render(request, 'website/make_teacher.html', context)

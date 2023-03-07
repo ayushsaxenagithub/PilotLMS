@@ -45,9 +45,9 @@ class Enrollment(models.Model):
 
 
 class Module(models.Model):
-    course = models.ForeignKey(Course, on_delete=models.CASCADE, blank=True, null=True)
-    number = models.IntegerField(null=True, blank=True)
     name = models.CharField(max_length=2000, blank=True, null=True)
+    course = models.ForeignKey(Course, on_delete=models.CASCADE, blank=True, null=True)
+    number = models.IntegerField(null=True, blank=True)    
     description = RichTextField(null=True, blank=True)
     videos = models.IntegerField(null=True, blank=True)
     duration = models.CharField(max_length=2000, blank=True, null=True)
@@ -59,10 +59,10 @@ class Module(models.Model):
         super().save(*args, **kwargs)
 
 class Video(models.Model):
+    name = models.CharField(max_length=2000, null=True, blank=True)
     course=models.ForeignKey(Course,on_delete=models.SET_NULL,blank=True,null=True)
     module = models.ForeignKey(Module, on_delete=models.CASCADE, blank=True, null=True)
     video = models.FileField(null=True, blank=True)
-    name = models.CharField(max_length=2000, null=True, blank=True)
     duration = models.IntegerField(default=0)
 
     def save(self, *args, **kwargs):

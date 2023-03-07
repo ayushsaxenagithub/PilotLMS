@@ -5,9 +5,9 @@ from django.db.models.signals import post_save, post_delete
 from django.dispatch import receiver
 from ckeditor.fields import RichTextField
 class Profile(models.Model):
+    name = models.CharField(max_length=2000, blank=True, null=True)
     user = models.OneToOneField(User, on_delete=models.CASCADE, null=True, blank=True)
     email = models.CharField(max_length=2000, blank=True, null=True)
-    name = models.CharField(max_length=2000, blank=True, null=True)
     phone = models.CharField(max_length=2000, blank=True, null=True)
     status_choices = (
         ('Student', 'Student'),
@@ -35,8 +35,8 @@ class Organization(models.Model):
     description = RichTextField(blank=True, null=True)
     location = models.CharField(max_length=2000, blank=True, null=True)
     website = models.URLField(blank=True, null=True)
-    founded_year = models.IntegerField(blank=True, null=True)
-    employees = models.IntegerField(blank=True, null=True)
+    founded_year = models.DateField(blank=True, null=True)
+    employees = models.IntegerField(blank=True, null=True, default = 0)
 
 
 class Teacher(models.Model):
