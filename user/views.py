@@ -61,8 +61,10 @@ def registerUser(request):
                         user=User.objects.create_user(username=email,email=email)
                         user.set_password(pwd)
                         profile=Profile.objects.create(user=user,name=username,email=email,phone=phone)
+                        student=Student.objects.create(profile=profile)
                         user.save()
                         profile.save()
+                        student.save()
                         login(request, user)
                         return redirect('index')
                     else:

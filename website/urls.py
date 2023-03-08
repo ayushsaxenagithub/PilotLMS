@@ -20,6 +20,7 @@ urlpatterns = [
     path('quiz/<int:pk>/', views.view_quiz, name='quiz_detail'),
     path('quiz/<int:pk>/update/', views.update_quiz, name='update_quiz'),
     path('user_teacher', views.make_teacher, name='make_teacher'),
+    path('teacher_list', views.teacher_list, name='teacher_list'),
     
 ]
 

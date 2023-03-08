@@ -273,10 +273,37 @@ def delete_quiz(request, quiz_id):
 
 
 def make_teacher(request):
-    profiles = Profile.objects.all()
-    context = {
-        'profiles': profiles
-    }
-    if request.method == 'POST':
-        pass
-    return render(request, 'website/make_teacher.html', context)
+    r_profile=get_object_or_404(Profile, user=request.user)
+    organization=Organization.objects.filter(profile=r_profile)
+    if organization.exists():
+        organization=Organization.objects.get(profile=r_profile)
+        profiles = Profile.objects.all()
+        context = {
+            'profiles': profiles
+        }
+        
+        if request.method == 'POST':
+            profile_id=request.POST.get('profile_id')
+            r_profile=get_object_or_404(Profile, id=profile_id)
+            r_profile.status="Teacher"
+            r_profile.save()
+            teacher=Teacher.objects.create(profile=r_profile, organization=organization)
+            student=get_object_or_404(Student,profile=r_profile)
+            student.delete()
+            teacher.save()
+            return redirect('make_teacher')                           
+        return render(request, 'website/make_teacher.html', context)
+    else:
+        return redirect('index')
+
+def teacher_list(request):
+    r_profile = get_object_or_404(Profile, user=request.user)
+    organization = Organization.objects.filter(profile=r_profile)
+    if organization.exists():
+        organization = Organization.objects.get(profile=r_profile)
+        teachers = Teacher.objects.filter(organization=organization)
+        profiles = [teacher.profile for teacher in teachers]
+        context = {'profiles': profiles}
+        return render(request, 'website/teacher_list.html', context)
+    else:
+        return redirect('index')

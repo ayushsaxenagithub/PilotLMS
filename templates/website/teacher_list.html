@@ -39,7 +39,7 @@
                 </thead>
                 <tbody>
                     {% for profile in profiles %}
-                    {% if profile.status == 'Student' %}
+                    {% if profile.status == 'Teacher' %}
                         {% if profile.user.is_staff == False %}
                             <tr>
                                 <td>{{ profile.name }}</td>
@@ -47,12 +47,7 @@
                                 <td>{{ profile.phone }}</td>
                                 <td>
                                     <a href="{% url 'profile_detail' profile.id %}" class="btn btn-primary btn-sm">View Full Profile</a>
-                                    
-                                        <form method="post" class="d-inline">
-                                            {% csrf_token %}
-                                            <input type="hidden" value="{{profile.id}}" name="profile_id">
-                                            <button type="submit" class="btn btn-success btn-sm">Make Teacher</button>
-                                        </form>
+                                        
                                     
                                 </td>
                             </tr>

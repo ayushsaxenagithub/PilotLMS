@@ -40,18 +40,16 @@
                 <ul>
                   {% if profile.status == 'Student' %}
                   
-                  {% elif profile.status == 'Teacher' %}
-                  
-                
-                  {% elif profile.status == 'Organization' %}
-                  <li><a href="{% url 'create_course' %}">Create Course</a></li>
-                  <li><a href="{% url 'make_teacher' %}">Assign Teacher</a></li>
-                  {% endif %}
-                  
-                  <li><a href="#">View Courses</a></li>
+                  {% elif profile.status == 'Teacher' %}                                   
+                  <li><a href="#">Create Courses</a></li>
                   <li><a href="#">Assign Students</a></li>
                   <li><a href="#">Select Teachers</a></li>
-                  <li><a href="#">Course Progress</a></li>
+                  <li><a href="#">Course Progress</a></li>               
+                  {% elif profile.status == 'Organization' %}
+                  <li><a href="{% url 'make_teacher' %}">Assign Teacher</a></li>
+                  <li><a href="{% url 'teacher_list' %}">Teacher List</a></li>
+                  {% endif %}
+
                 </ul>
               </div>
             </div>
