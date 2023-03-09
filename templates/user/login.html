@@ -1,12 +1,6 @@
-{% extends 'main/base.html' %} 
-{% block head %} 
-    <link rel="stylesheet" href="../../static/user/css/login.css">
-{% endblock %} 
-
-{% block title %}
-{% endblock %} 
-
-{% block content %}
+{% extends 'main/base.html' %} {% block head %}
+<link rel="stylesheet" href="../../static/user/css/login.css" />
+{% endblock %} {% block title %} {% endblock %} {% block content %}
 
 <div class="container my-5" style="height: 60vh">
   <div class="row justify-content-center">
@@ -22,11 +16,11 @@
           {% endfor %} {% endif %}
           <form method="post">
             {% csrf_token %}
-            <div class="form-group">
+            <div class="form-group mb-2">
               <label class="text-danger">Email*</label>
               <input type="email" class="form-control" name="email" required />
             </div>
-            <div class="form-group">
+            <div class="form-group mb-2">
               <label class="text-danger">Password*</label>
               <input
                 type="password"
@@ -51,16 +45,16 @@
       </div>
     </div>
   </div>
-</div> 
+</div>
 
-{% comment %} <div class="form">
+{% comment %}
+<div class="form">
   <p>Login</p>
   <form>
-      <input type="text" name="username" placeholder="username">
-      <input type="password" name="password" placeholder="password">
-      <button>login</button>
-      <p class="message">Not registered? <a href="#">Create an account</a></p>
+    <input type="text" class="my-5" name="username" placeholder="username" />
+    <input type="password" name="password" placeholder="password" />
+    <button>login</button>
+    <p class="message">Not registered? <a href="#">Create an account</a></p>
   </form>
-  </div> {% endcomment %}
-
-{% endblock %}
+</div>
+{% endcomment %} {% endblock %}

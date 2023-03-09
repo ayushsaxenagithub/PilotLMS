@@ -1,58 +1,77 @@
-{% extends 'main/base.html' %}
+{% extends 'main/base.html' %} {% block head %} {% endblock %} {% block title %}
+{% endblock %} {% block content %}
 
-    {% block head %}
-    
-    {% endblock %}
+<div class="mb-2">
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark px-4">
+    <a class="navbar-brand fw-bold" href="#">Dashboard</a>
+  </nav>
 
-
-    {% block title %}
-    
-    {% endblock %}
-
-    {% block content %}
-
-
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-        <a class="navbar-brand" href="#">Dashboard</a>
-      </nav>
-    
-      <div class="container-fluid">
-        <div class="row mt-4">
-          <div class="col-md-3">
-            <div class="card">
-              <div class="card-header">
-                <h5>Profile</h5>
-              </div>
-              <div class="card-body">
-                <ul>
-                  <li><a href="{% url 'profile_detail' profile_id=request.user.profile.id %}">Profile</a></li>
-                  <li><a href="{% url 'update_profile' %}">Update Profile</a></li>
-                  <li><a href="#">Change Password</a></li>
-                </ul>
-              </div>
-            </div>
-    
-            <div class="card">
-              <div class="card-header">
-                <h5>Courses</h5>
-              </div>
-              <div class="card-body">
-                <ul>
-                  {% if profile.status == 'Student' %}
-                  
-                  {% elif profile.status == 'Teacher' %}                                   
-                  <li><a href="#">Create Courses</a></li>
-                  <li><a href="#">Assign Students</a></li>
-                  <li><a href="#">Select Teachers</a></li>
-                  <li><a href="#">Course Progress</a></li>               
-                  {% elif profile.status == 'Organization' %}
-                  <li><a href="{% url 'make_teacher' %}">Assign Teacher</a></li>
-                  <li><a href="{% url 'teacher_list' %}">Teacher List</a></li>
-                  {% endif %}
-
-                </ul>
-              </div>
-            </div>
+  <div class="container-fluid">
+    <div class="row mt-4">
+      <div class="col-md-3">
+        <div class="card mb-2">
+          <div class="card-header">
+            <h5 class="text-danger">Profile</h5>
           </div>
-    
-    {% endblock %}
+          <div class="card-body">
+            <ul class="list-unstyled">
+              <li>
+                <a
+                  class="text-decoration-none text-dark fw-bold"
+                  href="{% url 'profile_detail' profile_id=request.user.profile.id %}"
+                  >Profile</a
+                >
+              </li>
+              <li>
+                <a
+                  class="text-decoration-none text-dark fw-bold"
+                  href="{% url 'update_profile' %}"
+                  >Update Profile</a
+                >
+              </li>
+              <li>
+                <a class="text-decoration-none text-dark fw-bold" href="#"
+                  >Change Password</a
+                >
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-header">
+            <h5 class="text-danger">Courses</h5>
+          </div>
+          <div class="card-body">
+            <ul class="list-unstyled">
+              {% if profile.status == 'Student' %} {% elif profile.status ==
+              'Teacher' %}
+              <li><a href="#">Create Courses</a></li>
+              <li><a href="#">Assign Students</a></li>
+              <li><a href="#">Select Teachers</a></li>
+              <li><a href="#">Course Progress</a></li>
+              {% elif profile.status == 'Organization' %}
+              <li>
+                <a
+                  class="text-decoration-none text-dark fw-bold"
+                  href="{% url 'make_teacher' %}"
+                  >Assign Teacher</a
+                >
+              </li>
+              <li>
+                <a
+                  class="text-decoration-none text-dark fw-bold"
+                  href="{% url 'teacher_list' %}"
+                  >Teacher List</a
+                >
+              </li>
+              {% endif %}
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock %}
