@@ -83,10 +83,7 @@
   <!-- Nav tabs -->
   <div class="mb-3 d-flex justify-content-between">
     <h1 class="fw-bolder">Popural <span class="text-danger">Courses</span></h1>
-    {% for course in courses %}
-      <p>{{ course.name }}</p>
-      1
-    {% endfor %}
+
     <button class="btn btn-danger px-4 fw-bold fs-5">Explore All</button>
   </div>
 
@@ -98,24 +95,22 @@
     <div class="carousel-inner">
       <div class="carousel-item active">
         <div class="d-flex gap-3 flex-wrap justify-content-around">
+          {% for course in courses %}
           <div class="card border-0 shadow" style="width: 18rem">
             <img
-              src="{% static '/images/course/1.jpg' %}"
+              src="{{ course.image_course.url }}"
               class="card-img-top"
               width="100%"
               height="180px"
-              alt="..."
+              alt="{{ course.name }}"
             />
 
             <div class="card-body">
               <div class="d-flex justify-content-between mb-2">
                 <span class="badge bg-danger bg-gradient">Advance</span>
               </div>
-              <h5 class="card-title">Graphic Design MasterClass</h5>
-              <p class="card-text">
-                Some quick example text to build on the card title and make up
-                the bulk oft...
-              </p>
+              <h5 class="card-title">{{ course.name}}</h5>
+              <p class="card-text">{{ course.small_description }}</p>
               <ul class="list-inline mb-0">
                 <li class="list-inline-item me-0 small">
                   <i class="fas fa-star text-warning"></i>
@@ -129,11 +124,8 @@
                 <li class="list-inline-item me-0 small">
                   <i class="fas fa-star text-warning"></i>
                 </li>
-                <li class="list-inline-item me-0 small">
-                  <i class="fas fa-star-half-alt text-warning"></i>
-                </li>
                 <li class="list-inline-item ms-2 h6 fw-light mb-0 fw-bold">
-                  4.5/5.0
+                  {{ course.rating }}/5.0
                 </li>
               </ul>
             </div>
@@ -150,6 +142,8 @@
               </div>
             </div>
           </div>
+          {% endfor %}
+
           <div class="card border-0 shadow" style="width: 18rem">
             <img
               src="{% static '/images/course/2.jpg' %}"

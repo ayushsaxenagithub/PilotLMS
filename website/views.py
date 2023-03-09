@@ -333,3 +333,11 @@ def teacher_list(request):
         return render(request, 'website/teacher_list.html', context)
     else:
         return redirect('index')
+
+
+def allcourses(request):
+    courses = Course.objects.all().values()
+    context = {
+        "courses": courses
+    }
+    return render(request, 'website/courses.html', context)
