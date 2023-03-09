@@ -4,7 +4,7 @@
   {% if msg %}
   <div class="alert alert-danger" role="alert">{{ msg }}</div>
   {% endif %}
-  <div class="d-flex justify-content-between gap-2 align-items-center">
+  <div class="d-flex justify-content-between gap-2 align-items-center my-0">
     <div class="h-100 bg-dark w-50">
       <img
         src="{% static 'images/user_profile/login.jpg' %}"
@@ -13,76 +13,82 @@
         alt="login"
       />
     </div>
-    <div class="w-50">
-      <h2 class="text-danger">Sign Up</h2>
-      <form method="POST" action="{% url 'register' %}">
-        {% csrf_token %}
-        <div class="mb-1">
-          <label for="name" class="form-label text-danger">Full Name</label>
-          <input
-            type="text"
-            class="form-control"
-            id="name"
-            name="name"
-            required
-          />
-        </div>
-        <div class="mb-1">
-          <label for="email" class="form-label text-danger"
-            >Email address</label
-          >
-          <input
-            type="email"
-            class="form-control"
-            id="email"
-            name="email"
-            aria-describedby="emailHelp"
-            required
-          />
-          <div id="emailHelp" class="form-text">
-            We'll never share your email with anyone else.
+    <div class="card w-50 my-0">
+      <h2 class="card-header text-danger">Sign Up</h2>
+      <div class="card-body">
+        <form method="POST" action="{% url 'register' %}">
+          {% csrf_token %}
+          <div class="mb-1">
+            <label for="name" class="form-label text-danger">Full Name</label>
+            <input
+              type="text"
+              class="form-control"
+              id="name"
+              name="name"
+              required
+            />
           </div>
-        </div>
-        <div class="mb-1">
-          <label for="phone" class="form-label text-danger">Phone Number</label>
-          <input
-            type="tel"
-            class="form-control"
-            id="phone"
-            name="phone"
-            pattern="[0-9]{10}"
-            maxlength="10"
-            required
-          />
-        </div>
-        <div class="mb-1">
-          <label for="password" class="form-label text-danger">Password</label>
-          <input
-            type="password"
-            class="form-control"
-            id="password"
-            name="password"
-            required
-          />
-          <div class="form-text">
-            Password must contain at least 8 characters, including uppercase,
-            lowercase, and numbers.
+          <div class="mb-1">
+            <label for="email" class="form-label text-danger"
+              >Email address</label
+            >
+            <input
+              type="email"
+              class="form-control"
+              id="email"
+              name="email"
+              aria-describedby="emailHelp"
+              required
+            />
+            <div id="emailHelp" class="form-text">
+              We'll never share your email with anyone else.
+            </div>
           </div>
-        </div>
-        <div class="mb-2">
-          <label for="confirmpassword" class="form-label text-danger"
-            >Confirm Password</label
-          >
-          <input
-            type="password"
-            class="form-control"
-            id="confirmpassword"
-            name="confirmpassword"
-            required
-          />
-        </div>
-        <button type="submit" class="btn btn-danger mb-2">Sign Up</button>
-      </form>
+          <div class="mb-1">
+            <label for="phone" class="form-label text-danger"
+              >Phone Number</label
+            >
+            <input
+              type="tel"
+              class="form-control"
+              id="phone"
+              name="phone"
+              pattern="[0-9]{10}"
+              maxlength="10"
+              required
+            />
+          </div>
+          <div class="mb-1">
+            <label for="password" class="form-label text-danger"
+              >Password</label
+            >
+            <input
+              type="password"
+              class="form-control"
+              id="password"
+              name="password"
+              required
+            />
+            <div class="form-text">
+              Password must contain at least 8 characters, including uppercase,
+              lowercase, and numbers.
+            </div>
+          </div>
+          <div class="mb-2">
+            <label for="confirmpassword" class="form-label text-danger"
+              >Confirm Password</label
+            >
+            <input
+              type="password"
+              class="form-control"
+              id="confirmpassword"
+              name="confirmpassword"
+              required
+            />
+          </div>
+          <button type="submit" class="btn btn-danger mb-2">Sign Up</button>
+        </form>
+      </div>
     </div>
   </div>
 </div>
