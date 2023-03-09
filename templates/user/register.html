@@ -1,76 +1,113 @@
-{% extends 'main/base.html' %}
-
-    {% block head %}
-    
-    {% endblock %}
-
-
-    {% block title %}
-    
-    {% endblock %}
-
-    {% block content %}
-    <div class="container mt-5">
-        <h2>Sign Up</h2>
-        {% if msg %}
-            <div class="alert alert-danger" role="alert">
-                {{ msg }}
-            </div>
-        {% endif %}
-        <form method="POST" action="{% url 'register' %}">
-            {% csrf_token %}
-            <div class="mb-3">
-                <label for="name" class="form-label">Full Name</label>
-                <input type="text" class="form-control" id="name" name="name" required>
-            </div>
-            <div class="mb-3">
-                <label for="email" class="form-label">Email address</label>
-                <input type="email" class="form-control" id="email" name="email" aria-describedby="emailHelp" required>
-                <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
-            </div>
-            <div class="mb-3">
-                <label for="phone" class="form-label">Phone Number</label>
-                <input type="tel" class="form-control" id="phone" name="phone" pattern="[0-9]{10}" maxlength="10" required>
-            </div>
-            <div class="mb-3">
-                <label for="password" class="form-label">Password</label>
-                <input type="password" class="form-control" id="password" name="password" required>
-                <div class="form-text">Password must contain at least 8 characters, including uppercase, lowercase, and numbers.</div>
-            </div>
-            <div class="mb-3">
-                <label for="confirmpassword" class="form-label">Confirm Password</label>
-                <input type="password" class="form-control" id="confirmpassword" name="confirmpassword" required>
-            </div>
-            <button type="submit" class="btn btn-primary">Sign Up</button>
-        </form>
+{% extends 'main/base.html' %} {% block head %} {% endblock %} {% block title %}
+{% endblock %} {% block content %}
+<div class="mx-5 my-5">
+  {% if msg %}
+  <div class="alert alert-danger" role="alert">{{ msg }}</div>
+  {% endif %}
+  <div class="d-flex justify-content-between gap-2">
+    <div class="h-100 bg-dark w-50">Akash chandra</div>
+    <div class="w-50">
+      <h2 class="text-danger">Sign Up</h2>
+      <form method="POST" action="{% url 'register' %}">
+        {% csrf_token %}
+        <div class="mb-1">
+          <label for="name" class="form-label text-danger">Full Name</label>
+          <input
+            type="text"
+            class="form-control"
+            id="name"
+            name="name"
+            required
+          />
+        </div>
+        <div class="mb-1">
+          <label for="email" class="form-label text-danger"
+            >Email address</label
+          >
+          <input
+            type="email"
+            class="form-control"
+            id="email"
+            name="email"
+            aria-describedby="emailHelp"
+            required
+          />
+          <div id="emailHelp" class="form-text">
+            We'll never share your email with anyone else.
+          </div>
+        </div>
+        <div class="mb-1">
+          <label for="phone" class="form-label text-danger">Phone Number</label>
+          <input
+            type="tel"
+            class="form-control"
+            id="phone"
+            name="phone"
+            pattern="[0-9]{10}"
+            maxlength="10"
+            required
+          />
+        </div>
+        <div class="mb-1">
+          <label for="password" class="form-label text-danger">Password</label>
+          <input
+            type="password"
+            class="form-control"
+            id="password"
+            name="password"
+            required
+          />
+          <div class="form-text">
+            Password must contain at least 8 characters, including uppercase,
+            lowercase, and numbers.
+          </div>
+        </div>
+        <div class="mb-2">
+          <label for="confirmpassword" class="form-label text-danger"
+            >Confirm Password</label
+          >
+          <input
+            type="password"
+            class="form-control"
+            id="confirmpassword"
+            name="confirmpassword"
+            required
+          />
+        </div>
+        <button type="submit" class="btn btn-danger mb-2">Sign Up</button>
+      </form>
     </div>
+  </div>
+</div>
 
-    <script>
-        var password = document.getElementById("password");
-        var confirmPassword = document.getElementById("confirm-password");
-      
-        function validatePassword() {
-          var pattern = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$/;
-          if (pattern.test(password.value)) {
-            password.setCustomValidity('');
-            return true;
-          } else {
-            password.setCustomValidity('Password must contain at least 8 characters, including at least 1 lowercase letter, 1 uppercase letter, and 1 number.');
-            return false;
-          }
-        }
-      
-        function validateConfirmPassword() {
-          if (password.value == confirmPassword.value) {
-            confirmPassword.setCustomValidity('');
-            return true;
-          } else {
-            confirmPassword.setCustomValidity('Passwords do not match.');
-            return false;
-          }
-        }
-      
-        password.onkeyup = validatePassword;
-        confirmPassword.onkeyup = validateConfirmPassword;
-      </script>
-    {% endblock %}
+<script>
+  var password = document.getElementById("password");
+  var confirmPassword = document.getElementById("confirm-password");
+
+  function validatePassword() {
+    var pattern = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$/;
+    if (pattern.test(password.value)) {
+      password.setCustomValidity("");
+      return true;
+    } else {
+      password.setCustomValidity(
+        "Password must contain at least 8 characters, including at least 1 lowercase letter, 1 uppercase letter, and 1 number."
+      );
+      return false;
+    }
+  }
+
+  function validateConfirmPassword() {
+    if (password.value == confirmPassword.value) {
+      confirmPassword.setCustomValidity("");
+      return true;
+    } else {
+      confirmPassword.setCustomValidity("Passwords do not match.");
+      return false;
+    }
+  }
+
+  password.onkeyup = validatePassword;
+  confirmPassword.onkeyup = validateConfirmPassword;
+</script>
+{% endblock %}
