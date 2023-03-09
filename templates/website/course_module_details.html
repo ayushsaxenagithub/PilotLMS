@@ -39,8 +39,8 @@
   <div class="row my-4">
     <div class="col-md-12">
       <h2>Modules</h2>
-      {% if course.modules.all %}
-        {% for module in course.modules.all %}
+      {% if course.modules %}
+        {% for module in course.modules %}
           <div class="card mb-4">
             <div class="card-header">
               {{ module.name }}
