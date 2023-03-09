@@ -83,6 +83,10 @@
   <!-- Nav tabs -->
   <div class="mb-3 d-flex justify-content-between">
     <h1 class="fw-bolder">Popural <span class="text-danger">Courses</span></h1>
+    {% for course in courses %}
+      <p>{{ course.name }}</p>
+      1
+    {% endfor %}
     <button class="btn btn-danger px-4 fw-bold fs-5">Explore All</button>
   </div>
 
