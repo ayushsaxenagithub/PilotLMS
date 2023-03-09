@@ -17,7 +17,7 @@ class Course(models.Model):
     enroller_user=models.ManyToManyField(User,blank=True, null=True, through="Enrollment")
     tags=models.ManyToManyField(Tags, blank=True, null=True)
     description=RichTextField(null=True, blank=True)
-    image_course=models.ImageField(null=True, blank=True, default='blank.png',upload_to='course/')
+    image_course=models.ImageField(null=True, blank=True, default='blank_course.png',upload_to='course/')
     price = models.DecimalField(null=True, blank=True, default=0, max_digits=100, decimal_places=2)
     small_description = models.TextField(null=True, blank=True)
     learned = RichTextField(null = True, blank = True)
