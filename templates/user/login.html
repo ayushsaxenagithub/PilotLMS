@@ -1,10 +1,17 @@
-{% extends 'main/base.html' %} {% block head %}
+{% extends 'main/base.html' %} {% load static %} {% block head %}
 <link rel="stylesheet" href="../../static/user/css/login.css" />
 {% endblock %} {% block title %} {% endblock %} {% block content %}
 
 <div class="container my-5" style="height: 60vh">
-  <div class="row justify-content-center">
-    <div class="col-md-6 bg-danger"></div>
+  <div class="row justify-content-center h-100 align-items-center">
+    <div class="col-md-6 w-50 h-100">
+      <img
+        src="{% static 'images/user_profile/login.jpg' %}"
+        width="100%"
+        height="100%"
+        alt="login"
+      />
+    </div>
     <div class="col-md-6">
       <div class="card">
         <div class="card-header text-center">
@@ -46,8 +53,7 @@
     </div>
   </div>
 </div>
-
-{% comment %}
+{% endblock %} {% comment %}
 <div class="form">
   <p>Login</p>
   <form>
@@ -57,4 +63,4 @@
     <p class="message">Not registered? <a href="#">Create an account</a></p>
   </form>
 </div>
-{% endcomment %} {% endblock %}
+{% endcomment %}
