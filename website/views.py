@@ -12,7 +12,11 @@ from datetime import datetime, timedelta
 # Create your views here.
 
 def index(request):
-    return render(request, 'website/home.html')
+    courses = Course.objects.all().values()
+    context = {
+        "courses": courses
+    }
+    return render(request, 'website/home.html', context)
 
 def dashboard(request):
     if not request.user.is_authenticated:

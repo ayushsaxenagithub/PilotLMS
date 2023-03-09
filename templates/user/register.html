@@ -1,11 +1,18 @@
-{% extends 'main/base.html' %} {% block head %} {% endblock %} {% block title %}
-{% endblock %} {% block content %}
-<div class="mx-5 my-5">
+{% extends 'main/base.html' %} {% load static %} {% block head %} {% endblock %}
+{% block title %} {% endblock %} {% block content %}
+<div class="mx-5 mb-5">
   {% if msg %}
   <div class="alert alert-danger" role="alert">{{ msg }}</div>
   {% endif %}
-  <div class="d-flex justify-content-between gap-2">
-    <div class="h-100 bg-dark w-50">Akash chandra</div>
+  <div class="d-flex justify-content-between gap-2 align-items-center">
+    <div class="h-100 bg-dark w-50">
+      <img
+        src="{% static 'images/user_profile/login.jpg' %}"
+        width="100%"
+        height="100%"
+        alt="login"
+      />
+    </div>
     <div class="w-50">
       <h2 class="text-danger">Sign Up</h2>
       <form method="POST" action="{% url 'register' %}">
