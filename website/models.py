@@ -60,6 +60,7 @@ class Module(models.Model):
 
 class Video(models.Model):
     name = models.CharField(max_length=2000, null=True, blank=True)
+    number=models.IntegerField(blank=True,null=True, default=0)
     course=models.ForeignKey(Course,on_delete=models.SET_NULL,blank=True,null=True)
     module = models.ForeignKey(Module, on_delete=models.CASCADE, blank=True, null=True)
     video = models.FileField(null=True, blank=True)
@@ -94,7 +95,8 @@ class SubComment(models.Model):
 
 class Notes(models.Model):
     user=models.ForeignKey(User, on_delete=models.CASCADE,null=True,blank=True)
-    description=RichTextField(null=True, blank=True)  
+    description=RichTextField(null=True, blank=True) 
+    number=models.IntegerField(blank=True,null=True, default=0) 
     video = models.ForeignKey(Video, null=True, blank=True, on_delete=models.CASCADE)
     module = models.ForeignKey(Module, null=True, blank=True, on_delete=models.CASCADE)
     course = models.ForeignKey(Course, null=True, blank=True, on_delete=models.CASCADE)
