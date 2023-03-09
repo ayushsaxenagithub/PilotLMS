@@ -20,7 +20,7 @@
           </div>
           <div class="form-group">
             <label for="description">Description:</label>
-            <textarea class="form-control" id="description" name="description" rows="10">{{ course.description }}</textarea>
+            <textarea class="form-control" id="description" name="description" rows="10" id="description">{{ course.description }}</textarea>
           </div>
           <div class="form-group">
             <label for="image_course">Image:</label>
@@ -36,7 +36,7 @@
           </div>
           <div class="form-group">
             <label for="learned">What you will learn:</label>
-            <textarea class="form-control" id="learned" name="learned" rows="10">{{ course.learned }}</textarea>
+            <textarea class="form-control" id="learned" name="learned" rows="10" id="learned">{{ course.learned }}</textarea>
           </div>
          
           <div class="form-group">
@@ -47,4 +47,16 @@
           <a href="{% url 'course_detail' course.id %}" class="btn btn-secondary">Cancel</a>
         </form>
       </div>
+      <script>
+        try {
+          CKEDITOR.replace("learned");
+        } catch (error) {
+          console.log(error);
+        }
+        try {
+            CKEDITOR.replace("description");
+          } catch (error) {
+            console.log(error);
+          }
+      </script>
     {% endblock %}

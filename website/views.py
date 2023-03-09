@@ -6,6 +6,8 @@ from django.contrib import messages
 from django.utils import timezone
 from .models import Course, Module, Video, Comment, SubComment, Notes,Monitor, Tags, Quiz, Question, Answer
 from user.models import Profile, Student, Organization, Teacher
+from datetime import datetime, timedelta
+
 
 # Create your views here.
 
@@ -122,25 +124,30 @@ def course(request):
     }
     return render(request,'website/courses.html', context)
 
+
 def create_module(request, course_id):
     course = Course.objects.get(id=course_id)
-    course.modules+=1
+    course.modules += 1
 
     if request.method == 'POST':
         module_name = request.POST['module_name']
-        module.number=course.modules
-        module = Module.objects.create(course=course, name=module_name)
+        module_number = course.modules
+        module = Module.objects.create(course=course, name=module_name, number=module_number)
 
         for video in request.FILES.getlist('video'):
             video_name = video.name.split('.')[0]
-            Video.objects.create(module=module, video=video, name=video_name, course=course)
+            module.videos += 1
+            Video.objects.create(module=module, video=video, name=video_name, course=course, number=module.videos)
 
-        for note in request.POST.getlist('note'):
-            Notes.objects.create(user=request.user, module=module, description=note)
+        for note in request.POST.getlist('notes[]'):
+            if note.strip():
+                module.notes_frequency += 1
+                Notes.objects.create(user=request.user, module=module, description=note, number=module.notes_frequency)
 
         return redirect('course_detail', course_id=course_id)
 
     return render(request, 'website/create_module.html', {'course': course})
+
 
 
 def update_module(request, course_id, module_id):
