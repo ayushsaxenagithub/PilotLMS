@@ -132,28 +132,28 @@ def course(request):
 
 def create_module(request, course_id):
     course = Course.objects.get(id=course_id)
-    course.modules += 1
+    course.total_module += 1
 
     if request.method == 'POST':
         module_name = request.POST['module_name']
-        module_number = course.modules
+        module_number = course.total_module
         module=Module()
         module.name = module_name
         module.course=course
         module.number = module_number
         module.save()
-
+        number=0
         for video in request.FILES.getlist('video'):
             video_name = video.name.split('.')[0]
-            module.videos += 1
-            Video.objects.create(module=module, video=video, name=video_name, course=course, number=module.videos)
+            number += 1
+            Video.objects.create(module=module, video=video, name=video_name, course=course, number=number)
 
         for note in request.POST.getlist('notes[]'):
             if note.strip():
-                module.notes_frequency += 1
+                module.total_notes += 1
                 Notes.objects.create(user=request.user, module=module, description=note, number=module.notes_frequency)
 
-        return redirect('course_detail', course_id=course_id)
+        return redirect('course_modules', course_id=course_id)
 
     return render(request, 'website/create_module.html', {'course': course})
 
@@ -203,7 +203,7 @@ def delete_module(request, course_id, module_id):
 
 def course_modules(request, course_id):
     course = get_object_or_404(Course, id=course_id)
-    modules = course.module_set.all()
+    modules = Module.objects.filter(course=course)
     context = {
         'course': course,
         'modules': modules,
