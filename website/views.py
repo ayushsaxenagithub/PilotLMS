@@ -129,6 +129,7 @@ def course(request):
     return render(request,'website/courses.html', context)
 
 
+
 def create_module(request, course_id):
     course = Course.objects.get(id=course_id)
     course.modules += 1
@@ -136,7 +137,11 @@ def create_module(request, course_id):
     if request.method == 'POST':
         module_name = request.POST['module_name']
         module_number = course.modules
-        module = Module.objects.create(course=course, name=module_name, number=module_number)
+        module=Module()
+        module.name = module_name
+        module.course=course
+        module.number = module_number
+        module.save()
 
         for video in request.FILES.getlist('video'):
             video_name = video.name.split('.')[0]
@@ -151,6 +156,7 @@ def create_module(request, course_id):
         return redirect('course_detail', course_id=course_id)
 
     return render(request, 'website/create_module.html', {'course': course})
+
 
 
 
