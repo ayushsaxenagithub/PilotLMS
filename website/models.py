@@ -49,7 +49,8 @@ class Module(models.Model):
     course = models.ForeignKey(Course, on_delete=models.CASCADE, blank=True, null=True)
     number = models.IntegerField(null=True, blank=True)    
     description = RichTextField(null=True, blank=True)
-    videos = models.IntegerField(null=True, blank=True)
+    videos = models.IntegerField(null=True, blank=True, default=0)
+    notes_frequency = models.IntegerField(null=True, blank=True, default=0)
     duration = models.CharField(max_length=2000, blank=True, null=True)
 
     def save(self, *args, **kwargs):
