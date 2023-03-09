@@ -12,7 +12,7 @@ class Tags(models.Model):
     
 class Course(models.Model):
     name = models.CharField(max_length=2000,blank=True,null=True)
-    organisation = models.ForeignKey(Organization, on_delete=models.CASCADE, null = True, blank = True)
+    organization = models.ForeignKey(Organization, on_delete=models.CASCADE, null = True, blank = True)
     teacher=models.ForeignKey(Teacher,on_delete=models.CASCADE, blank=True, null=True)
     enroller_user=models.ManyToManyField(User,blank=True, null=True, through="Enrollment")
     tags=models.ManyToManyField(Tags, blank=True, null=True)
@@ -20,20 +20,20 @@ class Course(models.Model):
     image_course=models.ImageField(null=True, blank=True, default='blank.png',upload_to='course/')
     price = models.DecimalField(null=True, blank=True, default=0, max_digits=100, decimal_places=2)
     small_description = models.TextField(null=True, blank=True)
-    description=RichTextField(null=True, blank=True)
     learned = RichTextField(null = True, blank = True)
     created_at=models.DateTimeField(null=True, blank = True)
     updated_at=models.DateTimeField(null=True, blank =True)
-    modules=models.IntegerField(null=True, blank = True)
     rating=models.FloatField(null=True, blank = True, default=0)
     videos=models.IntegerField(null=True, blank = True)
     vidoes_time=models.CharField(max_length=2000,null=True, blank = True)
-    def save(self, *args, **kwargs):
-        self.videos = Video.objects.filter(module=self).count()
-        time = sum([video.duration for video in Video.objects.filter(module=self)])
-        self.videos_time = str(datetime.timedelta(seconds=time))
-        super().save(*args, **kwargs)
-
+    modules=models.IntegerField(blank=True, null=True, default=0)
+    # def save(self, *args, **kwargs):
+    #     self.videos = Video.objects.filter(module=self).count()
+    #     time = sum([video.duration for video in Video.objects.filter(module=self)])
+    #     self.videos_time = str(datetime.timedelta(seconds=time))
+    #     super().save(*args, **kwargs)
+    def __str__(self):
+        return self.name
 
 
 

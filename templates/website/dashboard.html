@@ -27,7 +27,6 @@
                 <ul>
                   <li><a href="{% url 'profile_detail' profile_id=request.user.profile.id %}">Profile</a></li>
                   <li><a href="{% url 'update_profile' %}">Update Profile</a></li>
-                  <li><a href="#">Change Password</a></li>
                 </ul>
               </div>
             </div>
@@ -41,8 +40,8 @@
                   {% if profile.status == 'Student' %}
                   
                   {% elif profile.status == 'Teacher' %}                                   
-                  <li><a href="#">Create Courses</a></li>
-                  <li><a href="#">Assign Students</a></li>
+                  <li><a href="{% url 'create_course' %}">Create Courses</a></li>
+                  <li><a href="{% url 'course' %}">Mine Courses</a></li>
                   <li><a href="#">Select Teachers</a></li>
                   <li><a href="#">Course Progress</a></li>               
                   {% elif profile.status == 'Organization' %}

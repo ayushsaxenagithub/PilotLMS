@@ -12,7 +12,7 @@
     {% block content %}
     <div class="container">
         <h1>Update Course</h1>
-        <form method="POST" enctype="multipart/form-data" action="{% url 'course_update' course.id %}">
+        <form method="POST" enctype="multipart/form-data" action="{% url 'update_course' course.id %}">
           {% csrf_token %}
           <div class="form-group">
             <label for="name">Name:</label>

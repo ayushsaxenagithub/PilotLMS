@@ -49,21 +49,21 @@ def create_course(request):
                 tags.append(tag)
             teacher=Teacher.objects.get(profile=request.user.profile)
                 
+            course=Course()
+            course.name=name
+            course.description=description
+            course.image_course=image_course
+            course.price=price
+            course.small_description=small_description
+            course.learned=learned
+            course.teacher = teacher
+            course.organization = teacher.organization
+            course.created_at=datetime.today()
+            course.updated_at=datetime.today()
+            course.save()
             
-            course = Course.objects.create(
-                name=name,
-                description=description,
-                image_course=image_course,
-                price=price,
-                small_description=small_description,
-                learned=learned,
-                modules=0,
-                teacher = teacher,
-                organization = teacher.organization,
-                created_at=datetime.today(),
-                updated_at=datetime.today(),
-            )
             course.tags.set(tags)
+            
 
             return redirect('course_detail', course_id=course.id)
 
@@ -104,6 +104,7 @@ def update_course(request, course_id):
 
 
 def delete_course(request, course_id):
+    course = get_object_or_404(Course, id=course_id)
     if(course.teacher.profile == request.user.profile):
         course = get_object_or_404(Course, pk=course_id)
         if request.method == 'POST':
@@ -112,6 +113,14 @@ def delete_course(request, course_id):
         return render(request, 'website/delete_course.html', {'course': course})
     else:
         return redirect('course_detail', course_id=course.id)
+
+def course(request):
+    teacher=get_object_or_404(Teacher,profile=request.user.profile)
+    courses=Course.objects.filter(teacher=teacher)
+    context={
+        "courses":courses,
+    }
+    return render(request,'website/courses.html', context)
 
 def create_module(request, course_id):
     course = Course.objects.get(id=course_id)

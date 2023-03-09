@@ -1,0 +1,35 @@
+{% extends 'main/base.html' %}
+
+    {% block head %}
+    
+    {% endblock %}
+
+
+    {% block title %}
+    
+    {% endblock %}
+
+    {% block content %}
+    <div class="container">
+        <div class="row">
+            {% for course in courses %}
+            <div class="col-md-4 mb-4">
+                <div class="card">
+                    <img src="{{ course.image_course.url }}" alt="{{ course.name }}" class="card-img-top">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ course.name }}</h5>
+                        <h6 class="card-subtitle mb-2 text-muted">{{ course.teacher.profile.name }}</h6>
+                        <p class="card-text">{{ course.small_description }}</p>
+                        <h6>Course Progress: {{ course.courseprogress.total_progress_percent }}%</h6>
+                        <div class="progress">
+                            <div class="progress-bar" role="progressbar" style="width: {{ course.courseprogress.total_progress_percent }}%;" aria-valuenow="{{ course.courseprogress.total_progress_percent }}" aria-valuemin="0" aria-valuemax="100">{{ course.courseprogress.total_progress_percent }}%</div>
+                        </div>
+                        <br>
+                        <a href="{% url 'course_detail' course.id %}" class="btn btn-primary">View Full Course</a>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+    {% endblock %}

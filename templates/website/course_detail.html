@@ -1,123 +1,72 @@
 {% extends 'main/base.html' %} {% block head %} {% endblock %} {% block title %}
 {% endblock %} {% block content %}
 
-<div class="container">
-  <div class="row mt-4">
-    <div class="col-md-8">
-      <h1>{{ course.name }}</h1>
-      <p class="text-muted">{{ course.organisation.profile.name }}</p>
-      <p>Created by: {{ course.teacher.profile.name }}</p>
-      <p>
-        Tags: {% for tag in course.tags.all %} {{ tag.name }} {% if not
-        forloop.last %}, {% endif %} {% endfor %}
-      </p>
-      <p>Created at: {{ course.created_at }}</p>
-      <p>Last updated: {{ course.updated_at }}</p>
-      <p>Price: ${{ course.price }}</p>
-      <p>{{ course.small_description }}</p>
-      <hr />
-      <img src="{{ course.image_course.url }}" class="img-fluid mb-4" />
-      <div>{{ course.description|safe }}</div>
-      <div>{{ course.learned|safe }}</div>
-    </div>
-    <div class="col-md-4">
-      <div class="card">
-        <div class="card-header">Enrolled Users</div>
-        <div class="card-body">
-          {% for enrollment in course.enrollment_set.all %}
-          <p>{{ enrollment.user.profile.name }}</p>
-          {% empty %}
-          <p>No enrollments yet.</p>
+  <div class="container">
+    <div class="row mt-4">
+      <div class="col-md-8">
+        <h1>{{ course.name }}</h1>
+        <p class="text-muted">{{ course.organization.profile.name }}</p>
+        <p>Created by: {{ course.teacher.profile.name }}</p>
+        <p>
+          Tags:
+          {% for tag in course.tags.all %}
+            {{ tag.name }}
+            {% if not forloop.last %}
+              ,
+            {% endif %}
           {% endfor %}
+        </p>
+        <p>Created at: {{ course.created_at }}</p>
+        <p>Last updated: {{ course.updated_at }}</p>
+        <p>Price: ${{ course.price }}</p>
+        <p>{{ course.small_description }}</p>
+        <hr />
+        <img src="{{ course.image_course.url }}" class="img-fluid mb-4" />
+        <div>{{ course.description|safe }}</div>
+        <div>{{ course.learned|safe }}</div>
+      </div>
+      <div class="col-md-4">
+        <div class="card">
+          <div class="card-header">Enrolled Users</div>
+          <div class="card-body">
+            {% for enrollment in course.enrollment_set.all %}
+              <p>{{ enrollment.user.profile.name }}</p>
+            {% empty %}
+              <p>No enrollments yet.</p>
+            {% endfor %}
+          </div>
+        </div>
+        <div class="card mt-4">
+          <div class="card-header">Course Progress</div>
+          <div class="card-body">
+            <p>Ratings: {{ course.rating }}</p>
+            <p>Total number of videos: {{ course.videos }}</p>
+            <p>Total video hours: {{ course.vidoes_time }}</p>
+            <p>Total number of modules: {{ course.modules }}</p>
+            <p>Total number of enrolled users: {{ course.enroller_user.count }}</p>
+            {% with courseprogress=course.courseprogress %}
+              <p>Progress: {{ courseprogress.number_of_videos_watched }}/{{ courseprogress.total_number_of_videos }} ({{ courseprogress.total_progress_percent }}%)</p>
+            {% endwith %}
+          </div>
         </div>
       </div>
     </div>
+    {% if request.user.is_authenticated %}
+      <div class="row mt-4">
+        <div class="col-md-8">
+          <a href="{% url 'update_course' course.id %}" class="btn btn-primary">Update Course</a>
+          <a href="{% url 'delete_course' course.id %}" class="btn btn-danger">Delete Course</a>
+        </div>
+        <div class="col-md-4">
+          <a href="{% url 'create_module' course.id %}" class="btn btn-success">Create Module</a>
+        </div>
+      </div>
+    {% endif %}
   </div>
 
-  <div class="row mt-4">
-    <div class="col-md-8">
-      <a href="{% url 'update_course' course.id %}" class="btn btn-primary"
-        >Update Course</a
-      >
-      <a href="{% url 'delete_course' course.id %}" class="btn btn-danger"
-        >Delete Course</a
-      >
-    </div>
-  </div>
-  <!-- Modal -->
-  <div
-    class="modal fade"
-    id="create-module-modal"
-    tabindex="-1"
-    role="dialog"
-    aria-labelledby="create-module-modal-label"
-    aria-hidden="true"
-  >
-    <div class="modal-dialog" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="create-module-modal-label">
-            Create New Module
-          </h5>
-          <button
-            type="button"
-            class="close"
-            data-dismiss="modal"
-            aria-label="Close"
-          >
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-        <form
-          method="POST"
-          action="{% url 'create_module' course.id %}"
-          enctype="multipart/form-data"
-        >
-          {% csrf_token %}
-          <div class="modal-body">
-            <div class="form-group">
-              <label for="module_name">Module Name</label>
-              <input
-                type="text"
-                class="form-control"
-                id="module_name"
-                name="module_name"
-                required
-              />
-            </div>
-            <div class="form-group">
-              <label for="video">Videos</label>
-              <input
-                type="file"
-                class="form-control-file"
-                id="video"
-                name="video"
-                multiple
-              />
-            </div>
-            <div class="form-group">
-              <label for="note">Notes</label>
-              <textarea
-                class="form-control"
-                id="note"
-                name="note"
-                rows="3"
-              ></textarea>
-            </div>
-          </div>
-          <div class="modal-footer">
-            <button
-              type="button"
-              class="btn btn-secondary"
-              data-dismiss="modal"
-            >
-              Close
-            </button>
-            <button type="submit" class="btn btn-primary">Save changes</button>
-          </div>
-        </form>
-      </div>
-    </div>
-  </div>
-</div>
+
+
+
+
+
 {% endblock %}

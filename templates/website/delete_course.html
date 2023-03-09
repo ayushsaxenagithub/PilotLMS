@@ -12,7 +12,7 @@
     {% block content %}
     <div class="container">
         <h1>Delete Course</h1>
-        <form method="POST" action="{% url 'course_delete' course.id %}">
+        <form method="POST" action="{% url 'delete_course' course.id %}">
           {% csrf_token %}
           <p>Are you sure you want to delete "{{ course.name }}"?</p>
           <button type="submit" class="btn btn-danger">Delete</button>
