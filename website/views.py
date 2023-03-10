@@ -340,4 +340,4 @@ def allcourses(request):
     context = {
         "courses": courses
     }
-    return render(request, 'website/courses.html', context)
+    return render(request, 'website/allcourses.html', context)
