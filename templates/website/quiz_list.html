@@ -28,9 +28,9 @@
               <td>{{ quiz.start_time }}</td>
               <td>{{ quiz.pass_mark }}</td>
               <td>
-                <a href="{% url 'quiz:view_quiz' quiz.id %}" class="btn btn-sm btn-primary">View</a>
-                <a href="{% url 'quiz:update_quiz' quiz.id %}" class="btn btn-sm btn-warning">Edit</a>
-                <a href="{% url 'quiz:delete_quiz' quiz.id %}" class="btn btn-sm btn-danger">Delete</a>
+                <a href="{% url 'quiz_detail' quiz.id %}" class="btn btn-sm btn-primary">View</a>
+                <a href="" class="btn btn-sm btn-warning">Edit</a>
+                <a href="" class="btn btn-sm btn-danger">Delete</a>
               </td>
             </tr>
             {% endfor %}

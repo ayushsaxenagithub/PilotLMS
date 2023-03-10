@@ -13,10 +13,10 @@
         <p><strong>Start Time:</strong> {{ quiz.start_time }}</p>
         <p><strong>Pass Mark:</strong> {{ quiz.pass_mark }}</p>
         <hr>
-        {% if quiz.questions.all %}
+        {% if quiz.question_set.all%}
         <h4>Questions:</h4>
         <ul>
-          {% for question in quiz.questions.all %}
+          {% for question in quiz.question_set.all %}
           <li>{{ question.text }}</li>
           {% endfor %}
         </ul>
@@ -24,8 +24,8 @@
         <p>No questions added for this quiz yet.</p>
         {% endif %}
         <hr>
-        <a href="{% url 'quiz:update_quiz' quiz.id %}" class="btn btn-warning">Edit Quiz</a>
-        <a href="{% url 'quiz:delete_quiz' quiz.id %}" class="btn btn-danger">Delete Quiz</a>
+        <a href="" class="btn btn-warning">Edit Quiz</a>
+        <a href="" class="btn btn-danger">Delete Quiz</a>
       </div>
     </div>
   </div>

@@ -211,8 +211,8 @@ def course_modules(request, course_id):
     return render(request, 'website/course_module_details.html', context=context)
 
 
-def quiz_list(request):
-    quizzes = Quiz.objects.all()
+def quiz_list(request, video_id):
+    quizzes = Quiz.objects.filter(video=video_id)
     return render(request, 'website/quiz_list.html', {'quizzes': quizzes})
 
 
@@ -225,26 +225,57 @@ def create_quiz(request, video_id):
     if request.user.profile != video.module.course.teacher.profile:
         return HttpResponse('You do not have permission to access this page')
     if request.method == 'POST':
-        timestamp = request.POST.get('timestamp')
-        question = request.POST.get('question')
-        option1 = request.POST.get('option1')
-        option2 = request.POST.get('option2')
-        option3 = request.POST.get('option3')
-        option4 = request.POST.get('option4')
-        correct_answer = request.POST.get('correct_answer')
+        pass_mark = request.POST.get('pass_mark')
+        start_time_str = request.POST.get('timestamp')
+        if start_time_str:
+            start_time = timedelta(seconds=float(start_time_str))
+        else:
+            start_time = timedelta(seconds=0)
 
         quiz = Quiz.objects.create(
             video=video,
-            timestamp=timestamp,
-            question=question,
-            option1=option1,
-            option2=option2,
-            option3=option3,
-            option4=option4,
-            correct_answer=correct_answer,
+            start_time=start_time,
+            pass_mark=pass_mark,
         )
 
-        return redirect('video_detail', video_id=video.id)
+        question_text = request.POST.get('question_text')
+        question = Question.objects.create(
+            quiz=quiz,
+            text=question_text,
+        )
+
+        answer1_text = request.POST.get('answer1_text')
+        answer1_is_correct = request.POST.get('answer1_is_correct') == 'on'
+        answer1 = Answer.objects.create(
+            question=question,
+            text=answer1_text,
+            is_correct=answer1_is_correct,
+        )
+
+        answer2_text = request.POST.get('answer2_text')
+        answer2_is_correct = request.POST.get('answer2_is_correct') == 'on'
+        answer2 = Answer.objects.create(
+            question=question,
+            text=answer2_text,
+            is_correct=answer2_is_correct,
+        )
+
+        answer3_text = request.POST.get('answer3_text')
+        answer3_is_correct = request.POST.get('answer3_is_correct') == 'on'
+        answer3 = Answer.objects.create(
+            question=question,
+            text=answer3_text,
+            is_correct=answer3_is_correct,
+        )
+
+        answer4_text = request.POST.get('answer4_text')
+        answer4_is_correct = request.POST.get('answer4_is_correct') == 'on'
+        answer4 = Answer.objects.create(
+            question=question,
+            text=answer4_text,
+            is_correct=answer4_is_correct,
+        )
+        return redirect('quiz_detail', quiz_id=quiz.id)
 
     return render(request, 'website/create_quiz.html', {'video': video})
 

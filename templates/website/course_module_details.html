@@ -60,10 +60,13 @@
                     <a href="{{ video.video.url }}" target="_blank">{{ video.name }}</a>
                     <br>
                     <video width="320" height="240" controls>
-                      <source src="{{ video.video.url }}" type="video/mp4">
-                      Your browser does not support the video tag.
+                        <source src="{{ video.video.url }}" type="video/mp4">
+                        Your browser does not support the video tag.
                     </video>
-                  </li>
+                    <br>
+                    <a href="{% url 'create_quiz' video_id=video.id %}" class="btn btn-sm btn-primary">Create Quiz</a>
+                    <a href="{% url 'quiz_list' video_id=video.id %}" class="btn btn-sm btn-secondary">View Quizzes</a>
+                </li>
                   {% endfor %}
                 {% else %}
                   <li>No videos yet.</li>

@@ -16,13 +16,13 @@ urlpatterns = [
     path('course/<int:course_id>/module/<int:module_id>/update/', views.update_module, name='update_module'),
     path('course/<int:course_id>/module/<int:module_id>/delete/', views.delete_module, name='delete_module'),
     path('<int:course_id>/modules/', views.course_modules, name='course_modules'),
-    path('dashboard',views.dashboard,name='dashboard'),
-    path('quiz_list', views.quiz_list, name='quiz_list'),
-    path('quiz/create/', views.create_quiz, name='create_quiz'),
-    path('quiz/<int:pk>/', views.view_quiz, name='quiz_detail'),
+    path('dashboard/',views.dashboard,name='dashboard'),
+    path('quiz_list/<int:video_id>/', views.quiz_list, name='quiz_list'),
+    path('quiz/create/<int:video_id>/', views.create_quiz, name='create_quiz'),
+    path('quiz/<int:quiz_id>', views.view_quiz, name='quiz_detail'),
     path('quiz/<int:pk>/update/', views.update_quiz, name='update_quiz'),
-    path('user_teacher', views.make_teacher, name='make_teacher'),
-    path('teacher_list', views.teacher_list, name='teacher_list'),
+    path('user_teacher/', views.make_teacher, name='make_teacher'),
+    path('teacher_list/', views.teacher_list, name='teacher_list'),
     
 ]
 
