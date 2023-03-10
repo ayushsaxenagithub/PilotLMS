@@ -12,15 +12,15 @@
       />
     </div>
     <div class="pt-1">
-      <h1 class="text-white m-0">Akash chandra</h1>
-      <h5 class="text-white text-uppercase">IIT KHARAGPUR</h5>
-      <h6 class="text-white">akashchandra8544@gmail.com | 6205240094</h6>
+      <h1 class="text-white m-0">{{ profile.name }}</h1>
+      <h5 class="text-white text-uppercase">{{ profile.department }}</h5>
+      <h6 class="text-white">{{profile.email}} | {{profile.phone}}</h6>
     </div>
   </div>
 </div>
 
 <div class="container-fluid">
-  <div class="row mt-4">
+  <div class="row mt-4 px-3">
     <div class="col-md-3">
       <div class="card mb-2 bg-dark text-white">
         <div class="card-header border-white">
@@ -101,6 +101,7 @@
         </div>
       </div>
     </div>
+    <div class="col-md-9 bg-danger"></div>
   </div>
 </div>
 {% endblock %}
