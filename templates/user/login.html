@@ -6,7 +6,7 @@
   <div class="row justify-content-center h-100 align-items-center">
     <div class="col-md-6 w-50 h-100">
       <img
-        src="{% static 'images/user_profile/login.jpg' %}"
+        src="{% static '/user/images/login.jpg' %}"
         width="100%"
         height="100%"
         alt="login"
@@ -23,11 +23,11 @@
           {% endfor %} {% endif %}
           <form method="post">
             {% csrf_token %}
-            <div class="form-group" style="text-align: left;">
+            <div class="form-group" style="text-align: left">
               <label class="text-danger px-2">Email*</label>
               <input type="email" class="form-control" name="email" required />
             </div>
-            <div class="form-group" style="text-align: left;">
+            <div class="form-group" style="text-align: left">
               <label class="text-danger px-2">Password*</label>
               <input
                 type="password"

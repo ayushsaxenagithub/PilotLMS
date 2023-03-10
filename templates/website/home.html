@@ -12,7 +12,7 @@
     <form class="d-flex flex-column w-75 justify-content-end align-items-end">
       <input
         type="text"
-        class="p-2 rounded rounded-2 mb-2 w-100 py-3 px-3 border-1 border-secondary"
+        class="p-2 rounded rounded-2 mb-2 w-100 py-3 px-3 border border-2 border-secondary"
         placeholder="Search for Course"
       />
       <div class="d-flex justify-content-end gap-2">
@@ -95,10 +95,9 @@
     <div class="carousel-inner">
       <div class="carousel-item active">
         <div class="d-flex gap-3 flex-wrap justify-content-around">
-          {% for course in courses %}
           <div class="card border-0 shadow" style="width: 18rem">
             <img
-              src="{{ course.image_course.url }}"
+              src="{% static '/images/course/01.jpg' %}"
               class="card-img-top"
               width="100%"
               height="180px"
@@ -109,8 +108,11 @@
               <div class="d-flex justify-content-between mb-2">
                 <span class="badge bg-danger bg-gradient">Advance</span>
               </div>
-              <h5 class="card-title">{{ course.name}}</h5>
-              <p class="card-text">{{ course.small_description }}</p>
+              <h5 class="card-title">Javascript Advance</h5>
+              <p class="card-text">
+                This is a Javascript course for the students having bascis
+                knowledge of Javascript and its functionalities
+              </p>
               <ul class="list-inline mb-0">
                 <li class="list-inline-item me-0 small">
                   <i class="fas fa-star text-warning"></i>
@@ -125,7 +127,7 @@
                   <i class="fas fa-star text-warning"></i>
                 </li>
                 <li class="list-inline-item ms-2 h6 fw-light mb-0 fw-bold">
-                  {{ course.rating }}/5.0
+                  4.0/5.0
                 </li>
               </ul>
             </div>
@@ -142,11 +144,10 @@
               </div>
             </div>
           </div>
-          {% endfor %}
 
           <div class="card border-0 shadow" style="width: 18rem">
             <img
-              src="{% static '/images/course/2.jpg' %}"
+              src="{% static '/images/course/02.jpg' %}"
               class="card-img-top"
               width="100%"
               height="180px"
@@ -198,7 +199,7 @@
           </div>
           <div class="card border-0 shadow" style="width: 18rem">
             <img
-              src="{% static '/images/course/1.jpg' %}"
+              src="{% static '/images/course/01.jpg' %}"
               class="card-img-top"
               width="100%"
               height="180px"
@@ -254,7 +255,7 @@
         <div class="d-flex gap-3 flex-wrap justify-content-around">
           <div class="card border-0 shadow" style="width: 18rem">
             <img
-              src="{% static '/images/course/2.jpg' %}"
+              src="{% static '/images/course/02.jpg' %}"
               class="card-img-top"
               width="100%"
               height="180px"
@@ -306,7 +307,7 @@
           </div>
           <div class="card border-0 shadow" style="width: 18rem">
             <img
-              src="{% static '/images/course/1.jpg' %}"
+              src="{% static '/images/course/01.jpg' %}"
               width="100%"
               height="180px"
               class="card-img-top"
@@ -358,7 +359,7 @@
           </div>
           <div class="card border-0 shadow" style="width: 18rem">
             <img
-              src="{% static '/images/course/2.jpg' %}"
+              src="{% static '/images/course/02.jpg' %}"
               class="card-img-top"
               width="100%"
               height="180px"

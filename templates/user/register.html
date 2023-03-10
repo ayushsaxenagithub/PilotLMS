@@ -1,39 +1,50 @@
-{% extends 'main/base.html' %} {% load static %} {% block head %} 
+{% extends 'main/base.html' %} {% load static %} {% block head %}
 <link rel="stylesheet" href="../../static/user/css/login.css" />
 
-{% endblock %}
-{% block title %} {% endblock %} {% block content %}
+{% endblock %} {% block title %} {% endblock %} {% block content %}
 <div class="mx-5 mb-5">
   {% if msg %}
   <div class="alert alert-danger" role="alert">{{ msg }}</div>
   {% endif %}
-  <div class="d-flex justify-content-between gap-2 align-items-center my-0">
-    <div class="h-100 bg-dark w-50">
+  <div class="d-flex justify-content-between gap-2 align-items-center my-5">
+    <div class="h-75 w-50 d-flex justify-content-center">
       <img
-        src="{% static 'images/user_profile/login.jpg' %}"
-        width="100%"
-        height="100%"
+        src="{% static '/user/images/register.jpg' %}"
+        width="80%"
+        height="80%"
         alt="login"
       />
     </div>
-    <div class="card w-50 my-0">
+    <div
+      class="card w-50 my-0"
+      style="
+        box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2),
+          0 5px 5px 0 rgba(0, 0, 0, 0.24);
+      "
+    >
       <h2 class="card-header text-danger">Sign Up</h2>
       <div class="card-body">
         <form method="POST" action="{% url 'register' %}">
           {% csrf_token %}
-          <div class="mb-1">
-            <label for="name" class="form-label text-danger">Full Name</label>
+          <div class="form-group mb-1">
+            <label for="name" class="form-label text-danger">Full Name*</label>
             <input
               type="text"
               class="form-control"
               id="name"
               name="name"
+              style="
+                background-color: -internal-light-dark(
+                  rgb(232, 240, 254),
+                  rgba(70, 90, 126, 0.4)
+                ) !important;
+              "
               required
             />
           </div>
           <div class="mb-1">
             <label for="email" class="form-label text-danger"
-              >Email address</label
+              >Email address*</label
             >
             <input
               type="email"
@@ -49,7 +60,7 @@
           </div>
           <div class="mb-1">
             <label for="phone" class="form-label text-danger"
-              >Phone Number</label
+              >Phone Number*</label
             >
             <input
               type="tel"
@@ -63,7 +74,7 @@
           </div>
           <div class="mb-1">
             <label for="password" class="form-label text-danger"
-              >Password</label
+              >Password*</label
             >
             <input
               type="password"
@@ -79,7 +90,7 @@
           </div>
           <div class="mb-2">
             <label for="confirmpassword" class="form-label text-danger"
-              >Confirm Password</label
+              >Confirm Password*</label
             >
             <input
               type="password"
