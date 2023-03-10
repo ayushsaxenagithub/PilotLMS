@@ -151,7 +151,7 @@ def create_module(request, course_id):
         for note in request.POST.getlist('notes[]'):
             if note.strip():
                 module.total_notes += 1
-                Notes.objects.create(user=request.user, module=module, description=note, number=module.notes_frequency)
+                Notes.objects.create(user=request.user, module=module, description=note, number=module.total_notes)
 
         return redirect('course_modules', course_id=course_id)
 
@@ -184,7 +184,7 @@ def update_module(request, course_id, module_id):
         for note in request.POST.getlist('note'):
             Notes.objects.create(user=request.user, module=module, description=note)
 
-        return redirect('course_detail', course_id=course_id)
+        return redirect('course_modules', course_id=course_id)
 
     return render(request, 'website/update_module.html', {'course': course, 'module': module})
 
@@ -195,7 +195,7 @@ def delete_module(request, course_id, module_id):
 
     if request.method == 'POST':
         module.delete()
-        return redirect('course_detail', course_id=course_id)
+        return redirect('course_modules', course_id=course_id)
 
     return render(request, 'website/delete_module.html', {'course': course, 'module': module})
 

@@ -19,8 +19,6 @@
       <p>{{ course.small_description }}</p>
       <hr>
       <img src="{{ course.image_course.url }}" class="img-fluid mb-4">
-      <div>{{ course.description|safe }}</div>
-      <div>{{ course.learned|safe }}</div>
     </div>
     <div class="col-md-4">
       <div class="card">
@@ -39,14 +37,15 @@
   <div class="row my-4">
     <div class="col-md-12">
       <h2>Modules</h2>
-      {% if course.modules %}
-        {% for module in course.modules %}
+      {% if course.module_set.all %}
+        {% for module in course.module_set.all %}
           <div class="card mb-4">
             <div class="card-header">
               {{ module.name }}
               <span class="float-end">
-                <a href="" class="btn btn-sm btn-primary">Edit</a>
-                <a href="" class="btn btn-sm btn-danger">Delete</a>
+                <a href="{% url 'update_module' course_id=course.id module_id=module.id %}" class="btn btn-sm btn-primary">Edit</a>
+                <a href="{% url 'delete_module' course_id=course.id module_id=module.id %}" class="btn btn-sm btn-danger">Delete</a>
+
               </span>
             </div>
             <div class="card-body">
@@ -55,9 +54,16 @@
               <hr>
               <h4>Videos:</h4>
               <ul>
-                {% if module.videos.all %}
-                  {% for video in module.videos.all %}
-                    <li><a href="{{ video.video.url }}" target="_blank">{{ video.name }}</a></li>
+                {% if module.video_set.all %}
+                  {% for video in module.video_set.all %}
+                  <li>
+                    <a href="{{ video.video.url }}" target="_blank">{{ video.name }}</a>
+                    <br>
+                    <video width="320" height="240" controls>
+                      <source src="{{ video.video.url }}" type="video/mp4">
+                      Your browser does not support the video tag.
+                    </video>
+                  </li>
                   {% endfor %}
                 {% else %}
                   <li>No videos yet.</li>
@@ -66,9 +72,11 @@
               <hr>
               <h4>Notes:</h4>
               <ul>
-                {% if module.notes.all %}
-                  {% for note in module.notes.all %}
-                    <li>{{ note.description }}</li>
+                {% if module.notes_set.all %}
+                  {% for note in module.notes_set.all%}
+                    <li>
+                      {{ note.description }}
+                    </li>
                   {% endfor %}
                 {% else %}
                   <li>No notes yet.</li>

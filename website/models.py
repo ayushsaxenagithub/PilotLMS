@@ -27,11 +27,11 @@ class Course(models.Model):
     total_video=models.IntegerField(null=True, blank = True)
     vidoes_time=models.CharField(max_length=2000,null=True, blank = True)
     total_module=models.IntegerField(blank=True, null=True, default=0)
-    def save(self, *args, **kwargs):
-        self.total_video = Video.objects.filter(module=self).count()
-        time = sum([video.duration for video in Video.objects.filter(module=self)])
-        self.videos_time = str(timedelta(seconds=time))
-        super().save(*args, **kwargs)
+    # def save(self, *args, **kwargs):
+    #     self.total_video = Video.objects.filter(module=self).count()
+    #     time = sum([video.duration for video in Video.objects.filter(module=self)])
+    #     self.videos_time = str(timedelta(seconds=time))
+    #     super().save(*args, **kwargs)
     def __str__(self):
         return self.name
 
