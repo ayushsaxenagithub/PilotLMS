@@ -94,16 +94,18 @@
             </div>
             {% if user.is_authenticated %}
             <div class="d-flex align-items-center gap-2">
-              <button class="btn btn-danger">
+              <button class="btn p-0 rounded rounded-3">
                 <a
-                  class="text-white text-decoration-none"
+                  class="btn text-decoration-none text-white"
+                  style="background-color: #1d3b53"
                   href="{% url 'logout' %}"
                   >Logout</a
                 >
               </button>
-              <button class="btn btn-danger">
+              <button class="btn p-0 rounded rounded-3">
                 <a
-                  class="text-white text-decoration-none"
+                  class="btn text-decoration-none text-white"
+                  style="background-color: #1d3b53"
                   href="{% url 'dashboard' %}"
                   >Dashboard</a
                 >
@@ -113,14 +115,16 @@
             <div class="d-flex align-items-center gap-2">
               <button class="btn p-0 rounded rounded-3">
                 <a
-                  class="btn btn-danger text-decoration-none"
+                  class="btn text-decoration-none text-white"
+                  style="background-color: #1d3b53"
                   href="{% url 'login' %}"
                   >Login</a
                 >
               </button>
               <button class="btn p-0 rounded rounded-3">
                 <a
-                  class="btn btn-danger text-white text-decoration-none"
+                  class="btn text-white text-decoration-none"
+                  style="background-color: #1d3b53"
                   href="{% url 'register' %}"
                   >Register</a
                 >
@@ -134,7 +138,7 @@
 
     {% block content %} {% endblock %}
 
-    <footer class="m-0 border-top">
+    <footer class="m-0 border-top" style="height: 187px">
       <div
         class="w-100 d-flex justify-content-between px-5 py-3 flex-wrap gap-5"
       >
