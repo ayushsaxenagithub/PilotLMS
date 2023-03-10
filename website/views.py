@@ -29,7 +29,12 @@ def dashboard(request):
             context={
             "profile": profile
             }
-            return render(request, 'website/dashboard.html', context)
+            if profile.status == 'Student':
+                student = get_object_or_404(Student, profile=profile)
+                context = {'student': student,'profile': profile}
+                return render(request, 'website/dashboard.html', context)
+            else:   
+                return render(request, 'website/dashboard.html', context)
         else:
             return HttpResponse('Something went wrong')
 
