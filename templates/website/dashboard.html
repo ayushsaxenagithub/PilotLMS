@@ -1,57 +1,106 @@
-{% extends 'main/base.html' %}
+{% extends 'main/base.html' %} {% load static %} {% block head %} {% endblock %}
+{% block title %} {% endblock %} {% block content %}
 
-    {% block head %}
-    
-    {% endblock %}
+<div>
+  <div class="w-100 d-flex px-5 gap-3 py-5" style="background-color: #1d3b53">
+    <div class="rounded rounded-circle">
+      <img
+        src="{% static '/user/images/profile.png'%}"
+        height="150px"
+        width="150px"
+        class="rounded rounded-circle"
+      />
+    </div>
+    <div class="pt-1">
+      <h1 class="text-white m-0">Akash chandra</h1>
+      <h5 class="text-white text-uppercase">IIT KHARAGPUR</h5>
+      <h6 class="text-white">akashchandra8544@gmail.com | 6205240094</h6>
+    </div>
+  </div>
+</div>
 
+<div class="container-fluid">
+  <div class="row mt-4">
+    <div class="col-md-3">
+      <div class="card mb-2 bg-dark text-white">
+        <div class="card-header border-white">
+          <h3 class="text-primary">Profile</h3>
+        </div>
+        <div class="card-body">
+          <ul class="list-unstyled">
+            <li>
+              <a
+                class="text-white text-decoration-none d-block w-100"
+                href="{% url 'profile_detail' profile_id=request.user.profile.id %}"
+                >Profile</a
+              >
+            </li>
+            <li>
+              <a
+                class="text-white text-decoration-none"
+                href="{% url 'update_profile' %}"
+                >Update Profile</a
+              >
+            </li>
+          </ul>
+        </div>
+      </div>
 
-    {% block title %}
-    
-    {% endblock %}
-
-    {% block content %}
-
-
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-        <a class="navbar-brand" href="#">Dashboard</a>
-      </nav>
-    
-      <div class="container-fluid">
-        <div class="row mt-4">
-          <div class="col-md-3">
-            <div class="card">
-              <div class="card-header">
-                <h5>Profile</h5>
-              </div>
-              <div class="card-body">
-                <ul>
-                  <li><a href="{% url 'profile_detail' profile_id=request.user.profile.id %}">Profile</a></li>
-                  <li><a href="{% url 'update_profile' %}">Update Profile</a></li>
-                </ul>
-              </div>
-            </div>
-    
-            <div class="card">
-              <div class="card-header">
-                <h5>Courses</h5>
-              </div>
-              <div class="card-body">
-                <ul>
-                  {% if profile.status == 'Student' %}
-                  
-                  {% elif profile.status == 'Teacher' %}                                   
-                  <li><a href="{% url 'create_course' %}">Create Courses</a></li>
-                  <li><a href="{% url 'course' %}">Mine Courses</a></li>
-                  <li><a href="#">Select Teachers</a></li>
-                  <li><a href="#">Course Progress</a></li>               
-                  {% elif profile.status == 'Organization' %}
-                  <li><a href="{% url 'make_teacher' %}">Assign Teacher</a></li>
-                  <li><a href="{% url 'teacher_list' %}">Teacher List</a></li>
-                  {% endif %}
-
-                </ul>
-              </div>
-            </div>
-          </div>
-    
-    {% endblock %}
+      <div class="card bg-dark text-white mb-2">
+        <div class="card-header border-white">
+          <h3 class="text-primary">Courses</h3>
+        </div>
+        <div class="card-body">
+          <ul class="list-unstyled">
+            {% if profile.status == 'Student' %}
+            <li>
+              <a class="text-white text-decoration-none" href="#">My Courses</a>
+            </li>
+            {% elif profile.status == 'Teacher' %}
+            <li>
+              <a
+                class="text-white text-decoration-none"
+                href="{% url 'create_course' %}"
+                >Create Courses</a
+              >
+            </li>
+            <li>
+              <a
+                class="text-white text-decoration-none"
+                href="{% url 'course' %}"
+                >Mine Courses</a
+              >
+            </li>
+            <li>
+              <a class="text-white text-decoration-none" href="#"
+                >Select Teachers</a
+              >
+            </li>
+            <li>
+              <a class="text-white text-decoration-none" href="#"
+                >Course Progress</a
+              >
+            </li>
+            {% elif profile.status == 'Organization' %}
+            <li>
+              <a
+                class="text-white text-decoration-none"
+                href="{% url 'make_teacher' %}"
+                >Assign Teacher</a
+              >
+            </li>
+            <li>
+              <a
+                class="text-white text-decoration-none"
+                href="{% url 'teacher_list' %}"
+                >Teacher List</a
+              >
+            </li>
+            {% endif %}
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
