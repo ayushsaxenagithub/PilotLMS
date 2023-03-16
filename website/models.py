@@ -132,6 +132,8 @@ class UserProgress(models.Model):
         super().save(*args, **kwargs)   
 
 
+
+
 class CourseProgress(models.Model):
     course = models.ForeignKey(Course, on_delete=models.CASCADE, blank=True, null=True)
     total_number_of_videos = models.IntegerField(default=0)
