@@ -1,66 +1,97 @@
-{% extends 'main/base.html' %}
+{% extends 'main/base.html' %} {% block head %} {% endblock %} {% block title %}
+{% endblock %} {% block content %}
 
-    {% block head %}
-    
-    {% endblock %}
+<div class="container mt-4">
+  <h1 class="text-danger">Create a Course</h1>
+  <form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    <div class="form-group my-2">
+      <label for="name">Course Name</label>
+      <input
+        type="text"
+        class="form-control border-dark"
+        id="name"
+        name="name"
+        required
+      />
+    </div>
+    <div class="form-group my-2">
+      <label for="description">Description</label>
+      <textarea
+        class="form-control border-dark"
+        id="description"
+        name="description"
+        rows="3"
+        id="description"
+        required
+      ></textarea>
+    </div>
+    <div class="form-group my-2">
+      <label for="image_course">Image</label>
+      <input
+        type="file"
+        class="form-control-file"
+        id="image_course"
+        name="image_course"
+        accept="image/*"
+      />
+    </div>
+    <div class="form-group my-2">
+      <label for="price">Price</label>
+      <input
+        type="number"
+        class="form-control border-dark"
+        id="price"
+        name="price"
+        step="0.01"
+        min="0"
+        required
+      />
+    </div>
+    <div class="form-group my-2">
+      <label for="small_description">Short Description</label>
+      <input
+        type="text"
+        class="form-control border-dark"
+        id="small_description"
+        name="small_description"
+      />
+    </div>
+    <div class="form-group my-2">
+      <label for="learned">What will you learn</label>
+      <textarea
+        class="form-control border-dark"
+        id="learned"
+        name="learned"
+        rows="3"
+        id="learned"
+      ></textarea>
+    </div>
 
+    <div class="form-group my-2">
+      <label for="tags">Tags (separate by comma)</label>
+      <input
+        type="text"
+        class="form-control border-dark"
+        id="tags"
+        name="tags"
+      />
+    </div>
+    <button type="submit" class="btn btn-primary my-2">Create</button>
+  </form>
 
-    {% block title %}
-    
-    {% endblock %}
+  <script>
+    try {
+      CKEDITOR.replace("description");
+    } catch (error) {
+      console.log(error);
+    }
+    try {
+      CKEDITOR.replace("learned");
+    } catch (error) {
+      console.log(error);
+    }
+  </script>
 
-    {% block content %}
-
-
-    <div class="container mt-4">
-      <h1>Create a Course</h1>
-      <form method="post" enctype="multipart/form-data">
-        {% csrf_token %}
-        <div class="form-group">
-          <label for="name">Course Name</label>
-          <input type="text" class="form-control" id="name" name="name" required>
-        </div>
-        <div class="form-group">
-          <label for="description">Description</label>
-          <textarea class="form-control" id="description" name="description" rows="3" id="description" required></textarea>
-        </div>
-        <div class="form-group">
-          <label for="image_course">Image</label>
-          <input type="file" class="form-control-file" id="image_course" name="image_course" accept="image/*">
-        </div>
-        <div class="form-group">
-          <label for="price">Price</label>
-          <input type="number" class="form-control" id="price" name="price" step="0.01" min="0" required>
-        </div>
-        <div class="form-group">
-          <label for="small_description">Short Description</label>
-          <input type="text" class="form-control" id="small_description" name="small_description">
-        </div>
-        <div class="form-group">
-          <label for="learned">What will you learn</label>
-          <textarea class="form-control" id="learned" name="learned" rows="3" id="learned"></textarea>
-        </div>
-        
-        <div class="form-group">
-          <label for="tags">Tags (separate by comma)</label>
-          <input type="text" class="form-control" id="tags" name="tags">
-        </div>
-        <button type="submit" class="btn btn-primary">Create</button>
-      </form>
-
-
-
-      <script>
-        try {
-          CKEDITOR.replace("description");
-        } catch (error) {
-          console.log(error);
-        }
-        try {
-          CKEDITOR.replace("learned");
-        } catch (error) {
-          console.log(error);
-        }
-      </script>
-    
-    {% endblock %}
+  {% endblock %}
+</div>

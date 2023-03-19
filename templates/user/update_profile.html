@@ -1,98 +1,98 @@
 {% extends 'main/base.html' %} {% block head %} {% endblock %} {% block title %}
 {% endblock %} {% block content %}
-<h1>Profile</h1>
-<form method="POST" enctype="multipart/form-data">
+<h1 class="text-danger px-5 py-3">Update Profile</h1>
+<form method="POST" class="px-5" enctype="multipart/form-data">
   {% csrf_token %}
-  <div class="form-group">
+  <div class="form-group my-2">
     <label for="name">Name:</label>
-    <textarea name="name" class="form-control"></textarea>
+    <input type="text" name="name" class="form-control border-dark" placeholder={{ profile.name }}></input>
   </div>
-  <div class="form-group">
+  <div class="form-group my-2">
     <label for="image_profile">Profile Image:</label>
     <input type="file" name="image_profile" class="form-control-file" />
   </div>
-  <div class="form-group">
+  <div class="form-group my-2">
     <label for="shortBio">Short Bio:</label>
-    <textarea name="shortBio" class="form-control"></textarea>
+    <textarea name="shortBio" class="form-control border-dark" placeholder={{ profile.shortBio }}></textarea>
   </div>
-  <div class="form-group">
+  <div class="form-group my-2">
     <label for="detail">Detail:</label>
-    <textarea name="detail" class="form-control" id="detail"></textarea>
+    <textarea name="detail" class="form-control border-dark" id="detail"></textarea>
   </div>
-  <div class="form-group">
+  <div class="form-group my-2">
     <label for="github">Github:</label>
-    <input type="text" name="github" class="form-control" />
+    <input type="text" name="github" class="form-control border-dark" />
   </div>
-  <div class="form-group">
+  <div class="form-group my-2">
     <label for="youtube">Youtube:</label>
-    <input type="text" name="youtube" class="form-control" />
+    <input type="text" name="youtube" class="form-control border-dark" />
   </div>
-  <div class="form-group">
+  <div class="form-group my-2">
     <label for="twitter">Twitter:</label>
-    <input type="text" name="twitter" class="form-control" />
+    <input type="text" name="twitter" class="form-control border-dark" />
   </div>
-  <div class="form-group">
+  <div class="form-group my-2">
     <label for="facebook">Facebook:</label>
-    <input type="text" name="facebook" class="form-control" />
+    <input type="text" name="facebook" class="form-control border-dark" />
   </div>
-  <div class="form-group">
+  <div class="form-group my-2">
     <label for="instagram">Instagram:</label>
-    <input type="text" name="instagram" class="form-control" />
+    <input type="text" name="instagram" class="form-control border-dark" />
   </div>
-  <div class="form-group">
+  <div class="form-group my-2">
     <label for="linkedin">LinkedIn:</label>
-    <input type="text" name="linkedin" class="form-control" />
+    <input type="text" name="linkedin" class="form-control border-dark" />
   </div>
   {% if profile.status == 'Student' %}
-  <div class="form-group">
+  <div class="form-group my-2">
     <label for="department">Department:</label>
-    <input type="text" name="department" class="form-control" />
+    <input type="text" name="department" class="form-control border-dark" />
   </div>
-  <div class="form-group">
+  <div class="form-group my-2 w-25">
     <label for="date_of_birth">Date of Birth:</label>
-    <input type="date" name="date_of_birth" class="form-control" />
+    <input type="date" name="date_of_birth" class="form-control border-dark" />
   </div>
   {% elif profile.status == 'Teacher' %}
-  <div class="form-group">
+  <div class="form-group my-2">
     <label for="date_of_birth">Date of Birth:</label>
-    <input type="date" name="date_of_birth" class="form-control" />
+    <input type="date" name="date_of_birth" class="form-control border-dark" />
   </div>
-  <div class="form-group">
+  <div class="form-group my-2">
     <label for="department">Department:</label>
-    <input type="text" name="department" class="form-control" />
+    <input type="text" name="department" class="form-control border-dark" />
   </div>
-  <div class="form-group">
+  <div class="form-group my-2">
     <label for="qualification">Qualification:</label>
-    <input type="text" name="qualification" class="form-control" />
+    <input type="text" name="qualification" class="form-control border-dark" />
   </div>
-  <div class="form-group">
+  <div class="form-group my-2">
     <label for="bio">Bio:</label>
-    <input type="text" name="bio" class="form-control" />
+    <input type="text" name="bio" class="form-control border-dark" />
   </div>
-  <div class="form-group">
+  <div class="form-group my-2">
     <label for="research_interests">Research Interest:</label>
-    <input type="text" name="research_interests" class="form-control" />
+    <input type="text" name="research_interests" class="form-control border-dark" />
   </div>
 
   {% elif profile.status == 'Organization' %}
-  <div class="form-group">
+  <div class="form-group my-2">
     <label for="location">Location:</label>
-    <input type="text" name="location" class="form-control" />
+    <input type="text" name="location" class="form-control border-dark" />
   </div>
-  <div class="form-group">
+  <div class="form-group my-2">
     <label for="website">Website:</label>
-    <input type="text" name="website" class="form-control" />
+    <input type="text" name="website" class="form-control border-dark" />
   </div>
-  <div class="form-group">
+  <div class="form-group my-2">
     <label for="employees">Employees:</label>
-    <input type="Number"  name="employees" class="form-control" />
+    <input type="Number" name="employees" class="form-control border-dark" />
   </div>
-  <div class="form-group">
+  <div class="form-group my-2">
     <label for="founded_year">Founded Year:</label>
-    <input type="date" name="founded_year" class="form-control" />
+    <input type="date" name="founded_year" class="form-control border-dark" />
   </div>
   {% endif %}
-  <button type="submit" class="btn btn-primary">Submit</button>
+  <button type="submit" class="btn btn-primary my-2">Submit</button>
 </form>
 
 <script>
