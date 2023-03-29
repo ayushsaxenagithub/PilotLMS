@@ -29,7 +29,12 @@ def dashboard(request):
             context={
             "profile": profile
             }
-            return render(request, 'website/dashboard.html', context)
+            if profile.status == 'Student':
+                student = get_object_or_404(Student, profile=profile)
+                context = {'student': student,'profile': profile}
+                return render(request, 'website/dashboard.html', context)
+            else:   
+                return render(request, 'website/dashboard.html', context)
         else:
             return HttpResponse('Something went wrong')
 
@@ -132,28 +137,28 @@ def course(request):
 
 def create_module(request, course_id):
     course = Course.objects.get(id=course_id)
-    course.modules += 1
+    course.total_module += 1
 
     if request.method == 'POST':
         module_name = request.POST['module_name']
-        module_number = course.modules
+        module_number = course.total_module
         module=Module()
         module.name = module_name
         module.course=course
         module.number = module_number
         module.save()
-
+        number=0
         for video in request.FILES.getlist('video'):
             video_name = video.name.split('.')[0]
-            module.videos += 1
-            Video.objects.create(module=module, video=video, name=video_name, course=course, number=module.videos)
+            number += 1
+            Video.objects.create(module=module, video=video, name=video_name, course=course, number=number)
 
         for note in request.POST.getlist('notes[]'):
             if note.strip():
-                module.notes_frequency += 1
-                Notes.objects.create(user=request.user, module=module, description=note, number=module.notes_frequency)
+                module.total_notes += 1
+                Notes.objects.create(user=request.user, module=module, description=note, number=module.total_notes)
 
-        return redirect('course_detail', course_id=course_id)
+        return redirect('course_modules', course_id=course_id)
 
     return render(request, 'website/create_module.html', {'course': course})
 
@@ -184,7 +189,7 @@ def update_module(request, course_id, module_id):
         for note in request.POST.getlist('note'):
             Notes.objects.create(user=request.user, module=module, description=note)
 
-        return redirect('course_detail', course_id=course_id)
+        return redirect('course_modules', course_id=course_id)
 
     return render(request, 'website/update_module.html', {'course': course, 'module': module})
 
@@ -195,7 +200,7 @@ def delete_module(request, course_id, module_id):
 
     if request.method == 'POST':
         module.delete()
-        return redirect('course_detail', course_id=course_id)
+        return redirect('course_modules', course_id=course_id)
 
     return render(request, 'website/delete_module.html', {'course': course, 'module': module})
 
@@ -203,7 +208,7 @@ def delete_module(request, course_id, module_id):
 
 def course_modules(request, course_id):
     course = get_object_or_404(Course, id=course_id)
-    modules = course.module_set.all()
+    modules = Module.objects.filter(course=course)
     context = {
         'course': course,
         'modules': modules,
@@ -211,8 +216,8 @@ def course_modules(request, course_id):
     return render(request, 'website/course_module_details.html', context=context)
 
 
-def quiz_list(request):
-    quizzes = Quiz.objects.all()
+def quiz_list(request, video_id):
+    quizzes = Quiz.objects.filter(video=video_id)
     return render(request, 'website/quiz_list.html', {'quizzes': quizzes})
 
 
@@ -225,26 +230,57 @@ def create_quiz(request, video_id):
     if request.user.profile != video.module.course.teacher.profile:
         return HttpResponse('You do not have permission to access this page')
     if request.method == 'POST':
-        timestamp = request.POST.get('timestamp')
-        question = request.POST.get('question')
-        option1 = request.POST.get('option1')
-        option2 = request.POST.get('option2')
-        option3 = request.POST.get('option3')
-        option4 = request.POST.get('option4')
-        correct_answer = request.POST.get('correct_answer')
+        pass_mark = request.POST.get('pass_mark')
+        start_time_str = request.POST.get('timestamp')
+        if start_time_str:
+            start_time = timedelta(seconds=float(start_time_str))
+        else:
+            start_time = timedelta(seconds=0)
 
         quiz = Quiz.objects.create(
             video=video,
-            timestamp=timestamp,
-            question=question,
-            option1=option1,
-            option2=option2,
-            option3=option3,
-            option4=option4,
-            correct_answer=correct_answer,
+            start_time=start_time,
+            pass_mark=pass_mark,
         )
 
-        return redirect('video_detail', video_id=video.id)
+        question_text = request.POST.get('question_text')
+        question = Question.objects.create(
+            quiz=quiz,
+            text=question_text,
+        )
+
+        answer1_text = request.POST.get('answer1_text')
+        answer1_is_correct = request.POST.get('answer1_is_correct') == 'on'
+        answer1 = Answer.objects.create(
+            question=question,
+            text=answer1_text,
+            is_correct=answer1_is_correct,
+        )
+
+        answer2_text = request.POST.get('answer2_text')
+        answer2_is_correct = request.POST.get('answer2_is_correct') == 'on'
+        answer2 = Answer.objects.create(
+            question=question,
+            text=answer2_text,
+            is_correct=answer2_is_correct,
+        )
+
+        answer3_text = request.POST.get('answer3_text')
+        answer3_is_correct = request.POST.get('answer3_is_correct') == 'on'
+        answer3 = Answer.objects.create(
+            question=question,
+            text=answer3_text,
+            is_correct=answer3_is_correct,
+        )
+
+        answer4_text = request.POST.get('answer4_text')
+        answer4_is_correct = request.POST.get('answer4_is_correct') == 'on'
+        answer4 = Answer.objects.create(
+            question=question,
+            text=answer4_text,
+            is_correct=answer4_is_correct,
+        )
+        return redirect('quiz_detail', quiz_id=quiz.id)
 
     return render(request, 'website/create_quiz.html', {'video': video})
 
@@ -333,3 +369,11 @@ def teacher_list(request):
         return render(request, 'website/teacher_list.html', context)
     else:
         return redirect('index')
+
+
+def allcourses(request):
+    courses = Course.objects.all().values()
+    context = {
+        "courses": courses
+    }
+    return render(request, 'website/allcourses.html', context)

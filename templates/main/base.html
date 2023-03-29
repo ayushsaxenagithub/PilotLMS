@@ -1,0 +1,210 @@
+{% load static %}
+<script src="{% static 'ckeditor/ckeditor.js' %}"></script>
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    {% block head %} {% endblock %}
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{% block title %} {% endblock %}</title>
+
+    <link rel="stylesheet" href="{% static 'main/css/base.css' %}" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD"
+      crossorigin="anonymous"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css"
+      integrity="sha512-SzlrxWUlpfuzQ+pcUCosxcglQRNAq/DZjVsC0lE40xsADsfeQoEypE+enwcOiGjk/bSuGGKHEyjSoQ1zVisanQ=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+  </head>
+  <body>
+    <nav
+      class="navbar navbar-expand-lg navbar-light bg-light p-0 py-2 w-100"
+      style="
+        box-shadow: rgba(0, 0, 0, 0.1) 0px 10px 15px -3px,
+          rgba(0, 0, 0, 0.05) 0px 4px 6px -2px;
+        z-index: 1000;
+      "
+    >
+      <div class="container-fluid">
+        <a class="navbar-brand fs-2 fw-bolder" href="/">PILOT</a>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarSupportedContent"
+          aria-controls="navbarSupportedContent"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div
+          class="collapse navbar-collapse justify-content-end"
+          id="navbarSupportedContent"
+        >
+          <div class="w-75 d-flex justify-content-between flex-wrap">
+            <div class="d-flex align-items-center">
+              <ul class="d-flex m-0 list-unstyled">
+                <li>
+                  <a
+                    class="text-dark px-3 fs-3 fw-bold text-decoration-none"
+                    href="/"
+                    >Home</a
+                  >
+                </li>
+                <li>
+                  <a
+                    class="text-dark px-3 fs-3 fw-bold text-decoration-none"
+                    href="/"
+                    >About</a
+                  >
+                </li>
+                <li>
+                  <a
+                    class="text-decoration-none text-dark px-3 fs-3 fw-bold"
+                    href="/allcourses"
+                  >
+                    Courses
+                  </a>
+                </li>
+              </ul>
+            </div>
+
+            <div class="position-relative" style="width: 30%">
+              <input
+                type="text"
+                placeholder="Search Course"
+                class="w-100 px-2 py-2 rounded rounded-3 border border-2 border-secondary"
+              />
+              <button
+                class="btn position-absolute"
+                style="right: 2px; top: 4px; bottom: 5px"
+              >
+                <i class="fa-solid fa-magnifying-glass"></i>
+              </button>
+            </div>
+            {% if user.is_authenticated %}
+            <div class="d-flex align-items-center gap-2">
+              <button class="btn p-0 rounded rounded-3">
+                <a
+                  class="btn text-decoration-none text-white"
+                  style="background-color: #1d3b53"
+                  href="{% url 'logout' %}"
+                  >Logout</a
+                >
+              </button>
+              <button class="btn p-0 rounded rounded-3">
+                <a
+                  class="btn text-decoration-none text-white"
+                  style="background-color: #1d3b53"
+                  href="{% url 'dashboard' %}"
+                  >Dashboard</a
+                >
+              </button>
+            </div>
+            {% else %}
+            <div class="d-flex align-items-center gap-2">
+              <button class="btn p-0 rounded rounded-3">
+                <a
+                  class="btn text-decoration-none text-white"
+                  style="background-color: #1d3b53"
+                  href="{% url 'login' %}"
+                  >Login</a
+                >
+              </button>
+              <button class="btn p-0 rounded rounded-3">
+                <a
+                  class="btn text-white text-decoration-none"
+                  style="background-color: #1d3b53"
+                  href="{% url 'register' %}"
+                  >Register</a
+                >
+              </button>
+            </div>
+            {% endif %}
+          </div>
+        </div>
+      </div>
+    </nav>
+
+    {% block content %} {% endblock %}
+
+    <footer class="m-0 border-top" style="height: 187px">
+      <div
+        class="w-100 d-flex justify-content-between px-5 py-3 flex-wrap gap-5"
+      >
+        <div>
+          <h2 class="m-0 text-dark fw-bolder" style="font-size: 3em">PILOT</h2>
+          <p class="m-0 text-dark">
+            Lorem ipsum dolor, sit amet consectetur adipisicing elit. Tempore,
+            facilis?
+          </p>
+        </div>
+
+        <div>
+          <h3 class="fw-bold">Company</h3>
+          <ul class="list-unstyled">
+            <li>
+              <a href="#" class="text-decoration-none text-secondary fw-bold"
+                >About Us</a
+              >
+            </li>
+            <li>
+              <a href="#" class="text-decoration-none text-secondary fw-bold"
+                >Become a Teacher</a
+              >
+            </li>
+            <li>
+              <a href="#" class="text-decoration-none text-secondary fw-bold"
+                >Contact Us</a
+              >
+            </li>
+            <li>
+              <a href="#" class="text-decoration-none text-secondary fw-bold"
+                >Terms & Conditions</a
+              >
+            </li>
+          </ul>
+        </div>
+
+        <div class="pe-5 me-5">
+          <h4 class="m-0 text-dark fw-bold">Contact</h4>
+          <p class="m-0 text-danger fw-bold">
+            Email:
+            <span class="text-secondary">pilotlearningiitkgp@gmail.com</span>
+          </p>
+          <p class="m-0 text-danger fw-bold">
+            Phone: <span class="text-secondary">+91-222525126</span>
+          </p>
+        </div>
+      </div>
+    </footer>
+
+    <script
+      src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+      integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+      crossorigin="anonymous"
+    ></script>
+
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+      integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+      crossorigin="anonymous"
+    ></script>
+
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"
+      crossorigin="anonymous"
+    ></script>
+  </body>
+</html>

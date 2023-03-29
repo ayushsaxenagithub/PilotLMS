@@ -24,13 +24,13 @@ class Course(models.Model):
     created_at=models.DateTimeField(null=True, blank = True)
     updated_at=models.DateTimeField(null=True, blank =True)
     rating=models.FloatField(null=True, blank = True, default=0)
-    videos=models.IntegerField(null=True, blank = True)
+    total_video=models.IntegerField(null=True, blank = True)
     vidoes_time=models.CharField(max_length=2000,null=True, blank = True)
-    modules=models.IntegerField(blank=True, null=True, default=0)
+    total_module=models.IntegerField(blank=True, null=True, default=0)
     # def save(self, *args, **kwargs):
-    #     self.videos = Video.objects.filter(module=self).count()
+    #     self.total_video = Video.objects.filter(module=self).count()
     #     time = sum([video.duration for video in Video.objects.filter(module=self)])
-    #     self.videos_time = str(datetime.timedelta(seconds=time))
+    #     self.videos_time = str(timedelta(seconds=time))
     #     super().save(*args, **kwargs)
     def __str__(self):
         return self.name
@@ -49,14 +49,14 @@ class Module(models.Model):
     course = models.ForeignKey(Course, on_delete=models.CASCADE, blank=True, null=True)
     number = models.IntegerField(null=True, blank=True)    
     description = RichTextField(null=True, blank=True)
-    videos = models.IntegerField(null=True, blank=True, default=0)
-    notes_frequency = models.IntegerField(null=True, blank=True, default=0)
+    total_video = models.IntegerField(null=True, blank=True, default=0)
+    total_notes = models.IntegerField(null=True, blank=True, default=0)
     duration = models.CharField(max_length=2000, blank=True, null=True)
 
     def save(self, *args, **kwargs):
-        self.videos = Video.objects.filter(module=self).count()
+        self.total_video = Video.objects.filter(module=self).count()
         time = sum([video.duration for video in Video.objects.filter(module=self)])
-        self.duration = str(datetime.timedelta(seconds=time))
+        self.duration = str(timedelta(seconds=time))
         super().save(*args, **kwargs)
 
 class Video(models.Model):
@@ -130,6 +130,8 @@ class UserProgress(models.Model):
                 self.number_of_videos_watched / self.total_number_of_videos
             ) * 100
         super().save(*args, **kwargs)   
+
+
 
 
 class CourseProgress(models.Model):

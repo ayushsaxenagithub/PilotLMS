@@ -16,14 +16,14 @@ body{
     max-width: 260px;
     margin: 200px auto 100px;
     padding: 10px 45px 30px 45px;
-    text-align: center;
+    /* text-align: center; */
     box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
     border-radius: 10px;
 }
 .form p{
     font-size: 15px;
     padding: 1px;
-    text-align: center;
+    /* text-align: center; */
 }
 .form input{
     outline: 0;
