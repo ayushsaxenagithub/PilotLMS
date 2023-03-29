@@ -18,6 +18,9 @@ def index(request):
     }
     return render(request, 'website/home.html', context)
 
+def courseviewpage(request):
+    return render(request,'website/courseviewpage.html')    
+
 def dashboard(request):
     if not request.user.is_authenticated:
         return redirect('index')
@@ -29,12 +32,7 @@ def dashboard(request):
             context={
             "profile": profile
             }
-            if profile.status == 'Student':
-                student = get_object_or_404(Student, profile=profile)
-                context = {'student': student,'profile': profile}
-                return render(request, 'website/dashboard.html', context)
-            else:   
-                return render(request, 'website/dashboard.html', context)
+            return render(request, 'website/dashboard.html', context)
         else:
             return HttpResponse('Something went wrong')
 

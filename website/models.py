@@ -6,6 +6,7 @@ import uuid
 from django.utils import timezone
 from user.models import Profile,Organization,Teacher,Student
 from moviepy.editor import *
+import subprocess
 
 class Tags(models.Model):
     name=models.CharField(max_length=2000,blank=True, null=True)
@@ -70,10 +71,9 @@ class Video(models.Model):
     def save(self, *args, **kwargs):
         super().save(*args, **kwargs)
         try:
-            import moviepy.editor as mp
-            clip = mp.VideoFileClip(self.video.path)
-            self.duration = int(clip.duration)
-            clip.close()
+            cmd = ['ffprobe', '-i', self.video.path, '-show_entries', 'format=duration', '-v', 'quiet', '-of', 'csv=p=0']
+            output = subprocess.check_output(cmd)
+            self.duration = int(float(output))
         except Exception as e:
             print(f"Error getting video duration: {e}")
 
