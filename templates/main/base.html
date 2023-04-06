@@ -206,5 +206,23 @@
       integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"
       crossorigin="anonymous"
     ></script>
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+      <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+      <script>
+        let videos = document.querySelectorAll('video');
+        for (let i = 0; i < videos.length; i++) {
+          videos[i].addEventListener('contextmenu', function(e) {
+            e.preventDefault();
+          });
+        }
+
+        let videoControls = document.querySelectorAll('video');
+        for (let i = 0; i < videoControls.length; i++) {
+          videoControls[i].controls = true;
+        }
+      </script>
+
   </body>
 </html>
