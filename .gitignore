@@ -3,7 +3,9 @@ node_modules/
 dist/
 env/
 pilot/__pycache__
-user/__pycache__
+user/__pycache__ 
+user/migrations
+website/migrations 
 website/__pycache__
 
 
