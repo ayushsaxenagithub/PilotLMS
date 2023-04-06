@@ -7,6 +7,8 @@ from django.utils import timezone
 from .models import Course, Module, Video, Comment, SubComment, Notes,Monitor, Tags, Quiz, Question, Answer
 from user.models import Profile, Student, Organization, Teacher
 from datetime import datetime, timedelta
+from django.contrib.gis.geoip2 import GeoIP2
+from django_user_agents.utils import get_user_agent
 
 
 # Create your views here.
@@ -85,9 +87,30 @@ def create_course(request):
         return redirect('index')
 
 
+
 def course_detail(request, course_id):
     course = get_object_or_404(Course, pk=course_id)
+    monitor = Monitor()
+    monitor.ip = request.META.get('REMOTE_ADDR')
+    g = GeoIP2()
+    location = g.city(monitor.ip)
+    monitor.country = location['country_name']
+    monitor.city = location['city']
+    monitor.region = location['region']
+    monitor.timeZone = location['time_zone']
+    user_agent = get_user_agent(request)
+    monitor.browser = user_agent.browser.family
+    monitor.browser_version = user_agent.browser.version_string
+    monitor.operating_system = user_agent.os.family
+    monitor.device = user_agent.device.family
+    monitor.language = request.headers.get('Accept-Language')
+    monitor.screen_resolution = request.headers.get('X-Original-Request-Screen-Resolution')
+    monitor.referrer = request.META.get('HTTP_REFERER')
+    monitor.landing_page = request.META.get('HTTP_HOST') + request.META.get('PATH_INFO')
+    monitor.save()
+
     return render(request, 'website/course_detail.html', {'course': course})
+
 
 
 

@@ -1,7 +1,16 @@
+<<<<<<< HEAD
 node_modules/
 dist/
 env/
 pilot/__pycache__
+=======
+*.sqlite3
+
+
+node_modules/
+dist/
+env/
+>>>>>>> 5d3b2dbf5eb97540e26132456889286bb708b7e8
 */__pycache__ 
 */migrations
 staticfiles/
@@ -49,4 +58,8 @@ Thumbs.db
 *.wmv
 
 # Database files
+<<<<<<< HEAD
 *.sqlite3
+=======
+
+>>>>>>> 5d3b2dbf5eb97540e26132456889286bb708b7e8
