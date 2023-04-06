@@ -1,12 +1,5 @@
-{% extends 'main/base.html' %}
-
-{% block head %}
-{% endblock %}
-
-{% block title %}
-{% endblock %}
-
-{% block content %}
+{% extends 'main/base.html' %} {% block head %} {% endblock %} {% block title %}
+{% endblock %} {% block content %}
 <div class="container">
     <h1>Add Module</h1>
     <hr>
@@ -18,7 +11,7 @@
         </div>
         <div class="form-group">
             <label for="video">Videos:</label>
-            <input type="file" class="form-control-file" id="video" name="video" accept=".mp4,.avi,.mkv" multiple required>
+            <input type="file" class="form-control-file" id="video" name="video" accept="video/*" multiple required>
         </div>
         <div class="form-group">
             <label for="additional_notes">Additional Notes:</label>
@@ -37,48 +30,48 @@
     </form>
 </div>
 <script>
-function addNote() {
+  function addNote() {
     var notesDiv = document.getElementById("additional_notes");
     var noteInput = document.createElement("div");
     noteInput.classList.add("note-input");
     noteInput.innerHTML = `
-        <textarea class="form-control" name="notes[]" rows="3"></textarea>
+        <textarea class="form-control border-dark" name="notes[]" rows="3"></textarea>
         <button type="button" class="btn btn-danger" onclick="removeNote(this)">-</button>
     `;
     notesDiv.appendChild(noteInput);
 
     try {
-        CKEDITOR.replace(notesDiv.lastChild.firstChild);
+      CKEDITOR.replace(notesDiv.lastChild.firstChild);
     } catch (error) {
-        console.log(error);
+      console.log(error);
     }
-}
+  }
 
-function removeNote(btn) {
+  function removeNote(btn) {
     var noteInput = btn.parentNode;
     noteInput.remove();
-}
+  }
 
-function addVideoName() {
+  function addVideoName() {
     var videoNamesDiv = document.getElementById("video_names");
     var videoNameInput = document.createElement("div");
     videoNameInput.classList.add("video-name-input");
     videoNameInput.innerHTML = `
-        <input type="text" class="form-control" name="video_names[]" required>
-        <button type="button" class="btn btn-danger" onclick="removeVideoName(this)">-</button>
+        <input type="text" class="form-control border-dark my-1" name="video_names[]" required>
+        <button type="button" class="btn btn-danger my-2" onclick="removeVideoName(this)">-</button>
     `;
     videoNamesDiv.appendChild(videoNameInput);
-}
+  }
 
-function removeVideoName(btn) {
+  function removeVideoName(btn) {
     var videoNameInput = btn.parentNode;
     videoNameInput.remove();
-}
+  }
 
-try {
+  try {
     CKEDITOR.replace("additional_notes");
-} catch (error) {
+  } catch (error) {
     console.log(error);
-}
+  }
 </script>
 {% endblock %}

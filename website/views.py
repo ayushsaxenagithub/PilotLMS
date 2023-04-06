@@ -18,6 +18,10 @@ def index(request):
     }
     return render(request, 'website/home.html', context)
 
+def contact(request):
+    
+    return render(request, 'website/contact.html')
+
 def courseviewpage(request):
     return render(request,'website/courseviewpage.html')    
 

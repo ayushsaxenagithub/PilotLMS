@@ -1,4 +1,6 @@
-{% extends 'main/base.html' %} {% load static %} {% block head %} {% endblock %}
+{% extends 'main/base.html' %} {% load static %} {% block head %} 
+<link rel="stylesheet" href="../../static/website/css/dashboard.css">
+{% endblock %}
 {% block title %} {% endblock %} {% block content %}
 
 <div>
@@ -102,7 +104,7 @@
       </div>
     </div>
     <div class="col-md-9">
-      
+      {% if profile.status == 'Student' %}
       <div class="card">
         <div class="card-header">
           <h2>My Courses List</h2>
@@ -184,6 +186,174 @@
           </div>
         </div>
       </div>
+      {% elif profile.status == 'Teacher' %}
+      <div class="home-content">
+        <div class="overview-boxes">
+          <div class="box">
+            <div class="right-side">
+              <div class="box-topic">Total Content</div>
+              <div class="number">402 Hours</div>
+              <div class="indicator">
+                <i class='bx bx-up-arrow-alt'></i>
+                <span class="text">Up from yesterday</span>
+              </div>
+            </div>
+            <i class='bx bx-cart-alt cart'></i>
+          </div>
+          <div class="box">
+            <div class="right-side">
+              <div class="box-topic">Total time Spent</div>
+              <div class="number">38 mins</div>
+              <div class="indicator">
+                <i class='bx bx-up-arrow-alt'></i>
+                <span class="text">Up from yesterday</span>
+              </div>
+            </div>
+            <i class='bx bxs-cart-add cart two' ></i>
+          </div>
+          <div class="box">
+            <div class="right-side">
+              <div class="box-topic">Number Of Doubts resolved</div>
+              <div class="number">10</div>
+              <div class="indicator">
+                <i class='bx bx-up-arrow-alt'></i>
+                <span class="text">Up from yesterday</span>
+              </div>
+            </div>
+            <i class='bx bx-cart cart three' ></i>
+          </div>
+          <div class="box">
+            <div class="right-side">
+              <div class="box-topic">Number of Doubts raised</div>
+              <div class="number">17</div>
+              <div class="indicator">
+                <i class='bx bx-down-arrow-alt down'></i>
+                <span class="text">Down From Today</span>
+              </div>
+            </div>
+            <i class='bx bxs-cart-download cart four' ></i>
+          </div>
+        </div>
+  
+        <div class="sales-boxes">
+          <div class="recent-sales box">
+            <div class="title">Recent Doubts Raised</div>
+            <div class="sales-details">
+              <ul class="details">
+                <li class="topic">Date</li>
+                <li><a href="#">22 Aug 2022</a></li>
+                <li><a href="#">22 Aug 2022</a></li>
+                <li><a href="#">22 Aug 2022</a></li>
+                <li><a href="#">22 Aug 20221</a></li>
+                <li><a href="#">22 Aug 2022</a></li>
+                <li><a href="#">22 Aug 2022</a></li>
+                <li><a href="#">22 Aug 2022</a></li>
+              </ul>
+              <ul class="details">
+              <li class="topic">Students</li>
+              <li><a href="#">Alex Doe</a></li>
+              <li><a href="#">David Mart</a></li>
+              <li><a href="#">Roe Parter</a></li>
+              <li><a href="#">Diana Penty</a></li>
+              <li><a href="#">Martin Paw</a></li>
+              <li><a href="#">Doe Alex</a></li>
+              <li><a href="#">Aiana Lexa</a></li>
+              <!-- <li><a href="#"></a></li> -->
+               <!-- <li><a href="#">Tiana Loths</a></li> -->
+            </ul>
+            <ul class="details">
+              <li class="topic">Status</li>
+              <li><a href="#">Delivered</a></li>
+              <li><a href="#">Pending</a></li>
+              <li><a href="#">Pending</a></li>
+              <li><a href="#">Delivered</a></li>
+              <li><a href="#">Pending</a></li>
+              <li><a href="#">Delivered</a></li>
+              <li><a href="#">Delivered</a></li>
+               <!-- <li><a href="#">Pending</a></li>
+              <li><a href="#">Delivered</a></li> -->
+            </ul>
+            <ul class="details">
+              <li class="topic">Wait Time</li>
+              <li><a href="#">204.98 mins</a></li>
+              <li><a href="#">24.55 mins</a></li>
+              <li><a href="#">25.88 mins</a></li>
+              <li><a href="#">170.66 mins</a></li>
+              <li><a href="#">56.56 mins</a></li>
+              <li><a href="#">44.95 mins</a></li>
+              <li><a href="#">67.33 mins</a></li>
+               <!-- <li><a href="#">$23.53 mins</a></li> -->
+               <!-- <li><a href="#">$46.52 mins</a></li> -->
+            </ul>
+            </div>
+            <div class="button">
+              <a href="#">See All</a>
+            </div>
+          </div>
+          <div class="top-sales box">
+            <div class="title">Most Interactive Students</div>
+            <ul class="top-sales-details">
+              <li>
+              <a href="#">
+                <!--<img src="images/sunglasses.jpg" alt="">-->
+                <span class="product">ABC</span>
+              </a>
+              <span class="price">1107 mins</span>
+            </li>
+            <li>
+              <a href="#">
+                 <!--<img src="images/jeans.jpg" alt="">-->
+                <span class="product">acd </span>
+              </a>
+              <span class="price">1567 mins</span>
+            </li>
+            <li>
+              <a href="#">
+               <!-- <img src="images/nike.jpg" alt="">-->
+                <span class="product">dhg</span>
+              </a>
+              <span class="price">1234 mins</span>
+            </li>
+            <li>
+              <a href="#">
+                <!--<img src="images/scarves.jpg" alt="">-->
+                <span class="product">Hermes</span>
+              </a>
+              <span class="price">2312 mins</span>
+            </li>
+            <li>
+              <a href="#">
+                <!--<img src="images/blueBag.jpg" alt="">-->
+                <span class="product">S</span>
+              </a>
+              <span class="price">1456 mins</span>
+            </li>
+            <li>
+              <a href="#">
+                <!--<img src="images/bag.jpg" alt="">-->
+                <span class="product">Guc</span>
+              </a>
+              <span class="price">2345 mins</span>
+            <li>
+              <a href="#">
+                <!--<img src="images/addidas.jpg" alt="">-->
+                <span class="product">Add</span>
+              </a>
+              <span class="price">2345 mins</span>
+            </li>
+  <li>
+              <a href="#">
+               <!--<img src="images/shirt.jpg" alt="">-->
+                <span class="product">Bilact</span>
+              </a>
+              <span class="price">1245 mins</span>
+            </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    
+      {% endif %}
     </div>
   </div>
 </div>
