@@ -49,20 +49,18 @@
     <main class="container">
       <section class="video-and-comments">
         <section>
-          <!-- <iframe src="https://www.youtube.com/embed/6kAvCSMkYEI"
-            allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe> -->
-            <iframe width="885" height="498" src="https://www.youtube.com/embed/Xk-6h8ZUzJo" title="Taipei_1001 VR experience" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-          <p class="video-title">Lecture 1 :Taipei_1001 VR experience</p>
-          <!-- <div class="video-stats">
-            <div class="video-stat">
-              <i class="title-icon fas fa-thumbs-up"></i> 115K
-              <i class="title-icon fas fa-thumbs-down"></i> 1.1K
-              <i class="title-icon fas fa-share"></i>
-              <i class="title-icon fas fa-save"></i>
+          <div class="card" >
+            <div class="card-header">
+              Lecture 1
             </div>
-          </div> -->
+            <iframe style="margin-left: 0;" src="..." title="Taipei_1001 VR experience" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            <div class="card-body">
+              <p class="card-text">Taipei_1001 VR experience</p>
+            </div>
+          </div>
           <hr />
-          <div class="video-about">
+
+          <!-- <div class="video-about">
             <figure class="avatar">
               <img src="../../static/website/files/video_avatar_picture.jpg" alt="profile picture" />
               <figcaption class="youtuber-name">
@@ -70,32 +68,26 @@
                 Lorem ipsum dolor sit amet consectetur adipisicing elit.
               </figcaption>
             </figure>
-            <!-- <div class="subscribe">
+             <div class="subscribe">
               <button class="subscribe-button">SUBSCRIBE</button>
               <i class="far fa-bell fa-lg"></i>
-            </div> -->
+            </div>
   
-          </div>
+          </div> -->
   
         </section>
         <section>
           
           <br>
-          <ul class="nav-links">
-            <li>
-              <a href="#" class="active">
-                <i class='bx bx-grid-alt' ></i>
-                <span class="links_name">Lecture Notes</span>
-              </a>
-            </li>
-            <li>
-              <a href="#">
-                <i class='bx bx-box' ></i>
-                <span class="links_name">Doubts</span>
-              </a>
-            </li>
-            </ul>
-          <div class="comment">
+          <a class="btn btn-secondary my-3" href="#" role="button">Notes</a>
+          <a class="btn btn-secondary my-3" href="#" role="button">Community Doubts</a>
+
+          
+
+        <div class="card">
+          <ul class="list-group list-group-flush">
+
+          <li class="list-group-item my-3">
             <i class="fas fa-user-astronaut fa-lg"></i>
             <span class="comment-name">Lorem ipsum</span>
             <p class="comment-text">
@@ -107,12 +99,10 @@
               <p class="view-replies">
                 <i class="fas fa-arrow-down"></i> Reply
               </p>
-            </div>
-          </div>
-  
+          </li> 
           
   
-          <div class="comment">
+          <li class="list-group-item mb-3">
             <i class="fas fa-user-astronaut fa-lg"></i>
             <span class="comment-name">Lorem ipsum</span>
             <p class="comment-text">
@@ -124,10 +114,9 @@
               <p class="view-replies">
                 <i class="fas fa-arrow-down"></i> Reply
               </p>
-            </div>
-          </div>
+            </li>
   
-          <div class="comment">
+          <li class="list-group-item mb-3">
             <i class="fas fa-user-astronaut fa-lg"></i>
             <span class="comment-name">Lorem ipsum</span>
             <p class="comment-text">
@@ -139,37 +128,34 @@
               <p class="view-replies">
                 <i class="fas fa-arrow-down"></i> Reply
               </p>
-            </div>
-          </div>
+          </li>
           
+        </ul>
+        </div>
+
+        <br><br>
           
         </section>
       </section>
       <aside>
-        <div class="recommend-video">
-          <img src="../../static/website/files/video2.PNG" alt="LEC 2" />
-          <div >
-            <span class="recommend-video-title">
-              Lecture 2
-            </span>
-            <div class="creator-name">
-              <p>About</p>
-              <p>AR Crystal BCC</p>
-            </div>
-          </div>
+        <div class="card">
+          <div class="card-body">
+          <h4 class="card-title">Module -1</h4>
+          <ul class="list-group list-group-flush">
+            <li class="list-group-item">
+              <h5 class="card-title">Lecture 1</h5>
+              <h6 class="card-subtitle mb-2 text-muted">About</h6>
+            </li>
+            <li class="list-group-item">
+              <h5 class="card-title">Lecture 2</h5>
+              <h6 class="card-subtitle mb-2 text-muted">About</h6>
+            </li>
+            <li class="list-group-item">
+              <h5 class="card-title">Lecture 3</h5>
+              <h6 class="card-subtitle mb-2 text-muted">About</h6>
+            </li>
+          </ul>
         </div>
-  
-        <div class="recommend-video">
-          <img src="../../static/website/files/video3.PNG" alt="LEC 3" />
-          <div class="video-info-recommend">
-            <span class="recommend-video-title">
-              Lecture 3
-            </span>
-            <div class="creator-name">
-              <p>About</p>
-              <p>Markerless AR</p>
-            </div>
-          </div>
         </div>
         
       </aside>
