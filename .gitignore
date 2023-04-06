@@ -1,15 +1,10 @@
-
 node_modules/
 dist/
 env/
-/pilot/__pycache__
-user/__pycache__ 
-user/migrations
-website/migrations 
-website/__pycache__
+pilot/__pycache__
+*/__pycache__ 
+*/migrations
 staticfiles/
-
-
 
 # Compiled Java class files
 *.class
@@ -55,5 +50,3 @@ Thumbs.db
 
 # Database files
 *.sqlite3
-
-
