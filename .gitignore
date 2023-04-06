@@ -2,6 +2,11 @@
 node_modules/
 dist/
 env/
+pilot/__pycache__
+user/__pycache__
+website/__pycache__
+
+
 
 # Compiled Java class files
 *.class
