@@ -1,7 +1,9 @@
+*.sqlite3
+
+
 node_modules/
 dist/
 env/
-pilot/__pycache__
 */__pycache__ 
 */migrations
 staticfiles/
@@ -49,4 +51,4 @@ Thumbs.db
 *.wmv
 
 # Database files
-*.sqlite3
+

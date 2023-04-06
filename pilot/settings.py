@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'ckeditor',
     'website',
     'user',
+    'user_agents',
 ]
 
 MIDDLEWARE = [
