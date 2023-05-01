@@ -38,6 +38,37 @@ def courseviewpage(request, course_id):
         return render(request, 'website/courseviewpage.html', {'course': course})
     else:
         return redirect('course_detail',course_id=course.id)
+    
+
+def courseviewpagevideo(request, course_id, video_id):
+    course = get_object_or_404(Course, id=course_id)
+    video = get_object_or_404(Video, id=video_id)
+    is_enrolled = False
+    if request.user.is_authenticated:
+        enrollment = Enrollment.objects.filter(course=course, student=request.user).first()
+        if enrollment:
+            is_enrolled = True
+    if is_enrolled:
+        return render(request, 'website/courseviewvideo.html', {'course': course, 'video': video})
+    else:
+        return redirect('course_detail', course_id=course.id)
+
+def courseviewpagenote(request, course_id, note_id):
+    course = get_object_or_404(Course, id=course_id)
+    note = get_object_or_404(Notes, id=note_id)
+    is_enrolled = False
+    if request.user.is_authenticated:
+        enrollment = Enrollment.objects.filter(course=course, student=request.user).first()
+        if enrollment:
+            is_enrolled = True
+    if is_enrolled:
+        return render(request, 'website/courseviewnote.html', {'course': course, 'note': note})
+    else:
+        return redirect('course_detail', course_id=course.id)
+
+    
+
+
 
 def dashboard(request):
     if not request.user.is_authenticated:

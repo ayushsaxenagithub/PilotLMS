@@ -1,0 +1,11 @@
+{% extends 'website/courseviewpage.html' %}
+
+{% block coursecontent %} 
+
+<div class="container">
+    <h1>{{ course.title }} - Notes</h1>
+    
+    <h2>Note {{ note.number }}:</h2>
+    <p>{{ note.description|safe }}</p>
+
+{% endblock %}

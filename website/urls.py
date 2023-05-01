@@ -26,6 +26,8 @@ urlpatterns = [
     path('teacher_list/', views.teacher_list, name='teacher_list'),
 
     path('courseviewpage/<int:course_id>/', views.courseviewpage, name='courseviewpage'),
+    path('courseviewpage/<int:course_id>/video/<int:video_id>/', views.courseviewpagevideo, name='courseviewpagevideo'),
+    path('courseviewpage/<int:course_id>/note/<int:note_id>/', views.courseviewpagenote, name='courseviewpagenote'),
 
 
     path('enroll/<int:course_id>/', views.enroll_course, name='enroll_course'),
