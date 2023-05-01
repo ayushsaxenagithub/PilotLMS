@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Tags, Course, Module, Video, Comment, SubComment, Notes, Monitor, UserProgress, CourseProgress, Quiz, Question, Answer
+from .models import Tags, Course, Module, Video, Comment, SubComment, Notes, Monitor, UserProgress, CourseProgress, Quiz, Question, Answer, Enrollment
 
 # Register your models here.
 
@@ -16,5 +16,7 @@ admin.site.register(CourseProgress)
 admin.site.register(Quiz)
 admin.site.register(Question)
 admin.site.register(Answer)
+admin.site.register(Enrollment)
+
 
 

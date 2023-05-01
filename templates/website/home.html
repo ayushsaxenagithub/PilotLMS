@@ -82,7 +82,7 @@
 <section class="p-5 mb-4">
   <!-- Nav tabs -->
   <div class="mb-3 d-flex justify-content-between">
-    <h1 class="fw-bolder">Popural <span class="text-danger">Courses</span></h1>
+    <h1 class="fw-bolder">Popular <span class="text-danger">Courses</span></h1>
 
     <a
       class="btn px-4 text-white d-flex align-items-center justify-content-center py-0 fw-bold"
@@ -92,16 +92,25 @@
     >
   </div>
 
-  <div
-    id="carouselExampleControls"
-    class="carousel slide"
-    data-bs-ride="carousel"
-  >
-    <div class="carousel-inner">
-      <div class="carousel-item active">
-        <div class="d-flex gap-3 flex-wrap justify-content-around">         
 
+
+  
+  
+  
+  
+ 
+
+  <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
+    {% for course in courses %}
+    <div class="carousel-inner">
+      <a href="{% url 'course_detail' course_id=course.id %}">
+      
+      <div class="carousel-item {% if forloop.first %}active{% endif %}">
+        <div class="d-flex gap-3 flex-wrap justify-content-around">
           <div class="card border-0 shadow" style="width: 18rem">
+            {% if course.image_course.url %}
+            <img src="{{ course.image_course.url }}" class="card-img-top" width="100%" height="180px" alt="...">
+            {% else %}
             <img
               src="{% static '/images/course/02.jpg' %}"
               class="card-img-top"
@@ -109,104 +118,57 @@
               height="180px"
               alt="..."
             />
-
+            {% endif %}
+  
             <div class="card-body">
               <div class="d-flex justify-content-between mb-2">
-                <span class="badge bg-success bg-gradient">Beginner</span>
+                {% if course.tags.all %}
+                {% for tag in course.tags.all %}
+                <span class="badge bg-success bg-gradient">{{ tag }}</span>
+                {% endfor %}
+                {% endif %}
               </div>
-              <h5 class="card-title">Graphic Design MasterClass</h5>
-              <p class="card-text">
-                Some quick example text to build on the card title and make up
-                the bulk oft...
-              </p>
+              <h5 class="card-title">{{ course.name }}</h5>
+              <p class="card-text">{{ course.description|truncatewords:25|safe }}</p>
               <ul class="list-inline mb-0">
+                {% for i in "x"|ljust:course.rating %}
                 <li class="list-inline-item me-0 small">
                   <i class="fas fa-star text-warning"></i>
                 </li>
-                <li class="list-inline-item me-0 small">
-                  <i class="fas fa-star text-warning"></i>
-                </li>
-                <li class="list-inline-item me-0 small">
-                  <i class="fas fa-star text-warning"></i>
-                </li>
-                <li class="list-inline-item me-0 small">
-                  <i class="fas fa-star text-warning"></i>
-                </li>
+                {% endfor %}
+                {% if course.rating|floatformat %}
                 <li class="list-inline-item me-0 small">
                   <i class="fas fa-star-half-alt text-warning"></i>
                 </li>
+                {% endif %}
                 <li class="list-inline-item ms-2 h6 fw-light mb-0 fw-bold">
-                  4.5/5.0
+                  {{ course.rating }}/5.0
                 </li>
               </ul>
             </div>
             <div class="card-footer pt-0 pb-3 bg-white border-0">
               <hr />
               <div class="d-flex justify-content-between mt-2">
-                <span class="h6 mb-0"
-                  ><i class="far fa-clock text-danger me-2"></i>36h 30m</span
-                >
-                <span class="h6 mb-0"
-                  ><i class="fas fa-table text-primary me-2"></i>72
-                  lectures</span
-                >
-              </div>
-            </div>
-          </div>
-          <div class="card border-0 shadow" style="width: 18rem">
-            <img
-              src="{% static '/images/course/01.jpg' %}"
-              class="card-img-top"
-              width="100%"
-              height="180px"
-              alt="..."
-            />
-
-            <div class="card-body">
-              <div class="d-flex justify-content-between mb-2">
-                <span class="badge bg-danger bg-gradient">Advance</span>
-              </div>
-              <h5 class="card-title">Graphic Design MasterClass</h5>
-              <p class="card-text">
-                Some quick example text to build on the card title and make up
-                the bulk oft...
-              </p>
-              <ul class="list-inline mb-0">
-                <li class="list-inline-item me-0 small">
-                  <i class="fas fa-star text-warning"></i>
-                </li>
-                <li class="list-inline-item me-0 small">
-                  <i class="fas fa-star text-warning"></i>
-                </li>
-                <li class="list-inline-item me-0 small">
-                  <i class="fas fa-star text-warning"></i>
-                </li>
-                <li class="list-inline-item me-0 small">
-                  <i class="fas fa-star text-warning"></i>
-                </li>
-                <li class="list-inline-item me-0 small">
-                  <i class="fas fa-star-half-alt text-warning"></i>
-                </li>
-                <li class="list-inline-item ms-2 h6 fw-light mb-0 fw-bold">
-                  4.5/5.0
-                </li>
-              </ul>
-            </div>
-            <div class="card-footer pt-0 pb-3 bg-white border-0">
-              <hr />
-              <div class="d-flex justify-content-between mt-2">
-                <span class="h6 mb-0"
-                  ><i class="far fa-clock text-danger me-2"></i>36h 30m</span
-                >
-                <span class="h6 mb-0"
-                  ><i class="fas fa-table text-primary me-2"></i>72
-                  lectures</span
-                >
+                {% comment %} <span class="h6 mb-0"><i class="far fa-clock text-danger me-2"></i>{{ course.duration }}</span> {% endcomment %}
+                <span class="h6 mb-0"><i class="far fa-clock text-danger me-2"></i>72 hours</span>
+                {% comment %} <span class="h6 mb-0"><i class="fas fa-table text-primary me-2"></i>{{ course.lectures }} lectures</span> {% endcomment %}
+                <span class="h6 mb-0"><i class="fas fa-table text-primary me-2"></i>9 lectures</span>
               </div>
             </div>
           </div>
         </div>
       </div>
+   
+    </div>
+  </a>
+  </div>
+
+  {% endfor %}
+  
+
+
+
+
       <div class="carousel-item">
         <div class="d-flex gap-3 flex-wrap justify-content-around">
           <div class="card border-0 shadow" style="width: 18rem">

@@ -187,3 +187,7 @@ class Monitor(models.Model):
     referrer=models.CharField(max_length=2000,blank=True,null=True)
     landing_page=models.CharField(max_length=2000,blank=True,null=True)
     timestamp=models.DateTimeField(default=timezone.now)
+    frequency=models.IntegerField(default=0,null=True,blank=True)
+
+    # class Meta:
+    #     unique_together = ('user', 'ip', 'landing_page')
