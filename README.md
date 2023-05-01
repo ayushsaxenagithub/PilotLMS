@@ -20,8 +20,6 @@ Step 3: Install the requirements for the project using the command...
 > > pip install -r requirements.txt
 
 Step 4: To run the code 
-> > python manage.py collectstatic
-> > yes 
 > > python manage.py runserver
 
 <br>
