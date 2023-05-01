@@ -30,22 +30,25 @@ Step 4: To run the code
 
 <h3>Student</h3>
 <ul>
-<li>* Login/Signup using tokens and cookies.</li>
-<li>* Dashboard to view courses and their progress.</li>
-<li>* Quiz popups within videos</li>
-<li>* Doubt section</li>
-<li>* Personal Notes</li>
+<li> Login/Signup using tokens and cookies</li>
+<li> Dashboard to view courses and their progress</li>
+<li> Quiz popups within videos</li>
+<li> Doubt section</li>
+<li> Personal Notes</li>
 </ul>
 
 <h3>Teacher</h3>
-* Teacher Dashboard for administering student progress and analytics
-* Teacher domain within his Organization
-* Setup quizes for students
-
+<ul>
+<li> Teacher Dashboard for administering student progress and analytics</li>
+<li> Teacher domain within his Organization</li>
+<li> Setup quizes for students</li>
+</ul>
 <h3>organization</h3>
-* Has the power to appoint a user as an instructor
-* Has a domain specific to itself only accesible to its teachers.
-* Every teacher should belong to an onganisation
+<ul>
+<li> Has the power to appoint a user as an instructor</li>
+<li> Has a domain specific to itself only accesible to its teachers</li>
+<li> Every teacher should belong to an onganisation</li>
+</ul>
 
 <h2>Screenshots</h2>
 
