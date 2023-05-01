@@ -17,14 +17,14 @@ Step 2: Change directory into PilotLMS
 > > cd PILOTLMS
 
 Step 3: Install the requirements for the project using the command...
-<!-- pip install -r requirements.txt (when needed) -->
+> > pip install -r requirements.txt (when needed)
 
-Step 4: To run the code
+Step 4: To run the code <br>
         Collecting data
-<!-- python manage.py collectstatic -->
+> > python manage.py collectstatic
 
-<!-- yes -->
+> > yes <br>
         Running the code on a local server
-<!-- python manage.py runserver -->
+> >python manage.py runserver
 
 
