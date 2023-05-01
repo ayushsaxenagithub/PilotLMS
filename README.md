@@ -1,21 +1,30 @@
-# PilotLMS
+<h1>A fully responsive Learning Management System with models for Organisation, Teacher and Student. </h1>
 
+<h2>Tech Used</h2>
+
+Python
+PHP
+Django
+
+<h2> Getting Started </h2>
+
+We need to Download a number of libraries and also create an environment before running the site.
+
+Step 1: Create an environment outside the PilotLMS folder to keep the settings local to this project, Then activate it using the command...
 > > env\scripts\activate
 
-in parents folder
-
+Step 2: Change directory into PilotLMS
 > > cd PILOTLMS
 
-pip install -r requirements.txt (when needed)
+Step 3: Install the requirements for the project using the command...
+> > pip install -r requirements.txt (when needed)
 
-to run code
+Step 4: To run the code
+        Collecting data
+> > python manage.py collectstatic
 
-python manage.py collectstatic
+> > yes
+        Running the code on a local server
+> >python manage.py runserver
 
-yes
 
-python manage.py runserver
-
-admin@gmail.com
-
-admin
