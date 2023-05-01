@@ -17,14 +17,34 @@ Step 2: Change directory into PilotLMS
 > > cd PILOTLMS
 
 Step 3: Install the requirements for the project using the command...
-> > pip install -r requirements.txt (when needed)
+> > pip install -r requirements.txt
 
-Step 4: To run the code <br>
-        Collecting data
+Step 4: To run the code 
 > > python manage.py collectstatic
+> > yes 
+> > python manage.py runserver
 
-> > yes <br>
-        Running the code on a local server
-> >python manage.py runserver
+<br>
+
+<h2>Features</h2>
+
+<h3>Student</h3>
+* Login/Signup using tokens and cookies.
+* Dashboard to view courses and their progress.
+* Quiz popups within videos
+* Doubt section
+* Personal Notes
+
+<h3>Teacher</h3>
+* Teacher Dashboard for administering student progress and analytics
+* Teacher domain within his Organization
+* Setup quizes for students
+
+<h3>organization<h3>
+* Has the power to appoint a user as an instructor
+* Has a domain specific to itself only accesible to its teachers.
+* Every teacher should belong to an onganisation
+
+<h2>Screenshots</h2>
 
 
