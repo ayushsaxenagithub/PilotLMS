@@ -79,19 +79,25 @@
               </ul>
             </div>
 
-            <div class="position-relative" style="width: 30%">
-              <input
-                type="text"
-                placeholder="Search Course"
-                class="w-100 px-2 py-2 rounded rounded-3 border border-2 border-secondary"
-              />
-              <button
-                class="btn position-absolute"
-                style="right: 2px; top: 4px; bottom: 5px"
-              >
-                <i class="fa-solid fa-magnifying-glass"></i>
-              </button>
-            </div>
+
+<form method="GET" action="{% url 'allcourses' %}">
+    <div class="position-relative" style="width: 100%">
+        <input
+            type="text"
+            name="search_query"
+            value="{{ search_query }}"
+            placeholder="Search Course"
+            class="w-100 px-2 py-2 rounded rounded-3 border border-2 border-secondary"
+        />
+        <button
+            type="submit"
+            class="btn position-absolute"
+            style="right: 2px; top: 4px; bottom: 5px"
+        >
+            <i class="fa-solid fa-magnifying-glass"></i>
+        </button>
+    </div>
+</form>
             {% if user.is_authenticated %}
             <div class="d-flex align-items-center gap-2">
               <button class="btn p-0 rounded rounded-3">
@@ -223,6 +229,9 @@
           videoControls[i].controls = true;
         }
       </script>
+
+      {% block scriptjs %}
+      {% endblock %}
 
   </body>
 </html>

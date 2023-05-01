@@ -6,13 +6,13 @@ from django.conf.urls.static import static
 
 urlpatterns = [
     path('',views.index,name='index'),
-    path('contact',views.contact,name='contact'),
+    path('contact/',views.contact,name='contact'),
     path('create_course',views.create_course,name='create_course'),
     path('course/<int:course_id>/', views.course_detail, name='course_detail'),
     path('<int:course_id>/update/', views.update_course, name='update_course'),
     path('<int:course_id>/delete/', views.delete_course, name='delete_course'),
-    path('course', views.course, name='course'),
-    path('allcourses', views.allcourses, name='allcourses'),
+    path('course/', views.course, name='course'),
+    path('allcourses/', views.allcourses, name='allcourses'),
     path('create_module/<int:course_id>/', views.create_module, name='create_module'),
     path('course/<int:course_id>/module/<int:module_id>/update/', views.update_module, name='update_module'),
     path('course/<int:course_id>/module/<int:module_id>/delete/', views.delete_module, name='delete_module'),
@@ -31,6 +31,7 @@ urlpatterns = [
 
 
     path('enroll/<int:course_id>/', views.enroll_course, name='enroll_course'),
+    path('analytics/', views.analytics, name='analytic'),
     
 ]
 

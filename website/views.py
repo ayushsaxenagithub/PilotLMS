@@ -12,19 +12,29 @@ from django_user_agents.utils import get_user_agent
 import requests
 import json
 from django.urls import reverse
+from .utils import searchCourses
 
 
 # Create your views here.
 
 def index(request):
-    courses = Course.objects.all().values()
+    courses = Course.objects.all()
     context = {
         "courses": courses
     }
     return render(request, 'website/home.html', context)
 
-def contact(request):
-    
+
+def allcourses(request):
+    courses = Course.objects.all()
+    context = {
+        "courses": courses
+    }
+    courses, search_query = searchCourses(request)
+    context = {'courses': courses,'search_query': search_query}
+    return render(request, 'website/allcourses.html', context)
+
+def contact(request):   
     return render(request, 'website/contact.html')
 
 def courseviewpage(request, course_id):
@@ -461,12 +471,6 @@ def teacher_list(request):
         return redirect('index')
 
 
-def allcourses(request):
-    courses = Course.objects.all().values()
-    context = {
-        "courses": courses
-    }
-    return render(request, 'website/allcourses.html', context)
 
 
 
@@ -482,3 +486,6 @@ def enroll_course(request, course_id):
     else:
         messages.warning(request, f"You are already enrolled in {course.name}.")
     return redirect(reverse('courseviewpage', args=[course_id]))
+
+def analytics(request):
+    return render(request, 'website/analytics.html')

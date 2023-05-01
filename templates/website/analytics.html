@@ -1,0 +1,261 @@
+{% extends 'main/base.html' %}
+
+    {% block head %}
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD"
+      crossorigin="anonymous"
+    />
+    {% endblock %}
+
+
+    {% block title %}
+    
+    {% endblock %}
+
+    {% block content %}
+    <div>
+        <h2
+          class="fw-bold text-center text-danger fs-1 my-3 border-bottom border-1 pb-3"
+        >
+          Analyltics
+        </h2>
+        <div class="d-flex justify-content-around py-3 flex-wrap gap-5 border-bottom border-1">
+          <div
+            class="rounded rounded-end py-2 px-5 fs-3 fw-bold text-primary"
+            style="box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px"
+          >
+            Total Engagement
+            <br />
+            <h6 class="fs-3 text-center text-primary">50</h6>
+          </div>
+          <div
+            class="rounded rounded-end py-2 px-5 fs-3 fw-bold text-primary"
+            style="box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px"
+          >
+            Total Views 👀
+            <br />
+            <h6 class="fs-3 text-center text-primary">55</h6>
+          </div>
+          <div
+            class="rounded rounded-end py-2 px-5 fs-3 fw-bold text-primary"
+            style="box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px"
+          >
+            Total unique Views 👁️
+            <br />
+            <h6 class="fs-3 text-center text-primary">28</h6>
+          </div>
+  
+          <div
+            class="rounded rounded-end py-2 px-5 fs-3 fw-bold text-primary"
+            style="box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px"
+          >
+            Total Courses
+            <br />
+            <h6 class="fs-3 text-center text-primary">3</h6>
+          </div>
+          <div
+            class="rounded rounded-end py-2 px-5 fs-3 fw-bold text-primary"
+            style="box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px"
+          >
+            Total Assignments
+            <br />
+            <h6 class="fs-3 text-center text-primary">30</h6>
+          </div>
+        </div>
+  
+        <div class="px-3 py-2">
+          <div class="d-flex justify-content-evenly flex-wrap gap-5">
+            <div class="w-25">
+              <p class="fw-bold text-danger text-center fs-4">
+                Lecture hours courses
+              </p>
+              <canvas id="doughnut"></canvas>
+            </div>
+  
+            <div class="w-25">
+              <p class="fw-bold text-danger text-center fs-4">
+                Students Enrolled in courses
+              </p>
+              <canvas id="polarArea"></canvas>
+            </div>
+  
+            <div class="w-25">
+              <p class="fw-bold text-danger text-center fs-4">
+                Total Assignments submission
+              </p>
+              <canvas id="pie"></canvas>
+            </div>
+  
+            <div class="w-75">
+              <p class="fw-bold text-danger text-center fs-4">
+                Students Engagement
+              </p>
+              <canvas id="bar"></canvas>
+            </div>
+          </div>
+        </div>
+      </div>
+    {% endblock %}
+
+
+    {% block scriptjs %}
+
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"
+      crossorigin="anonymous"
+    ></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <script>
+      const ctx = document.getElementById("doughnut");
+      const polarArea = document.getElementById("polarArea");
+      const pie = document.getElementById("pie");
+      const bar = document.getElementById("bar");
+
+      new Chart(ctx, {
+        type: "doughnut",
+        data: {
+          labels: [
+            "IFM",
+            "DSA",
+            "Advance Propulsion",
+            "Computer",
+            "Hindi",
+            "English",
+          ],
+          datasets: [
+            {
+              label: "Total Hours",
+              data: [25, 30, 15, 13, 21, 41],
+              borderWidth: 1,
+            },
+          ],
+        },
+        backgroundColor: [
+          "rgb(255, 99, 132)",
+          "rgb(54, 162, 235)",
+          "rgb(255, 205, 86)",
+        ],
+      });
+
+      new Chart(polarArea, {
+        type: "polarArea",
+        data: {
+          labels: [
+            "IFM",
+            "DSA",
+            "Advance Propulsion",
+            "Computer",
+            "Hindi",
+            "English",
+          ],
+          datasets: [
+            {
+              label: "Total Students Enrolled",
+              data: [25, 30, 15, 13, 21, 41],
+              borderWidth: 1,
+            },
+          ],
+        },
+        backgroundColor: [
+          "rgb(255, 99, 132)",
+          "rgb(54, 162, 235)",
+          "rgb(255, 205, 86)",
+        ],
+        options: {
+          plugins: {
+            legend: {
+              position: "top",
+            },
+          },
+        },
+      });
+
+      new Chart(pie, {
+        type: "pie",
+        data: {
+          labels: [
+            "IFM",
+            "DSA",
+            "Advance Propulsion",
+            "Computer",
+            "Hindi",
+            "English",
+          ],
+          datasets: [
+            {
+              label: "Total Assignments submission",
+              data: [25, 30, 15, 13, 21, 41],
+              borderWidth: 1,
+            },
+          ],
+        },
+        backgroundColor: [
+          "rgb(255, 99, 132)",
+          "rgb(54, 162, 235)",
+          "rgb(255, 205, 86)",
+        ],
+        options: {
+          plugins: {
+            legend: {
+              position: "top",
+            },
+          },
+        },
+      });
+      new Chart(bar, {
+        type: "bar",
+        data: {
+          labels: [
+            "IFM",
+            "DSA",
+            "Advance Propulsion",
+            "Computer",
+            "Hindi",
+            "English",
+          ],
+          datasets: [
+            {
+              label: "Total Engagements",
+              data: [25, 30, 15, 13, 21, 41],
+              borderWidth: 1,
+              backgroundColor: [
+                "rgba(255, 99, 132, 0.2)",
+                "rgba(255, 159, 64, 0.2)",
+                "rgba(255, 205, 86, 0.2)",
+                "rgba(75, 192, 192, 0.2)",
+                "rgba(54, 162, 235, 0.2)",
+                "rgba(153, 102, 255, 0.2)",
+                "rgba(201, 203, 207, 0.2)",
+              ],
+              borderColor: [
+                "rgb(255, 99, 132)",
+                "rgb(255, 159, 64)",
+                "rgb(255, 205, 86)",
+                "rgb(75, 192, 192)",
+                "rgb(54, 162, 235)",
+                "rgb(153, 102, 255)",
+                "rgb(201, 203, 207)",
+              ],
+            },
+          ],
+        },
+
+        options: {
+          plugins: {
+            legend: {
+              position: "top",
+            },
+          },
+        },
+      });
+    </script>
+      {% endblock %}
+
