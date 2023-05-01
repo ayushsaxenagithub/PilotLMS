@@ -25,7 +25,10 @@ urlpatterns = [
     path('user_teacher/', views.make_teacher, name='make_teacher'),
     path('teacher_list/', views.teacher_list, name='teacher_list'),
 
-    path('courseviewpage/', views.courseviewpage, name='courseviewpage'),
+    path('courseviewpage/<int:course_id>/', views.courseviewpage, name='courseviewpage'),
+
+
+    path('enroll/<int:course_id>/', views.enroll_course, name='enroll_course'),
     
 ]
 

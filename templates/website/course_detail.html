@@ -51,17 +51,39 @@
         </div>
       </div>
     </div>
+    {% if profile.status == 'Student' %}
     {% if request.user.is_authenticated %}
-      <div class="row mt-4">
+    {% if request.user in course.enroller_user.all %}
         <div class="col-md-8">
-          <a href="{% url 'update_course' course.id %}" class="btn btn-primary">Update Course</a>
-          <a href="{% url 'delete_course' course.id %}" class="btn btn-danger">Delete Course</a>
+            <a href="{% url 'courseviewpage' course.id %}" class="btn btn-primary">Go to Course</a>
         </div>
-        <div class="col-md-4">
-          <a href="{% url 'create_module' course.id %}" class="btn btn-success">Create Module</a>
-          <a href="{% url 'course_modules' course.id %}" class="btn btn-success">Detailed Module</a>
+    {% else %}
+        <div class="col-md-8">
+            <a href="{% url 'enroll_course' course.id %}" class="btn btn-primary">Enroll Now</a>
         </div>
+    {% endif %}
+{% else %}
+    <div class="col-md-8">
+        <a href="{% url 'login' %}" class="btn btn-primary">Log in to Enroll</a>
+    </div>
+{% endif %}
+    {% elif profile.status == 'Teacher' %}
+    <div class="row mt-4">
+      <div class="col-md-8">
+        <a href="{% url 'update_course' course.id %}" class="btn btn-primary">Update Course</a>
+        <a href="{% url 'delete_course' course.id %}" class="btn btn-danger">Delete Course</a>
       </div>
+      <div class="col-md-4">
+        <a href="{% url 'create_module' course.id %}" class="btn btn-success">Create Module</a>
+        <a href="{% url 'course_modules' course.id %}" class="btn btn-success">Detailed Module</a>
+      </div>
+    </div>
+    {% endif %}
+    {% if request.user.is_authenticated %}
+    {% else %}
+    <div class="col-md-8">
+      <a href="{% url 'login' %}" class="btn btn-primary">Log in to Enroll</a>
+  </div>
     {% endif %}
   </div>
 
