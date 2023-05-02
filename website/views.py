@@ -50,6 +50,19 @@ def courseviewpage(request, course_id):
         return redirect('course_detail',course_id=course.id)
     
 
+# def courseviewpagevideo(request, course_id, video_id):
+#     course = get_object_or_404(Course, id=course_id)
+#     video = get_object_or_404(Video, id=video_id)
+#     is_enrolled = False
+#     if request.user.is_authenticated:
+#         enrollment = Enrollment.objects.filter(course=course, student=request.user).first()
+#         if enrollment:
+#             is_enrolled = True
+#     if is_enrolled:
+#         return render(request, 'website/courseviewvideo.html', {'course': course, 'video': video})
+#     else:
+#         return redirect('course_detail', course_id=course.id)
+
 def courseviewpagevideo(request, course_id, video_id):
     course = get_object_or_404(Course, id=course_id)
     video = get_object_or_404(Video, id=video_id)
@@ -59,9 +72,12 @@ def courseviewpagevideo(request, course_id, video_id):
         if enrollment:
             is_enrolled = True
     if is_enrolled:
-        return render(request, 'website/courseviewvideo.html', {'course': course, 'video': video})
+        quiz = Quiz.objects.filter(video=video).first()
+        questions = quiz.question_set.all() if quiz else []
+        return render(request, 'website/courseviewvideo.html', {'course': course, 'video': video, 'questions': questions})
     else:
         return redirect('course_detail', course_id=course.id)
+
 
 def courseviewpagenote(request, course_id, note_id):
     course = get_object_or_404(Course, id=course_id)
@@ -325,17 +341,84 @@ def view_quiz(request, quiz_id):
     quiz = get_object_or_404(Quiz, id=quiz_id)
     return render(request, 'website/view_quiz.html', {'quiz': quiz})
 
+# def create_quiz(request, video_id):
+#     video = Video.objects.get(id=video_id)
+#     if request.user.profile != video.module.course.teacher.profile:
+#         return HttpResponse('You do not have permission to access this page')
+#     if request.method == 'POST':
+#         pass_mark = request.POST.get('pass_mark')
+#         start_time_str = request.POST.get('timestamp')
+#         if start_time_str:
+#             start_time = timedelta(seconds=float(start_time_str))
+#         else:
+#             start_time = timedelta(seconds=0)
+
+#         quiz = Quiz.objects.create(
+#             video=video,
+#             start_time=start_time,
+#             pass_mark=pass_mark,
+#         )
+
+#         question_text = request.POST.get('question_text')
+#         question = Question.objects.create(
+#             quiz=quiz,
+#             text=question_text,
+#         )
+
+#         answer1_text = request.POST.get('answer1_text')
+#         answer1_is_correct = request.POST.get('answer1_is_correct') == 'on'
+#         answer1 = Answer.objects.create(
+#             question=question,
+#             text=answer1_text,
+#             is_correct=answer1_is_correct,
+#         )
+
+#         answer2_text = request.POST.get('answer2_text')
+#         answer2_is_correct = request.POST.get('answer2_is_correct') == 'on'
+#         answer2 = Answer.objects.create(
+#             question=question,
+#             text=answer2_text,
+#             is_correct=answer2_is_correct,
+#         )
+
+#         answer3_text = request.POST.get('answer3_text')
+#         answer3_is_correct = request.POST.get('answer3_is_correct') == 'on'
+#         answer3 = Answer.objects.create(
+#             question=question,
+#             text=answer3_text,
+#             is_correct=answer3_is_correct,
+#         )
+
+#         answer4_text = request.POST.get('answer4_text')
+#         answer4_is_correct = request.POST.get('answer4_is_correct') == 'on'
+#         answer4 = Answer.objects.create(
+#             question=question,
+#             text=answer4_text,
+#             is_correct=answer4_is_correct,
+#         )
+#         return redirect('quiz_detail', quiz_id=quiz.id)
+
+#     return render(request, 'website/create_quiz.html', {'video': video})
+
+
+
+from datetime import datetime, timedelta
+
 def create_quiz(request, video_id):
     video = Video.objects.get(id=video_id)
     if request.user.profile != video.module.course.teacher.profile:
         return HttpResponse('You do not have permission to access this page')
     if request.method == 'POST':
         pass_mark = request.POST.get('pass_mark')
-        start_time_str = request.POST.get('timestamp')
-        if start_time_str:
-            start_time = timedelta(seconds=float(start_time_str))
+        timestamp = request.POST.get('timestamp')
+        if timestamp:
+            timestamp_parts = [int(part) for part in timestamp.split(':')]
+            timestamp_td = timedelta(hours=timestamp_parts[0], minutes=timestamp_parts[1], seconds=timestamp_parts[2])
+            timestamp = timestamp_parts[0]*60*60+timestamp_parts[1]*60+timestamp_parts[2]
+            start_time = int(timestamp)
+            start_time = timedelta(seconds=float(start_time))
         else:
-            start_time = timedelta(seconds=0)
+            start_time = 0
 
         quiz = Quiz.objects.create(
             video=video,

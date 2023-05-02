@@ -15,11 +15,18 @@
       <form method="post">
         {% csrf_token %}
 
-        <div class="form-group">
+        {% comment %} <div class="form-group">
           <label for="timestamp">Quiz Timestamp</label>
           <input type="text" class="form-control" id="timestamp" name="timestamp">
           <small class="form-text text-muted">Enter timestamp in seconds (e.g. 42.5)</small>
+        </div> {% endcomment %}
+
+        <div class="form-group">
+          <label for="timestamp">Quiz Timestamp</label>
+          <input type="time" class="form-control" id="timestamp" name="timestamp" step="1">
+          <small class="form-text text-muted">Enter timestamp in hours:minutes:seconds (e.g. 01:30:25)</small>
         </div>
+        
 
         <div class="form-group">
           <label for="pass_mark">Pass Mark</label>

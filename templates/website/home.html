@@ -124,7 +124,7 @@
               <div class="d-flex justify-content-between mb-2">
                 {% if course.tags.all %}
                 {% for tag in course.tags.all %}
-                <span class="badge bg-success bg-gradient">{{ tag }}</span>
+                <span class="badge bg-success bg-gradient">{{ tag.name }}</span>
                 {% endfor %}
                 {% endif %}
               </div>
