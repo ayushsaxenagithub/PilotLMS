@@ -1,114 +1,4 @@
 {% extends 'website/courseviewpage.html' %} {% block head %}
-
-{% comment %} <style>
-  .hide {
-    display: none !important;
-  }
-
-  .show {
-    display: block !important;
-  }
-
-  .quesForm {
-    height: 100vh;
-    width: 100vw;
-    position: absolute;
-    top: 0;
-    left: 0;
-    background-color: rgba(0, 0, 0, 0.7);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-
-  .quesBox {
-    background-color: #fff;
-    padding: 20px;
-    border-radius: 10px;
-    max-width: 500px;
-    text-align: center;
-  }
-
-  .quesBox p {
-    font-size: 18px;
-    font-weight: bold;
-    margin-bottom: 20px;
-  }
-
-  .quesBox input[type="checkbox"] {
-    margin-right: 10px;
-  }
-
-  .quesBox button[type="submit"] {
-    padding: 10px;
-    background-color: #008cba;
-    color: #fff;
-    border: none;
-    border-radius: 5px;
-    margin-top: 20px;
-    cursor: pointer;
-  }
-</style>
-
-{% endblock %} {% block coursecontent %}
-
-<div class="video-player">
-  <video
-    src="{{ video.video.url }}"
-    type="{{ video.video.content_type }}"
-    id="vid"
-    width="640"
-    height="360"
-    controls
-  >
-    Your browser does not support the video tag.
-  </video>
-  <form class="hide quesForm" id="ques">
-    <div class="quesBox">
-      <p>Question. What is the name of the course?</p>
-      <input type="checkbox" />Python <input type="checkbox" />HTML
-      <button id="sub" type="submit">Submit</button>
-    </div>
-  </form>
-</div>
-
-{% endblock %} {% block scriptjs %}
-
-<script>
-  var vid = document.getElementById("vid");
-  var ques = document.getElementById("ques");
-  var sub = document.getElementById("sub");
-
-  function playVid() {
-    vid.play();
-  }
-
-  function pauseVid() {
-    vid.pause();
-  }
-
-  var time = 2;
-
-  var pausing_function = function () {
-    if (this.currentTime >= time) {
-      this.pause();
-      ques.classList.add("show");
-      ques.classList.remove("hide");
-      this.removeEventListener("timeupdate", pausing_function);
-    }
-  };
-
-  vid.addEventListener("timeupdate", pausing_function);
-
-  ques.addEventListener("submit", (event) => {
-    event.preventDefault();
-    ques.classList.remove("show");
-    ques.classList.add("hide");
-    vid.play();
-  });
-</script> {% endcomment %}
-
-
 <style>
   .hide {
     display: none !important;
@@ -160,7 +50,6 @@
 </style>
 
 {% endblock %} {% block coursecontent %}
-
 <div class="video-player">
   <video
     src="{{ video.video.url }}"
@@ -174,26 +63,44 @@
   </video>
   {% if questions %}
   <form class="hide quesForm" id="ques">
-    {% csrf_token %}
-    {% for question in questions %}
+    {% csrf_token %} {% for question in questions %}
     <div class="quesBox">
       <p>Question. {{ question.text }}</p>
       {% for answer in question.answer_set.all %}
-      <input type="checkbox" name="{{ question.id }}[]" value="{{ answer.id }}" />{{ answer.text }}
-      {% endfor %}
+      <input
+        type="checkbox"
+        name="{{ question.id }}[]"
+        value="{{ answer.id }}"
+      />{{ answer.text }} {% endfor %}
     </div>
     {% endfor %}
-    <button id="sub" type="submit">Submit</button>
+    <button id="sub" type="submit" class="submit-btn">Submit</button>
   </form>
   {% endif %}
+  <div class="hide results" id="results">
+    <h2>Quiz Results</h2>
+    {% if quiz %}
+      <p>Passing Score: {{ quiz.pass_mark }}</p>
+      <p>Score: {{ score }}</p>
+      {% if passed %}
+        <p>You passed the quiz!</p>
+      {% else %}
+        <p>You did not pass the quiz.</p>
+      {% endif %}
+    {% else %}
+      <p>No quiz for this video.</p>
+    {% endif %}
+  </div>
 </div>
-
-{% endblock %} {% block scriptjs %}
-
 <script>
+  var start_time = 0;
+  {% if quiz %}
+    start_time = "{{ quiz.start_time.total_seconds }}";
+  {% endif %}
   var vid = document.getElementById("vid");
   var ques = document.getElementById("ques");
   var sub = document.getElementById("sub");
+  var results = document.getElementById("results");
 
   function playVid() {
     vid.play();
@@ -202,18 +109,15 @@
   function pauseVid() {
     vid.pause();
   }
-
-  var pausing_function = function () {
-    if (this.currentTime >= {{ quiz.start_time.total_seconds }}) {
+  var pausing_function = function (){
+    if (this.currentTime >= start_time){
       this.pause();
       ques.classList.add("show");
       ques.classList.remove("hide");
       this.removeEventListener("timeupdate", pausing_function);
     }
-  };
-
+  }; 
   vid.addEventListener("timeupdate", pausing_function);
-
   ques.addEventListener("submit", (event) => {
     event.preventDefault();
     var formdata = new FormData(event.target);
@@ -228,13 +132,16 @@
       }
     }).then((data) => {
       console.log(data);
-      ques.classList.remove("show");
-      ques.classList.add("hide");
+      var score = data.score;
+      var passed = data.passed;
+      results.classList.remove("hide");
+      results.classList.add("show");
       vid.play();
     }).catch((error) => {
       console.error("Error submitting form:", error);
     });
   });
 </script>
+{% endblock %} {% block scriptjs %}
 
 {% endblock %}

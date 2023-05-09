@@ -13,7 +13,7 @@ import requests
 import json
 from django.urls import reverse
 from .utils import searchCourses
-
+from django.shortcuts import redirect
 
 # Create your views here.
 
@@ -48,20 +48,7 @@ def courseviewpage(request, course_id):
         return render(request, 'website/courseviewpage.html', {'course': course})
     else:
         return redirect('course_detail',course_id=course.id)
-    
 
-# def courseviewpagevideo(request, course_id, video_id):
-#     course = get_object_or_404(Course, id=course_id)
-#     video = get_object_or_404(Video, id=video_id)
-#     is_enrolled = False
-#     if request.user.is_authenticated:
-#         enrollment = Enrollment.objects.filter(course=course, student=request.user).first()
-#         if enrollment:
-#             is_enrolled = True
-#     if is_enrolled:
-#         return render(request, 'website/courseviewvideo.html', {'course': course, 'video': video})
-#     else:
-#         return redirect('course_detail', course_id=course.id)
 
 def courseviewpagevideo(request, course_id, video_id):
     course = get_object_or_404(Course, id=course_id)
@@ -77,6 +64,34 @@ def courseviewpagevideo(request, course_id, video_id):
         return render(request, 'website/courseviewvideo.html', {'course': course, 'video': video, 'questions': questions})
     else:
         return redirect('course_detail', course_id=course.id)
+
+
+
+def submit_quiz(request):
+    if request.method == 'POST':
+        quiz_id = request.POST.get('quiz_id')
+        question_ids = request.POST.getlist('question_ids[]')
+        answer_ids = request.POST.getlist('answer_ids[]')
+
+        # Do something with the form data, for example:
+        quiz = Quiz.objects.get(id=quiz_id)
+        total_marks = 0
+        obtained_marks = 0
+        for question_id, answer_id in zip(question_ids, answer_ids):
+            question = Question.objects.get(id=question_id)
+            answer = Answer.objects.get(id=answer_id)
+            if answer.is_correct:
+                obtained_marks += question.marks
+            total_marks += question.marks
+        percentage = obtained_marks / total_marks * 100
+        if percentage >= quiz.pass_percentage:
+            message = 'Congratulations! You passed the quiz with a score of {}%.'.format(round(percentage))
+        else:
+            message = 'Sorry, you failed the quiz with a score of {}%.'.format(round(percentage))
+        return redirect('quiz_result', quiz_id=quiz_id, message=message)
+    else:
+        return redirect('home')
+
 
 
 def courseviewpagenote(request, course_id, note_id):
