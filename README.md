@@ -48,8 +48,13 @@ Step 2: Create the Folder and clone the project, now Change directory into FOLDE
 Step 3: Install the requirements for the project using the command...
 > > pip install -r requirements.txt
 
-Step 4: To run the code 
+Step 4: To activate the server 
 > > python manage.py migrate
+
+Step 4: To collectstatic files
+> > python manage.py collectstaicfiles
+
+Step 6: To activate the server 
 > > python manage.py runserver
 
 Step 5 : Open your web browser and visit http://localhost:8000 to access the application.
