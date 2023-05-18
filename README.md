@@ -10,11 +10,11 @@ Django
 
 We need to Download a number of libraries and also create an environment before running the site.
 
-Step 1: Create an environment outside the PilotLMS folder to keep the settings local to this project, Then activate it using the command...
-> > env\scripts\activate
+Step 1: Create an environment outside the PilotLMS folder to keep the settings local to this project, Then activate it.. reference below
+> > https://docs.python.org/3/library/venv.html
 
-Step 2: Change directory into PilotLMS
-> > cd PILOTLMS
+Step 2: Create the Folder and clone the project, now Change directory into FOLDER_NAME
+> > cd FOLDER_NAME
 
 Step 3: Install the requirements for the project using the command...
 > > pip install -r requirements.txt
