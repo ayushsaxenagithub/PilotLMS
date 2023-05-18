@@ -1,8 +1,21 @@
 <h1>A fully responsive Learning Management System with models for Organisation, Teacher and Student. </h1>
 
-### Functionality Overview
 
-The web application provides the following functionality:
+## Description
+
+The project is a web application built using Django, a high-level Python web framework. It provides a comprehensive platform for managing user profiles, organizations, teachers, students, courses, and related entities. The application facilitates collaboration, learning, and progress tracking in an educational setting.
+
+## Table of Contents
+
+- [Features](#features)
+- [Installation](#installation)
+- [Usage](#usage)
+- [Users Functionality](#users)
+- [Technologies](#technologies)
+- [Contributing](#contributing)
+- [Screenshots](#screenshots)
+
+## Features
 
 - User registration and login system.
 - Creation and management of user profiles with personal information and social media links.
@@ -21,15 +34,7 @@ The web application provides the following functionality:
 - Creation and management of quiz questions and answers.
 - Monitoring user quiz attempts.
 
-This project aims to provide a comprehensive platform for managing user profiles, organizations, courses, and related entities, while also enabling collaboration, learning, and progress tracking.
-
-<h2>Tech Used</h2>
-
-'Python'
-'PHP'
-'Django'
-
-<h2> Getting Started </h2>
+## Installation
 
 We need to Download a number of libraries and also create an environment before running the site.
 
@@ -37,17 +42,38 @@ Step 1: Create an environment outside the PilotLMS folder to keep the settings l
 > > https://docs.python.org/3/library/venv.html
 
 Step 2: Create the Folder and clone the project, now Change directory into FOLDER_NAME
+> > git clone (https://github.com/ayushsaxenagithub/PilotLMS.git)
 > > cd FOLDER_NAME
 
 Step 3: Install the requirements for the project using the command...
 > > pip install -r requirements.txt
 
 Step 4: To run the code 
+> > python manage.py migrate
 > > python manage.py runserver
+
+Step 5 : Open your web browser and visit http://localhost:8000 to access the application.
+
+## Usage
+-Register a new user account or log in with an existing account.
+-Create a profile and fill in the necessary details.
+-Create organizations and add descriptions, locations, websites, and founding years.
+-Add teachers and students, linking them to their respective profiles and organizations.
+-Categorize courses using tags.
+-Create courses, specifying the associated organization, teacher, tags, descriptions, and course content.
+-Enroll students in courses.
+-Create modules within courses and add videos and notes.
+-Upload videos, specifying the associated module and course.
+-Interact with videos and courses by leaving comments and sub-comments.
+-Create notes on videos, modules, and courses.
+-Track user progress in courses and monitor overall course progress.
+-Create quizzes associated with videos and add questions and answers.
+-Monitor user attempts and quiz results.
+
 
 <br>
 
-<h2>Features</h2>
+## Users Functionality
 
 <h3>Student</h3>
 <ul>
@@ -73,7 +99,31 @@ Step 4: To run the code
 <li> Every teacher should belong to an onganisation</li>
 </ul>
 
+## Technologies
+<p>The project is built using the following technologies:</p>
+<ul>
+  <li>Python</li>
+  <li>Django - Web framework</li>
+  <li>Django REST Framework - Web API framework</li>
+  <li>SQLite - Database</li>
+</ul>
+<p>Front-end:</p>
+<ul>
+  <li>HTML</li>
+  <li>CSS</li>
+  <li>JavaScript</li>
+</ul>
+<p>Authentication:</p>
+<ul>
+  <li>Django Authentication - User authentication and authorization</li>
+</ul>
+<p>File Storage:</p>
+<ul>
+  <li>Amazon S3 (or any other storage service)</li>
+</ul>
 
+## Contributing
+Contributions are welcome! If you find any issues or have suggestions for improvements, please feel free to create a pull request.
 
 <h2>Screenshots</h2>
 
