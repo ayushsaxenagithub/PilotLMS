@@ -56,6 +56,8 @@ Step 4: To collectstatic files
 
 Step 6: To activate the server 
 > > python manage.py runserver
+
+
 Step 7 : Open your web browser and visit http://localhost:8000 to access the application.
 
 ## Usage
