@@ -55,20 +55,23 @@ Step 4: To run the code
 Step 5 : Open your web browser and visit http://localhost:8000 to access the application.
 
 ## Usage
--Register a new user account or log in with an existing account.
--Create a profile and fill in the necessary details.
--Create organizations and add descriptions, locations, websites, and founding years.
--Add teachers and students, linking them to their respective profiles and organizations.
--Categorize courses using tags.
--Create courses, specifying the associated organization, teacher, tags, descriptions, and course content.
--Enroll students in courses.
--Create modules within courses and add videos and notes.
--Upload videos, specifying the associated module and course.
--Interact with videos and courses by leaving comments and sub-comments.
--Create notes on videos, modules, and courses.
--Track user progress in courses and monitor overall course progress.
--Create quizzes associated with videos and add questions and answers.
--Monitor user attempts and quiz results.
+<ul>
+  <li>Register a new user account or log in with an existing account.</li>
+  <li>Create a profile and fill in the necessary details.</li>
+  <li>Create organizations and add descriptions, locations, websites, and founding years.</li>
+  <li>Add teachers and students, linking them to their respective profiles and organizations.</li>
+  <li>Categorize courses using tags.</li>
+  <li>Create courses, specifying the associated organization, teacher, tags, descriptions, and course content.</li>
+  <li>Enroll students in courses.</li>
+  <li>Create modules within courses and add videos and notes.</li>
+  <li>Upload videos, specifying the associated module and course.</li>
+  <li>Interact with videos and courses by leaving comments and sub-comments.</li>
+  <li>Create notes on videos, modules, and courses.</li>
+  <li>Track user progress in courses and monitor overall course progress.</li>
+  <li>Create quizzes associated with videos and add questions and answers.</li>
+  <li>Monitor user attempts and quiz results.</li>
+</ul>
+
 
 
 <br>
