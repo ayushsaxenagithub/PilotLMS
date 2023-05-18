@@ -1,10 +1,33 @@
 <h1>A fully responsive Learning Management System with models for Organisation, Teacher and Student. </h1>
 
+### Functionality Overview
+
+The web application provides the following functionality:
+
+- User registration and login system.
+- Creation and management of user profiles with personal information and social media links.
+- Creation and management of organizations with descriptions, locations, websites, and founding years.
+- Creation and management of teachers with associated profiles, organizations, qualifications, and research interests.
+- Creation and management of students with associated profiles and departments.
+- Categorization of courses using tags.
+- Creation and management of courses with associated organizations, teachers, tags, descriptions, and course content.
+- Enrollment of students in courses.
+- Creation and management of modules within courses with associated videos and notes.
+- Uploading and management of videos with associated modules and courses.
+- Commenting and sub-commenting on videos and courses.
+- Creation and management of notes on videos, modules, and courses.
+- Tracking user progress in courses and overall course progress.
+- Creation and management of quizzes associated with videos.
+- Creation and management of quiz questions and answers.
+- Monitoring user quiz attempts.
+
+This project aims to provide a comprehensive platform for managing user profiles, organizations, courses, and related entities, while also enabling collaboration, learning, and progress tracking.
+
 <h2>Tech Used</h2>
 
-Python
-PHP
-Django
+'Python'
+'PHP'
+'Django'
 
 <h2> Getting Started </h2>
 
@@ -49,6 +72,8 @@ Step 4: To run the code
 <li> Has a domain specific to itself only accesible to its teachers</li>
 <li> Every teacher should belong to an onganisation</li>
 </ul>
+
+
 
 <h2>Screenshots</h2>
 
