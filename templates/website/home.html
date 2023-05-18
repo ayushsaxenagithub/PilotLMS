@@ -9,9 +9,11 @@
       <span class="text-danger" style="font-size: 2em">SKILL</span> <br />
       LEARN FROM <span class="text-danger">PILOT</span>
     </h1>
-    <form class="d-flex flex-column w-75 justify-content-end align-items-end">
+    <form method="GET" action="{% url 'allcourses' %}" class="d-flex flex-column w-75 justify-content-end align-items-end">
       <input
-        type="text"
+      type="text"
+            name="search_query"
+            value="{{ search_query }}"
         class="p-2 rounded rounded-2 mb-2 w-100 py-3 px-3 border border-2 border-secondary"
         placeholder="Search for Course"
       />
@@ -23,6 +25,7 @@
           <i class="fa-solid fa-play"></i> Watch Intro
         </button>
         <button
+        type="submit"
           class="btn btn-outline-danger fs-5 rounded rounded-pill"
           style="width: fit-content"
         >
