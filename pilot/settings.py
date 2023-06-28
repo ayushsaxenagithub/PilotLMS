@@ -9,6 +9,7 @@ https://docs.djangoproject.com/en/4.1/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.1/ref/settings/
 """
+from datetime import timedelta
 import os 
 from pathlib import Path
 
@@ -41,6 +42,7 @@ INSTALLED_APPS = [
     'website',
     'user',
     'user_agents',
+    'axes',
 ]
 
 MIDDLEWARE = [
@@ -52,6 +54,7 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     # 'website.middleware.UserActivityMiddleware',
+    'axes.middleware.AxesMiddleware',
 ]
 
 ROOT_URLCONF = 'pilot.urls'
@@ -147,3 +150,16 @@ STATIC_ROOT = os.path.join(BASE_DIR,'staticfiles')
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+# settings.py
+AXES_FAILURE_LIMIT = 5  # Maximum failed login attempts allowed
+AXES_LOCK_OUT_AT_FAILURE = True  # Lock out IPs after exceeding the failure limit
+AXES_COOLOFF_TIME = timedelta(minutes=10)  # Time duration for which an IP is locked out
+
+# Optional: Customize the login URL used by Django Axes
+LOGIN_URL = 'user/login/'  # Replace 'your_login_url' with your actual login URL
+
+# settings.py
+AXES_ONLY_USER_FAILURES = False  # Track failed login attempts per IP or per user
+AXES_VERBOSE = False  # Whether to log blocked login attempts
+
