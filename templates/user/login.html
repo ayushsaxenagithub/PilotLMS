@@ -1,16 +1,11 @@
-{% extends 'main/base.html' %} {% load static %} {% block head %}
+{% extends 'main/base.html' %} {% load socialaccount %} {% load static %} {% block head %}
 <link rel="stylesheet" href="../../static/user/css/login.css" />
 {% endblock %} {% block title %} {% endblock %} {% block content %}
 
 <div class="container my-5" style="height: 60vh">
   <div class="row justify-content-center h-100 align-items-center">
     <div class="col-md-6 w-50 h-100">
-      <img
-        src="{% static '/user/images/login.jpg' %}"
-        width="100%"
-        height="100%"
-        alt="login"
-      />
+      <img src="{% static '/user/images/login.jpg' %}" width="100%" height="100%" alt="login" />
     </div>
     <div class="col-md-6 form">
       <div class="card">
@@ -36,23 +31,32 @@
                 required
                 oninput="checkPassword(this)"
               />
-              <small id="passwordHelp" class="form-text text-muted"
-                >Password must contain at least 8 characters, including at least
-                one uppercase letter, one lowercase letter, and one
-                number.</small
-              >
+              <small id="passwordHelp" class="form-text text-muted">
+                Password must contain at least 8 characters, including at least one uppercase letter, one lowercase letter, and one number.
+              </small>
             </div>
             <div class="form-group">
-              <button type="submit" class="btn btn-danger btn-block">
-                Login
-              </button>
+              <button type="submit" class="btn btn-danger btn-block">Login</button>
             </div>
           </form>
+          <div class="text-center">
+            <hr class="my-4" />
+            <p class="text-muted">Or log in with:</p>
+            <a href="{% provider_login_url 'github' %}" class="btn btn-secondary btn-icon" role="button">
+              <i class="fab fa-github"></i>
+              GitHub
+            </a>
+            <a href="{% provider_login_url 'google' %}" class="btn btn-danger btn-icon" role="button">
+              <i class="fab fa-google"></i>
+              Google
+            </a>
+          </div>
         </div>
       </div>
     </div>
   </div>
 </div>
+
 {% endblock %} {% comment %}
 <div class="form">
   <p>Login</p>

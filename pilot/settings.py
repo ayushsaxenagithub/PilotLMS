@@ -28,6 +28,14 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
+SITE_ID = 1
+
+AUTHENTICATION_BACKENDS = [
+    'axes.backends.AxesStandaloneBackend',
+    'django.contrib.auth.backends.ModelBackend',
+    'allauth.account.auth_backends.AuthenticationBackend',
+]
+
 
 # Application definition
 
@@ -38,11 +46,23 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    # 'django.contrib.sites',
+    'django.contrib.sites',
     'ckeditor',
     'website',
     'user',
     'user_agents',
     'axes',
+    'silk',
+    'allauth',  # django-allauth
+    'allauth.account',
+    'allauth.socialaccount',
+    'allauth.socialaccount.providers.google',
+    'allauth.socialaccount.providers.github',
+    # 'notifications',  # django-notification-hq
+    # 'boost',  # django-boost
+    'menu_generator',
+
 ]
 
 MIDDLEWARE = [
@@ -55,6 +75,7 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     # 'website.middleware.UserActivityMiddleware',
     'axes.middleware.AxesMiddleware',
+    'pilot.middleware.AdminMiddleware',
 ]
 
 ROOT_URLCONF = 'pilot.urls'
@@ -72,6 +93,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'django.template.context_processors.request',  # django-allauth
             ],
         },
     },
@@ -151,6 +173,25 @@ STATIC_ROOT = os.path.join(BASE_DIR,'staticfiles')
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
+SOCIALACCOUNT_PROVIDERS = {
+    'google': {
+        'APP': {
+            'client_id': '123',
+            'secret': '456',
+            'key': ''
+        }
+    },
+    'github': {
+        'APP': {
+            'client_id': 'ce523861bd1218f092a9',
+            'secret': '6633db61a108505fdf303106f835acbc57a79fc1',
+            'key': ''
+        }
+    }
+}
+
+
+
 # settings.py
 AXES_FAILURE_LIMIT = 5  # Maximum failed login attempts allowed
 AXES_LOCK_OUT_AT_FAILURE = True  # Lock out IPs after exceeding the failure limit
@@ -162,4 +203,9 @@ LOGIN_URL = 'user/login/'  # Replace 'your_login_url' with your actual login URL
 # settings.py
 AXES_ONLY_USER_FAILURES = False  # Track failed login attempts per IP or per user
 AXES_VERBOSE = False  # Whether to log blocked login attempts
+
+DEBUG_TOOLBAR_CONFIG = {
+    'SHOW_TOOLBAR_CALLBACK': lambda request: True,
+}
+
 
